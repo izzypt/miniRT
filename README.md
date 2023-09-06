@@ -3,6 +3,8 @@ This project is an introduction to the beautiful world of Raytracing.
 
 Once completed you will be able to render simple Computer-Generated-Images and you will never be afraid of implementing mathematical formulas again.
 
+***Sources***:
+- https://en.wikipedia.org/wiki/Ray_tracing_%28graphics%29
 
 # 3D Rendering
 
