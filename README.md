@@ -22,3 +22,9 @@ As a result, it is not yet fully adapted to real time use-cases but it produce a
 The ray-tracing algorithm builds an image by extending rays into a scene and bouncing them off surfaces and towards sources of light to approximate the color value of pixels.
 
 ![image](https://github.com/izzypt/miniRT/assets/73948790/dffdb27f-9ef8-42f2-878d-b8aca84e2c5c)
+
+Typically, each ray must be tested for intersection with some subset of all the objects in the scene.
+
+![image](https://github.com/izzypt/miniRT/assets/73948790/07a9f03a-1009-456b-bd8f-b5511a9d3e5c)
+
+Once the nearest object has been identified, the algorithm will estimate the incoming light at the point of intersection, examine the material properties of the object, and combine this information to calculate the final color of the pixel.
