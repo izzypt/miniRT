@@ -16,3 +16,9 @@ The ***Ray Tracing*** method, developed for the first time in 1968 (but improved
 As a result, it is not yet fully adapted to real time use-cases but it produce a much higher degree of visual realism.
 
 ![image](https://github.com/izzypt/miniRT/assets/73948790/8ed19e66-40b5-4356-9f67-d39e60655934) ![image](https://github.com/izzypt/miniRT/assets/73948790/77aee78c-ecaf-4238-9dae-c91bba650d19)
+
+# Ray Tracing Algorithm
+
+The ray-tracing algorithm builds an image by extending rays into a scene and bouncing them off surfaces and towards sources of light to approximate the color value of pixels.
+
+![image](https://github.com/izzypt/miniRT/assets/73948790/dffdb27f-9ef8-42f2-878d-b8aca84e2c5c)
