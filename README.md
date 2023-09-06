@@ -5,6 +5,7 @@ Once completed you will be able to render simple Computer-Generated-Images and y
 
 ***Sources***:
 - https://en.wikipedia.org/wiki/Ray_tracing_%28graphics%29
+- https://www.youtube.com/watch?v=lFnWy0Odsh8
 
 # 3D Rendering
 
