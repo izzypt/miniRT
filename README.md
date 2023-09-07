@@ -3,6 +3,16 @@ This project is an introduction to the beautiful world of Raytracing.
 
 Once completed you will be able to render simple Computer-Generated-Images and you will never be afraid of implementing mathematical formulas again.
 
+***Important topics to know***:
+
+- Basics of 3D geometry and coordinate systems.
+- Matrices and matrix transformations (translations, rotations, scaling).
+- Vectors and Vector Arithmetic
+- Intersection algorithms for common geometric primitives like triangles, spheres, and planes.
+- Understanding the principles of light reflection, refraction, and absorption.
+
+
+
 ***Sources***:
 - https://en.wikipedia.org/wiki/Ray_tracing_%28graphics%29
 - https://www.youtube.com/watch?v=lFnWy0Odsh8
@@ -11,7 +21,7 @@ Once completed you will be able to render simple Computer-Generated-Images and y
 
 When it comes to rendering 3-dimensional computer-generated images there are 2 possible approaches: 
 
-- ***Rasterization*** - which is used by almost all graphic engines becauseof its efficiency.
+- ***Rasterization*** - which is used by almost all graphic engines because of its efficiency.
 - ***Ray Tracing***
 
 The ***Ray Tracing*** method, developed for the first time in 1968 (but improved upon since) is even today more expensive in computation than the ***Rasterization*** method.
@@ -45,6 +55,8 @@ It's named after the concept of tracing the path of rays of light as they travel
 ### Global Illumination 
   - One of the strengths of ray tracing is its ability to simulate global illumination, which includes effects like soft shadows, indirect lighting (ambient occlusion), and caustics.
   - This makes scenes appear more natural and visually appealing.
+
+![image](https://github.com/izzypt/miniRT/assets/73948790/be2110b7-6191-4b77-9a63-f5468395000a)
 
 # Ray Tracing Algorithm
 
