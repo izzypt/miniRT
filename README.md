@@ -3,7 +3,7 @@ This project is an introduction to the beautiful world of Raytracing.
 
 Once completed you will be able to render simple Computer-Generated-Images and you will never be afraid of implementing mathematical formulas again.
 
-***Important topics to know***:
+# ***Important topics to know***
 
 - Basics of 3D geometry and coordinate systems.
 - Matrices and matrix transformations (translations, rotations, scaling).
@@ -62,7 +62,20 @@ It's named after the concept of tracing the path of rays of light as they travel
 
 # Ray Tracing Algorithm
 
-The ray-tracing algorithm builds an image by extending rays into a scene and bouncing them off surfaces and towards sources of light to approximate the color value of pixels.
+### Projecting Rays
+- Ray-tracing algorithm is a recursive algorithm that consists on projecting - from the observer - a vector (ray) for each one of the pixels that make up the image.
+- This vector will intersect with the object(s) that are part of the image.
+### Intersecting Rays
+- The intersections that each vector goes through must be confirmed by every object in the scene/image , in order to determine which object is the nearest from the observer.
+- If a ray does not intersect with any object throught its path, it is given to the pixel - that the ray goes through - the background color of the scene/image.
+- If a ray does intersect with some object - and after confirming that this intersection is the closest to the observer for that ray - it is necessary to determine which color we should assign to the pixel.
+### Determining pixel color
+- In order to to determine which color we should assign to the pixel, we must calculate the ilumination at the point of the image/scene where the ray impacts.
+- This illumination might come from different sources of light and to analyze the point, the algorithm uses 3 different rays (secundary rays) :
+  - Reflected rays
+  - Refracted rays
+  - Shadow rays
+
 
 ![image](https://github.com/izzypt/miniRT/assets/73948790/dffdb27f-9ef8-42f2-878d-b8aca84e2c5c)
 
