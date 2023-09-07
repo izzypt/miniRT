@@ -84,3 +84,5 @@ Typically, each ray must be tested for intersection with some subset of all the 
 ![image](https://github.com/izzypt/miniRT/assets/73948790/07a9f03a-1009-456b-bd8f-b5511a9d3e5c)
 
 Once the nearest object has been identified, the algorithm will estimate the incoming light at the point of intersection, examine the material properties of the object, and combine this information to calculate the final color of the pixel.
+
+![image](https://github.com/izzypt/miniRT/assets/73948790/0fd5b4cd-69ec-4845-a11e-ab098dc302eb)
