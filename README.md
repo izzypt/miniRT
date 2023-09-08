@@ -102,3 +102,10 @@ Once the nearest object has been identified, the algorithm will estimate the inc
 - and the positive ```X``` axis (```X+→```) to the right (Figure 2-3).
 
 ![image](https://github.com/izzypt/miniRT/assets/73948790/e87ae8d8-8c36-4dfa-b0f1-4f0b4ae18090)
+
+### Frame ( Viewport )
+
+- We’ll assume this frame has dimensions ```Vw``` and ```Vh```, and is frontal to the camera orientation—that is, perpendicular to ```Z+→```
+- We’ll also assume it’s at a distance ```d``` , its sides are parallel to the ```X``` and ```Y``` axes, and it’s centered with respect to ```Z⃗``` 
+
+![image](https://github.com/izzypt/miniRT/assets/73948790/314fee39-2f61-4456-8689-0de05799bf1c)
