@@ -87,3 +87,18 @@ Typically, each ray must be tested for intersection with some subset of all the 
 Once the nearest object has been identified, the algorithm will estimate the incoming light at the point of intersection, examine the material properties of the object, and combine this information to calculate the final color of the pixel.
 
 ![image](https://github.com/izzypt/miniRT/assets/73948790/0fd5b4cd-69ec-4845-a11e-ab098dc302eb)
+
+# Basic Assumptions
+
+### Viewing Position ( Camera )
+- We’ll assume a fixed viewing position.
+- The viewing position - the place where you’d put your eye - is commonly called the ```camera``` position; let’s call it ```O```.
+- We’ll assume that the ``camera`` occupies a single point in space, that it is located at the origin of the coordinate system, and that it never moves from there, so ``O=(0,0,0)`` for now.
+
+### Fixed Camera orientation
+- The camera orientation determines where the camera is pointing.
+- We’ll assume it looks in the direction of the positive ```Z``` axis (which we’ll shorten to ```Z+→``` )
+- with the positive ```Y``` axis (```Y+→``` ) up
+- and the positive ```X``` axis (```X+→```) to the right (Figure 2-3).
+
+![image](https://github.com/izzypt/miniRT/assets/73948790/e87ae8d8-8c36-4dfa-b0f1-4f0b4ae18090)
