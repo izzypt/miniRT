@@ -20,6 +20,7 @@ Once completed you will be able to render simple Computer-Generated-Images and y
 - https://www.youtube.com/watch?v=lFnWy0Odsh8
 - https://gabrielgambetta.com/computer-graphics-from-scratch/02-basic-raytracing.html
 - https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-ray-tracing/how-does-it-work.html
+- https://raytracing.github.io/books/RayTracingInOneWeekend.html#thevec3class
 
 # 3D Rendering
 
