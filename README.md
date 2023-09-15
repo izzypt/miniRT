@@ -8,6 +8,7 @@ Once completed you will be able to render simple Computer-Generated-Images and y
 - Basics of 3D geometry and coordinate systems.
 - Matrices and matrix transformations (translations, rotations, scaling).
 - Vectors and Vector Arithmetic
+  - https://www.physicsclassroom.com/class/vectors/Lesson-1/Vectors-and-Direction 
   - http://spiff.rit.edu/classes/phys311.old/lectures/vector/vector.html
   - https://tutorial.math.lamar.edu/classes/calcii/vectorarithmetic.aspx 
 - Intersection algorithms for common geometric primitives like triangles, spheres, and planes.
@@ -17,7 +18,11 @@ Once completed you will be able to render simple Computer-Generated-Images and y
 
 ***Sources***:
 - https://en.wikipedia.org/wiki/Ray_tracing_%28graphics%29
-- https://www.youtube.com/watch?v=lFnWy0Odsh8
+- https://gabrielgambetta.com/computer-graphics-from-scratch/02-basic-raytracing.html
+- https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-ray-tracing/how-does-it-work.html
+- https://raytracing.github.io/books/RayTracingInOneWeekend.html#thevec3class
+- https://blog.devgenius.io/a-passion-for-pixels-building-a-ray-tracer-from-scratch-449651509fa0
+- https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection.html
 
 # 3D Rendering
 
@@ -86,3 +91,25 @@ Typically, each ray must be tested for intersection with some subset of all the 
 Once the nearest object has been identified, the algorithm will estimate the incoming light at the point of intersection, examine the material properties of the object, and combine this information to calculate the final color of the pixel.
 
 ![image](https://github.com/izzypt/miniRT/assets/73948790/0fd5b4cd-69ec-4845-a11e-ab098dc302eb)
+
+# Basic Assumptions
+
+### Viewing Position ( Camera )
+- We’ll assume a fixed viewing position.
+- The viewing position - the place where you’d put your eye - is commonly called the ```camera``` position; let’s call it ```O```.
+- We’ll assume that the ``camera`` occupies a single point in space, that it is located at the origin of the coordinate system, and that it never moves from there, so ``O=(0,0,0)`` for now.
+
+### Fixed Camera orientation
+- The camera orientation determines where the camera is pointing.
+- We’ll assume it looks in the direction of the positive ```Z``` axis (which we’ll shorten to ```Z+→``` )
+- with the positive ```Y``` axis (```Y+→``` ) up
+- and the positive ```X``` axis (```X+→```) to the right (Figure 2-3).
+
+![image](https://github.com/izzypt/miniRT/assets/73948790/e87ae8d8-8c36-4dfa-b0f1-4f0b4ae18090)
+
+### Frame ( Viewport )
+
+- We’ll assume this frame has dimensions ```Vw``` and ```Vh```, and is frontal to the camera orientation—that is, perpendicular to ```Z+→```
+- We’ll also assume it’s at a distance ```d``` , its sides are parallel to the ```X``` and ```Y``` axes, and it’s centered with respect to ```Z⃗``` 
+
+![image](https://github.com/izzypt/miniRT/assets/73948790/314fee39-2f61-4456-8689-0de05799bf1c)
