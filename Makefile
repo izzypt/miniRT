@@ -1,7 +1,7 @@
 NAME=miniRT
-CFLAGS=-Wall -Wextra
+CFLAGS=-Wall
 CC=cc
-SRC=main.c libs/get_next_line/get_next_line.c objects.c
+SRC=main.c libs/get_next_line/get_next_line.c objects.c vectors.c
 
 MLX_LIB=libs/mlx_linux/libmlx.a
 
