@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/09/16 13:12:20 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/18 03:06:46 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 
 typedef struct t_camera
 {
-	int	x;
-	int	y;
-	int	z;
+	float	x;
+	float	y;
+	float	z;
 }	t_Camera;
 
 typedef struct t_vector
@@ -34,8 +34,8 @@ typedef struct t_vector
 
 typedef struct t_viewport
 {
-	int		wdth;
-	int		hght;
+	int		width;
+	int		height;
 	int		z;
 	int		dst;
 	float	aspect_ratio;
@@ -55,11 +55,9 @@ typedef struct t_renderer
 
 typedef struct t_sphere
 {
-	int	radius;
-	int	center_x;
-	int	center_y;
-	int	center_z;
-	int	color;
+	float		radius;
+	int			color;
+	t_Vector	coord;
 }	t_Sphere;
 
 /**************/
@@ -77,6 +75,9 @@ t_Canvas	*canvas(void);
 
 float		vector_magnitude(t_Vector vector1);
 float		dot_product(t_Vector vector1, t_Vector vector2);
-t_Vector	vector_normalize(t_Vector vector1);
+void		vector_normalize(t_Vector *vector1);
+t_Vector	sub_vectors(t_Vector *vector1, t_Vector *vector2);
+t_Vector	add_vectors(t_Vector *vector1, t_Vector *vector2);
+t_Vector	mult_vector(t_Vector *vector1, int num);
 
 #endif

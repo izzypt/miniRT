@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:05:41 by simao             #+#    #+#             */
-/*   Updated: 2023/09/16 18:22:48 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/18 12:04:14 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,15 @@ t_Canvas	*canvas(void)
 }
 
 /*
- - Representa a janela através da qual vemos a scene e os raios de luz atravessam.
+- A janela através da qual observamos a scene.
 */
 t_Viewport	*viewport(void)
 {
 	static t_Viewport	viewport;
 
-	viewport.wdth = 300;
-	viewport.hght = 300;
+	viewport.width = 640;
+	viewport.height = 360;
+	viewport.aspect_ratio = 16 / 9;
 	viewport.z = 0;
 	viewport.dst = 1;
 
@@ -45,13 +46,13 @@ t_Viewport	*viewport(void)
 */
 t_Vector	*camera(void)
 {
-	static t_Vector	camera_origin;
+	static t_Vector	camera;
 
-	camera_origin.x = 0;
-	camera_origin.y = 0;
-	camera_origin.z = 1;
+	camera.x = 0;
+	camera.y = 0;
+	camera.z = 4;
 
-	return (&camera_origin);
+	return (&camera);
 }
 
 /*
@@ -61,10 +62,10 @@ t_Sphere	*sphere(void)
 {
 	static t_Sphere	sphere;
 
-	sphere.radius = 95;
-	sphere.center_x = 125;
-	sphere.center_y = 125;
-	sphere.center_z = 125;
+	sphere.radius = 0.5;
+	sphere.coord.x = 0;
+	sphere.coord.y = 0;
+	sphere.coord.z = 0;
 	sphere.color = 0x964000;
 
 	return (&sphere);
