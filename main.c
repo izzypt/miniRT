@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
-/*   Updated: 2023/09/18 13:28:15 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/18 13:58:58 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,22 @@ int		main(void)
 	}
 	mlx_loop(mlx);
 	return (1);
+}
+
+
+/*
+A foŕmula abaixo é o resultado da manipulação da equação do círculo e do raio/ray:
+
+(bx² + by²)t² + (2(axbx + ayby))t + (ax² + ay² - r²) = 0
+
+a = origem do ray light.
+b = ray light direction
+r = radius of circle/sphere
+t = hit distance
+
+O resultado indica-nos se existe alguma intersecção entre o raio que disparamos da câmara e o circulo na nossa scene para a distãncia t.
+
+*/
 
 	/*t_Vector A;
 	t_Vector B;
@@ -192,19 +208,3 @@ int		main(void)
 	printf("Normalized vector C: %f , %f, %f\n", C.x, C.y, C.z);
 	printf("Normalized vector D: %f , %f, %f\n", D.x, D.y, D.z);
 	printf("Normalized vector E: %f , %f, %f\n", E.x, E.y, E.z);*/
-}
-
-
-/*
-A foŕmula abaixo é o resultado da manipulação da equação do círculo e do raio/ray:
-
-(bx² + by²)t² + (2(axbx + ayby))t + (ax² + ay² - r²) = 0
-
-a = origem do ray light.
-b = ray light direction
-r = radius of circle/sphere
-t = hit distance
-
-O resultado indica-nos se existe alguma intersecção entre o raio que disparamos da câmara e o circulo na nossa scene para a distãncia t.
-
-*/
