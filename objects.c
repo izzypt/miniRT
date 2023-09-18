@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:05:41 by simao             #+#    #+#             */
-/*   Updated: 2023/09/18 12:04:14 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/18 22:07:31 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ t_Viewport	*viewport(void)
 {
 	static t_Viewport	viewport;
 
-	viewport.width = 640;
-	viewport.height = 360;
+	viewport.width = 1;
+	viewport.height = 1;
 	viewport.aspect_ratio = 16 / 9;
-	viewport.z = 0;
+	viewport.z = 1;
 	viewport.dst = 1;
 
 	return (&viewport);
@@ -48,9 +48,9 @@ t_Vector	*camera(void)
 {
 	static t_Vector	camera;
 
-	camera.x = 0;
-	camera.y = 0;
-	camera.z = 4;
+	camera.x = 2;
+	camera.y = 2;
+	camera.z = 10;
 
 	return (&camera);
 }
@@ -62,7 +62,7 @@ t_Sphere	*sphere(void)
 {
 	static t_Sphere	sphere;
 
-	sphere.radius = 0.5;
+	sphere.radius = 1;
 	sphere.coord.x = 0;
 	sphere.coord.y = 0;
 	sphere.coord.z = 0;

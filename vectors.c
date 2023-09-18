@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:58:52 by simao             #+#    #+#             */
-/*   Updated: 2023/09/18 02:10:10 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/18 22:39:33 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	vector_normalize(t_Vector *vector1)
 	}
 }
 
-t_Vector	add_vectors(t_Vector *vector1, t_Vector *vector2)
+t_Vector	vector_add(t_Vector *vector1, t_Vector *vector2)
 {
 	t_Vector	result;
 
@@ -58,7 +58,7 @@ t_Vector	add_vectors(t_Vector *vector1, t_Vector *vector2)
 	return (result);
 }
 
-t_Vector	sub_vectors(t_Vector *vector1, t_Vector *vector2)
+t_Vector	vector_sub(t_Vector *vector1, t_Vector *vector2)
 {
 	t_Vector	result;
 
@@ -68,7 +68,7 @@ t_Vector	sub_vectors(t_Vector *vector1, t_Vector *vector2)
 	return (result);
 }
 
-t_Vector	mult_vector(t_Vector *vector1, int num)
+t_Vector	vector_mult(t_Vector *vector1, int num)
 {
 	t_Vector	result;
 

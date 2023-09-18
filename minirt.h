@@ -6,17 +6,25 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/09/18 03:06:46 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/18 22:39:10 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
+/**********/
+/* LIBS  */
+/********/
+
 # include "libs/get_next_line/get_next_line.h"
 # include "libs/mlx_linux/mlx.h"
 # include "libs/printf/ft_printf.h"
 # include <math.h>
+
+/**************/
+/* STRUCTS   */
+/************/
 
 typedef struct t_camera
 {
@@ -76,8 +84,14 @@ t_Canvas	*canvas(void);
 float		vector_magnitude(t_Vector vector1);
 float		dot_product(t_Vector vector1, t_Vector vector2);
 void		vector_normalize(t_Vector *vector1);
-t_Vector	sub_vectors(t_Vector *vector1, t_Vector *vector2);
-t_Vector	add_vectors(t_Vector *vector1, t_Vector *vector2);
-t_Vector	mult_vector(t_Vector *vector1, int num);
+t_Vector	vector_sub(t_Vector *vector1, t_Vector *vector2);
+t_Vector	vector_add(t_Vector *vector1, t_Vector *vector2);
+t_Vector	vector_mult(t_Vector *vector1, int num);
+
+/*******************/
+/* INTERSECTIONS   */
+/*****************/
+int			intersects_sphere(t_Vector pos);
+int			intersects_circle(int x, int y);
 
 #endif
