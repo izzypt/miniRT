@@ -8,9 +8,6 @@ Once completed you will be able to render simple Computer-Generated-Images and y
 - Basics of 3D geometry and coordinate systems.
 - Matrices and matrix transformations (translations, rotations, scaling).
 - Vectors and Vector Arithmetic
-  - https://www.physicsclassroom.com/class/vectors/Lesson-1/Vectors-and-Direction 
-  - http://spiff.rit.edu/classes/phys311.old/lectures/vector/vector.html
-  - https://tutorial.math.lamar.edu/classes/calcii/vectorarithmetic.aspx 
 - Intersection algorithms for common geometric primitives like triangles, spheres, and planes.
 - Understanding the principles of light reflection, refraction, and absorption.
 
