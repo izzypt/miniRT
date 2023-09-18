@@ -92,24 +92,27 @@ Once the nearest object has been identified, the algorithm will estimate the inc
 
 ![image](https://github.com/izzypt/miniRT/assets/73948790/0fd5b4cd-69ec-4845-a11e-ab098dc302eb)
 
-# Basic Assumptions
+# Light
 
-### Viewing Position ( Camera )
-- We’ll assume a fixed viewing position.
-- The viewing position - the place where you’d put your eye - is commonly called the ```camera``` position; let’s call it ```O```.
-- We’ll assume that the ``camera`` occupies a single point in space, that it is located at the origin of the coordinate system, and that it never moves from there, so ``O=(0,0,0)`` for now.
+There are 3 main types of light we must know :
 
-### Fixed Camera orientation
-- The camera orientation determines where the camera is pointing.
-- We’ll assume it looks in the direction of the positive ```Z``` axis (which we’ll shorten to ```Z+→``` )
-- with the positive ```Y``` axis (```Y+→``` ) up
-- and the positive ```X``` axis (```X+→```) to the right (Figure 2-3).
+- ### Point Lights
+  - Point lights emit light from a fixed point in 3D space.
+  - They emit light equally in every direction; 
+- ### Directional Lights
+  - Like point lights, directional lights have an intensity, but unlike them, they don’t have a position;
+  - instead, they have a fixed direction.
+  - You can think of them as infinitely distant point lights located in the specified direction. 
+- ### Ambient Light
+  - light can come not only from light sources, but also from objects that get light from light sources and scatter part of it back into the scene.
+  - The scattered light will in turn hit some other object, part of it will be absorbed, and part of it will be scattered back into the scene.
+  - And so on, until all of the energy of the original light has been absorbed by the surfaces in the scene.  
 
-![image](https://github.com/izzypt/miniRT/assets/73948790/e87ae8d8-8c36-4dfa-b0f1-4f0b4ae18090)
+# Reflections
 
-### Frame ( Viewport )
-
-- We’ll assume this frame has dimensions ```Vw``` and ```Vh```, and is frontal to the camera orientation—that is, perpendicular to ```Z+→```
-- We’ll also assume it’s at a distance ```d``` , its sides are parallel to the ```X``` and ```Y``` axes, and it’s centered with respect to ```Z⃗``` 
-
-![image](https://github.com/izzypt/miniRT/assets/73948790/314fee39-2f61-4456-8689-0de05799bf1c)
+- ### Diffuse Reflection
+  - When a ray of light hits a matte object (smooth even surface), the ray is scattered back into the scene equally in every direction, a process called diffuse reflection;
+  - this is what makes matte objects look matte. 
+- ### Specular Reflection
+  -  Unlike matte objects, shiny objects look slightly different depending on where you’re looking from.
+  -  Unlike matte objects, the way you perceive the surface of these objects does actually depend on your point of view. 
