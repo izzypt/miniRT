@@ -6,17 +6,28 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
-/*   Updated: 2023/09/18 22:35:34 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/19 19:37:09 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	canvas_to_viewport(int x, int y, t_Vector *ray_dir)
+void	init_values(void)
 {
-	ray_dir->x = x * ((float)viewport()->width / (float)canvas()->width);
-	ray_dir->y = y * ((float)viewport()->height / (float)canvas()->height);
-	ray_dir->z = 2;
+	canvas()->width = 1920;
+	canvas()->height = 1080;
+	viewport()->width = 1;
+	viewport()->height = 1;
+	viewport()->dist = 1;
+	viewport()->aspect_ratio = 16 / 9;
+	camera()->x = 0;
+	camera()->y = 0;
+	camera()->z = 0;
+	sphere()->radius = 3;
+	sphere()->coord.x = 0;
+	sphere()->coord.y = 0;
+	sphere()->coord.z = 0;
+	sphere()->color = 0x964000;
 }
 
 int	main(void)
@@ -29,6 +40,7 @@ int	main(void)
 
 	x = -1;
 	y = -1;
+	init_values();
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, canvas()->width, canvas()->height, "MiniRT");
 	while (++y <= canvas()->height)
