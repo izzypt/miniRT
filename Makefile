@@ -1,7 +1,7 @@
 NAME=miniRT
 CFLAGS=-Wall
 CC=cc
-SRC=main.c libs/get_next_line/get_next_line.c objects.c vectors.c intersections.c canvas.c maths.c
+SRC=main.c libs/get_next_line/get_next_line.c objects.c vectors.c intersections.c canvas.c maths.c init.c
 
 MLX_LIB=libs/mlx_linux/libmlx.a
 
