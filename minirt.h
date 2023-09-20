@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/09/20 14:41:58 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/20 22:02:21 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "libs/printf/ft_printf.h"
 # include <stdio.h>
 # include <math.h>
+# include <limits.h>
 
 /*************/
 /* DEFINES  */
@@ -50,6 +51,12 @@ typedef struct t_camera
 	float	z;
 }	t_Camera;
 
+typedef struct t_point
+{
+	float	t1;
+	float	t2;
+}	t_Point;
+
 typedef struct t_vector
 {
 	float	x;
@@ -75,13 +82,19 @@ typedef struct t_sphere
 {
 	float		radius;
 	int			color;
-	t_Vector	coord;
+	t_Vector	center;
 }	t_Sphere;
+
+typedef struct t_scene
+{
+	t_Sphere	*spheres;
+}	t_Scene;
 
 /**************/
 /* OBJECTS   */
 /************/
 
+t_Scene		*scene(void);
 t_Vector	*camera(void);
 t_Viewport	*viewport(void);
 t_Sphere	*sphere(void);
@@ -102,8 +115,9 @@ t_Vector	vector_mult(t_Vector *vector1, int num);
 /* INTERSECTIONS  */
 /*****************/
 
-int			intersects_sphere(t_Vector pos);
+t_Point		intersects_sphere(t_Vector pos, t_Sphere sphere);
 int			intersects_circle(int x, int y);
+int			trace_ray(t_Vector pos, int t_min, int t_max);
 
 /************/
 /* UTILS   */

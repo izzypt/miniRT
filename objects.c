@@ -6,17 +6,17 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:05:41 by simao             #+#    #+#             */
-/*   Updated: 2023/09/20 14:47:11 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/20 19:18:03 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_mlx	*mlx(void)
+t_Scene	*scene(void)
 {
-	static t_mlx	data;
+	static t_Scene	scene;
 
-	return (&data);
+	return (&scene);
 }
 
 /*
