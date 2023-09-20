@@ -6,11 +6,18 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:05:41 by simao             #+#    #+#             */
-/*   Updated: 2023/09/19 14:20:22 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/20 14:47:11 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+t_mlx	*mlx(void)
+{
+	static t_mlx	data;
+
+	return (&data);
+}
 
 /*
  - Representa a nossa tela MLX.
