@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:37:11 by simao             #+#    #+#             */
-/*   Updated: 2023/09/19 19:44:59 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/20 15:11:52 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,12 @@ void	set_fov(float degrees)
 
 	if (degrees < 0 || degrees > 180)
 	{
-		printf("Invalid degrees. Valid range is between 0 and 180.\n");
+		ft_printf("Invalid degrees. Valid range is between 0 and 180.\n");
 		return ;
 	}
 	radians = (degrees * (PI / 180)) / 2;
 	viewport()->width = (tan(radians) * viewport()->dist) * 2;
+	viewport()->height = viewport()->width / viewport()->aspect_ratio;
 	printf("Redefining viewport:\nNew Width: %f\n", viewport()->width);
 	calculate_fov();
 }
