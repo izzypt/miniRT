@@ -6,59 +6,51 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
-/*   Updated: 2023/09/19 19:37:09 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/20 15:01:55 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	init_values(void)
-{
-	canvas()->width = 1920;
-	canvas()->height = 1080;
-	viewport()->width = 1;
-	viewport()->height = 1;
-	viewport()->dist = 1;
-	viewport()->aspect_ratio = 16 / 9;
-	camera()->x = 0;
-	camera()->y = 0;
-	camera()->z = 0;
-	sphere()->radius = 3;
-	sphere()->coord.x = 0;
-	sphere()->coord.y = 0;
-	sphere()->coord.z = 0;
-	sphere()->color = 0x964000;
-}
-
 int	main(void)
 {
 	void		*mlx;
-	void		*mlx_win;
+	void		*window;
 	int			x;
 	int			y;
 	t_Vector	ray_dir;
 
-	x = -1;
-	y = -1;
 	init_values();
+	x = ((canvas()->width / 2) * -1);
+	y = (canvas()->height / 2);
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, canvas()->width, canvas()->height, "MiniRT");
-	while (++y <= canvas()->height)
+	window = mlx_new_window(mlx, canvas()->width, canvas()->height, "MiniRT");
+	calculate_fov();
+	set_fov(80);
+	calculate_fov();
+	while (--y >= (canvas()->height / 2) * -1)
 	{
-		while (++x <= canvas()->width)
+		while (++x <= (canvas()->width / 2))
 		{
 			canvas_to_viewport(x, y, &ray_dir);
 			if (intersects_sphere(ray_dir))
-				mlx_pixel_put(mlx, mlx_win, x, y, 0x0000FF);
+				put_pixel(x, y, BLUE, mlx, window);
 			else
-				mlx_pixel_put(mlx, mlx_win, x, y, 0xFFFFFF);
+				put_pixel(x, y, WHITE, mlx, window);
 		}
-		x = 0;
+		x = -961;
 	}
 	mlx_loop(mlx);
 	return (1);
 }
 
+
+/*
+ - Mudar o sistema de coordenadas (0,0) |.			|
+										|    .		|
+										|			|
+ -
+*/
 
 /*
 A foŕmula abaixo é o resultado da manipulação da equação do círculo e do raio/ray:
