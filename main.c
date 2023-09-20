@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
-/*   Updated: 2023/09/20 15:01:55 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/20 21:57:07 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(void)
 {
 	void		*mlx;
 	void		*window;
+	int			color;
 	int			x;
 	int			y;
 	t_Vector	ray_dir;
@@ -25,20 +26,15 @@ int	main(void)
 	y = (canvas()->height / 2);
 	mlx = mlx_init();
 	window = mlx_new_window(mlx, canvas()->width, canvas()->height, "MiniRT");
-	calculate_fov();
-	set_fov(80);
-	calculate_fov();
 	while (--y >= (canvas()->height / 2) * -1)
 	{
 		while (++x <= (canvas()->width / 2))
 		{
 			canvas_to_viewport(x, y, &ray_dir);
-			if (intersects_sphere(ray_dir))
-				put_pixel(x, y, BLUE, mlx, window);
-			else
-				put_pixel(x, y, WHITE, mlx, window);
+			color = trace_ray(ray_dir, 1, INT_MAX);
+			put_pixel(x, y, color, mlx, window);
 		}
-		x = -961;
+		x = ((canvas()->width / 2) * -1);
 	}
 	mlx_loop(mlx);
 	return (1);
