@@ -6,25 +6,63 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/09/20 22:03:39 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/24 21:54:58 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	trace_ray(t_Vector pos, int t_min, int t_max)
+float	calculate_light(t_Vector *P, t_Vector *N)
 {
-	int			closest_t;
+	float		intensty;
+	float		n_dot_l;
+	int			j;
+	t_Vector	L;
+
+	j = 0;
+	intensty = 0.0;
+	while (j < 3)
+	{
+		if (scene()->lights[j].type == 'A')
+			intensty = intensty + scene()->lights[j].intensity;
+		else
+		{
+			if (scene()->lights[j].type == 'P')
+				L = vector_sub(&scene()->lights[j].position, P);
+			if (scene()->lights[j].type == 'D')
+			{
+				vector_normalize(&scene()->lights[j].direction);
+				L = scene()->lights[j].direction;
+			}
+		}
+		n_dot_l = dot_product(*N, L);
+		if (n_dot_l > 0)
+		{
+			intensty = intensty + \
+			(scene()->lights[j].intensity * n_dot_l / (vector_magnitude(*N) * vector_magnitude(L)));
+		}
+		j++;
+	}
+	printf("Intensity %f\n", intensty);
+	return (intensty);
+}
+
+t_Color	trace_ray(t_Vector ray, int t_min, int t_max)
+{
+	float		closest_t;
 	t_Sphere	*closest_sphere;
 	int			i;
 	t_Point		intersections;
+	t_Vector	N;
+	t_Vector	P;
+	t_Vector	D;
 
 	i = 0;
 	closest_sphere = NULL;
 	closest_t = INT_MAX;
-	while (i < 3)
+	while (i < 4)
 	{
-		intersections = intersects_sphere(pos, scene()->spheres[i]);
+		intersections = intersects_sphere(ray, scene()->spheres[i]);
 		if (intersections.t1 < closest_t \
 			&& intersections.t1 >= t_min \
 			&& intersections.t1 <= t_max)
@@ -42,29 +80,13 @@ int	trace_ray(t_Vector pos, int t_min, int t_max)
 		i++;
 	}
 	if (closest_sphere == NULL)
-		return (WHITE);
-	return (closest_sphere->color);
+		return (hex_to_rgb(WHITE));
+	D = vector_mult(&ray, closest_t);
+	P = vector_add(&ray, &D);
+	N = vector_sub(&P, &closest_sphere->center);
+	vector_normalize(&N);
+	return (color_mult(&closest_sphere->color, calculate_light(&P, &N)));
 }
-/*
-	Equação do raio/ray:
-	 _______________________________________________________
-	|														|
-	|	P = O + tR											|
-	|_______________________________________________________|
-
-	O = origem do raio ( camera )
-	t = distância
-	R = direcção ( ponto final - ponto inicial, normalizado)
-
-	Equaçao da esfera:
-	 _______________________________________________________   
-	|														|
-	|	(a - x)² + (b - y)² + (c - z)² - r² = 0				|
-	|_______________________________________________________|
-
-	- a e b e c representam algum ponto no nosso plano cartesiano.
-	- x e y e z representam o centro da nossa esfera.
-*/
 
 t_Point	intersects_sphere(t_Vector pos, t_Sphere sphere)
 {
@@ -92,6 +114,27 @@ t_Point	intersects_sphere(t_Vector pos, t_Sphere sphere)
 
 /*
 	Equação do raio/ray:
+	 _______________________________________________________
+	|														|
+	|	P = O + tR											|
+	|_______________________________________________________|
+
+	O = origem do raio ( camera )
+	t = distância
+	R = direcção ( ponto final - ponto inicial, normalizado)
+
+	Equaçao da esfera:
+	 _______________________________________________________   
+	|														|
+	|	(a - x)² + (b - y)² + (c - z)² - r² = 0				|
+	|_______________________________________________________|
+
+	- a e b e c representam algum ponto no nosso plano cartesiano.
+	- x e y e z representam o centro da nossa esfera.
+*/
+
+/*
+	Equação do raio/ray:
 	 ________________________________________________________________
 	|																|
 	|	P = O + tR													|
@@ -115,7 +158,7 @@ t_Point	intersects_sphere(t_Vector pos, t_Sphere sphere)
 
 	- a e b representam algum ponto no nosso plano cartesiano.
 	- x e y representam o centro do nosso círculo.
-*/
+
 int	intersects_circle(int x, int y)
 {
 	float	sph_x_squared;
@@ -132,4 +175,4 @@ int	intersects_circle(int x, int y)
 		return (1);
 	else
 		return (0);
-}
+}*/
