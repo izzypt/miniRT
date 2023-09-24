@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
-/*   Updated: 2023/09/20 21:57:07 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/24 21:47:07 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,23 @@ int	main(void)
 {
 	void		*mlx;
 	void		*window;
-	int			color;
+	t_Color		color;
 	int			x;
 	int			y;
-	t_Vector	ray_dir;
+	t_Vector	ray;
 
 	init_values();
 	x = ((canvas()->width / 2) * -1);
 	y = (canvas()->height / 2);
+	set_fov(75);
 	mlx = mlx_init();
 	window = mlx_new_window(mlx, canvas()->width, canvas()->height, "MiniRT");
 	while (--y >= (canvas()->height / 2) * -1)
 	{
 		while (++x <= (canvas()->width / 2))
 		{
-			canvas_to_viewport(x, y, &ray_dir);
-			color = trace_ray(ray_dir, 1, INT_MAX);
+			canvas_to_viewport(x, y, &ray);
+			color = trace_ray(ray, 1, INT_MAX);
 			put_pixel(x, y, color, mlx, window);
 		}
 		x = ((canvas()->width / 2) * -1);
@@ -128,3 +129,38 @@ O resultado indica-nos se existe alguma intersecção entre o raio que disparamo
 	printf("Normalized vector C: %f , %f, %f\n", C.x, C.y, C.z);
 	printf("Normalized vector D: %f , %f, %f\n", D.x, D.y, D.z);
 	printf("Normalized vector E: %f , %f, %f\n", E.x, E.y, E.z);*/
+
+/*int	main(void)
+{
+    // Create a sample RGB color
+	t_Color	originalColor;
+
+	originalColor.r = 100;
+	originalColor.g = 150;
+	originalColor.b = 200;
+
+    // Test rgb_to_hex function
+    int hexValue = rgb_to_hex(originalColor);
+    printf("Original RGB Color (R:%f, G:%f, B:%f) as Hex: 0x%X\n", originalColor.r, originalColor.g, originalColor.b, hexValue);
+
+    // Test hex_to_rgb function
+    t_Color convertedColor = hex_to_rgb(hexValue);
+    printf("Converted Hex (0x%X) to RGB (R:%f, G:%f, B:%f)\n", hexValue, convertedColor.r, convertedColor.g, convertedColor.b);
+
+	// Test color_add function
+	t_Color color1 = {50, 75, 100};
+	t_Color color2 = {25, 40, 60};
+	t_Color addedColor = color_add(&color1, &color2);
+	printf("Color1 + Color2 = (R:%f, G:%f, B:%f)\n", addedColor.r, addedColor.g, addedColor.b);
+
+    // Test color_sub function
+    t_Color subtractedColor = color_sub(&color1, &color2);
+    printf("Color1 - Color2 = (R:%f, G:%f, B:%f)\n", subtractedColor.r, subtractedColor.g, subtractedColor.b);
+
+    // Test color_mult function
+    float scale = 0.5; // Scale factor
+    t_Color scaledColor = color_mult(&color1, scale);
+    printf("Color1 * %.2f = (R:%f, G:%f, B:%f)\n", scale, scaledColor.r, scaledColor.g, scaledColor.b);
+
+    return 0;
+}*/

@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:58:52 by simao             #+#    #+#             */
-/*   Updated: 2023/09/18 22:39:33 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/23 22:15:37 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ float	dot_product(t_Vector vector1, t_Vector vector2)
 	result = (vector1.x * vector2.x) \
 	+ (vector1.y * vector2.y) \
 	+ (vector1.z * vector2.z);
-
 	return (result);
 }
 
@@ -68,7 +67,7 @@ t_Vector	vector_sub(t_Vector *vector1, t_Vector *vector2)
 	return (result);
 }
 
-t_Vector	vector_mult(t_Vector *vector1, int num)
+t_Vector	vector_mult(t_Vector *vector1, float num)
 {
 	t_Vector	result;
 
@@ -77,4 +76,3 @@ t_Vector	vector_mult(t_Vector *vector1, int num)
 	result.z = vector1->z * num;
 	return (result);
 }
-
