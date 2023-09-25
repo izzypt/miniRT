@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
-/*   Updated: 2023/09/24 21:47:07 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/25 12:17:41 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(void)
 	init_values();
 	x = ((canvas()->width / 2) * -1);
 	y = (canvas()->height / 2);
-	set_fov(75);
 	mlx = mlx_init();
 	window = mlx_new_window(mlx, canvas()->width, canvas()->height, "MiniRT");
 	while (--y >= (canvas()->height / 2) * -1)

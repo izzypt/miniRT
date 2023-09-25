@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/09/24 21:54:58 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/25 11:53:42 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,36 @@
 
 float	calculate_light(t_Vector *P, t_Vector *N)
 {
-	float		intensty;
+	float		i;
 	float		n_dot_l;
 	int			j;
 	t_Vector	L;
 
 	j = 0;
-	intensty = 0.0;
+	i = 0.0;
 	while (j < 3)
 	{
 		if (scene()->lights[j].type == 'A')
-			intensty = intensty + scene()->lights[j].intensity;
+			i = i + scene()->lights[j].intensity;
 		else
 		{
 			if (scene()->lights[j].type == 'P')
 				L = vector_sub(&scene()->lights[j].position, P);
 			if (scene()->lights[j].type == 'D')
 			{
-				vector_normalize(&scene()->lights[j].direction);
-				L = scene()->lights[j].direction;
+				L = vector_normalize(&scene()->lights[j].direction);
 			}
 		}
 		n_dot_l = dot_product(*N, L);
 		if (n_dot_l > 0)
 		{
-			intensty = intensty + \
+			i = i + \
 			(scene()->lights[j].intensity * n_dot_l / (vector_magnitude(*N) * vector_magnitude(L)));
 		}
 		j++;
 	}
-	printf("Intensity %f\n", intensty);
-	return (intensty);
+	printf("Intensity %f\n", i);
+	return (i);
 }
 
 t_Color	trace_ray(t_Vector ray, int t_min, int t_max)
@@ -58,8 +57,8 @@ t_Color	trace_ray(t_Vector ray, int t_min, int t_max)
 	t_Vector	D;
 
 	i = 0;
-	closest_sphere = NULL;
 	closest_t = INT_MAX;
+	closest_sphere = NULL;
 	while (i < 4)
 	{
 		intersections = intersects_sphere(ray, scene()->spheres[i]);
@@ -82,13 +81,14 @@ t_Color	trace_ray(t_Vector ray, int t_min, int t_max)
 	if (closest_sphere == NULL)
 		return (hex_to_rgb(WHITE));
 	D = vector_mult(&ray, closest_t);
-	P = vector_add(&ray, &D);
+	P = vector_add(camera(), &D);
 	N = vector_sub(&P, &closest_sphere->center);
-	vector_normalize(&N);
+	N = vector_normalize(&N);
+	//return (closest_sphere->color);
 	return (color_mult(&closest_sphere->color, calculate_light(&P, &N)));
 }
 
-t_Point	intersects_sphere(t_Vector pos, t_Sphere sphere)
+t_Point	intersects_sphere(t_Vector D, t_Sphere sphere)
 {
 	float		a;
 	float		b;
@@ -96,8 +96,8 @@ t_Point	intersects_sphere(t_Vector pos, t_Sphere sphere)
 	float		discriminant;
 	t_Point		intersections;
 
-	a = dot_product(pos, pos);
-	b = 2 * dot_product(vector_sub(camera(), &sphere.center), pos);
+	a = dot_product(D, D);
+	b = 2 * dot_product(vector_sub(camera(), &sphere.center), D);
 	c = dot_product(vector_sub(camera(), &sphere.center), \
 	vector_sub(camera(), &sphere.center)) - sphere.radius * sphere.radius;
 
