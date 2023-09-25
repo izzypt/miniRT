@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:58:52 by simao             #+#    #+#             */
-/*   Updated: 2023/09/25 11:04:35 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/25 11:52:46 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,19 @@ float	dot_product(t_Vector vector1, t_Vector vector2)
 	return (result);
 }
 
-void	vector_normalize(t_Vector *vector1)
+t_Vector	vector_normalize(t_Vector *vector1)
 {
 	float		magnitude;
+	t_Vector	normalized_vector;
 
 	magnitude = vector_magnitude(*vector1);
 	if (magnitude != 0.0)
 	{
-		vector1->x = (vector1->x / magnitude);
-		vector1->y = (vector1->y / magnitude);
-		vector1->z = (vector1->z / magnitude);
+		normalized_vector.x = (vector1->x / magnitude);
+		normalized_vector.y = (vector1->y / magnitude);
+		normalized_vector.z = (vector1->z / magnitude);
 	}
+	return (normalized_vector);
 }
 
 t_Vector	vector_add(t_Vector *vector1, t_Vector *vector2)

@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/09/25 11:04:45 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/25 11:52:59 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ t_Canvas	*canvas(void);
 /************/
 
 float		dot_product(t_Vector vector1, t_Vector vector2);
-void		vector_normalize(t_Vector *vector1);
+t_Vector	vector_normalize(t_Vector *vector1);
 float		vector_magnitude(t_Vector vector1);
 t_Vector	vector_sub(t_Vector *vector1, t_Vector *vector2);
 t_Vector	vector_add(t_Vector *vector1, t_Vector *vector2);
