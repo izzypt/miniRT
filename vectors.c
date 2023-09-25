@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:58:52 by simao             #+#    #+#             */
-/*   Updated: 2023/09/23 22:15:37 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/25 11:04:35 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,15 @@ t_Vector	vector_mult(t_Vector *vector1, float num)
 	result.x = vector1->x * num;
 	result.y = vector1->y * num;
 	result.z = vector1->z * num;
+	return (result);
+}
+
+t_Vector	vector_div(t_Vector *vector1, float num)
+{
+	t_Vector	result;
+
+	result.x = vector1->x / num;
+	result.y = vector1->y / num;
+	result.z = vector1->z / num;
 	return (result);
 }
