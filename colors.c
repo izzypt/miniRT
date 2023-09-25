@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/09/24 00:10:34 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/25 10:46:11 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ t_Color	color_add(t_Color *color1, t_Color *color2)
 		result.r = 255;
 	if (result.r < 0)
 		result.r = 0;
+	if (result.g > 255)
+		result.g = 255;
+	if (result.g < 0)
+		result.g = 0;
+	if (result.b > 255)
+		result.b = 255;
+	if (result.b < 0)
+		result.b = 0;
 	return (result);
 }
 
@@ -59,6 +67,14 @@ t_Color	color_sub(t_Color *color1, t_Color *color2)
 		result.r = 255;
 	if (result.r < 0)
 		result.r = 0;
+	if (result.g > 255)
+		result.g = 255;
+	if (result.g < 0)
+		result.g = 0;
+	if (result.b > 255)
+		result.b = 255;
+	if (result.b < 0)
+		result.b = 0;
 	return (result);
 }
 
@@ -70,8 +86,17 @@ t_Color	color_mult(t_Color *color1, float num)
 	result.g = color1->g * num;
 	result.b = color1->b * num;
 
-	result.r = fmin(255, fmax(0, result.r));
-	result.g = fmin(255, fmax(0, result.g));
-	result.b = fmin(255, fmax(0, result.b));
+	if (result.r > 255)
+		result.r = 255;
+	if (result.r < 0)
+		result.r = 0;
+	if (result.g > 255)
+		result.g = 255;
+	if (result.g < 0)
+		result.g = 0;
+	if (result.b > 255)
+		result.b = 255;
+	if (result.b < 0)
+		result.b = 0;
 	return (result);
 }
