@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:46:50 by simao             #+#    #+#             */
-/*   Updated: 2023/09/24 21:55:35 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/25 11:00:47 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ void	canvas_to_viewport(int x, int y, t_Vector *ray)
 {
 	ray->x = x * ((float)viewport()->width / (float)canvas()->width);
 	ray->y = y * ((float)viewport()->height / (float)canvas()->height);
-	ray->z = 1;
+	ray->z = viewport()->dist;
 }
