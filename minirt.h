@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/09/24 00:28:47 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/25 11:04:45 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ float		vector_magnitude(t_Vector vector1);
 t_Vector	vector_sub(t_Vector *vector1, t_Vector *vector2);
 t_Vector	vector_add(t_Vector *vector1, t_Vector *vector2);
 t_Vector	vector_mult(t_Vector *vector1, float num);
+t_Vector	vector_div(t_Vector *vector1, float num);
 
 /*******************/
 /* INTERSECTIONS  */
