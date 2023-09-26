@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:46:50 by simao             #+#    #+#             */
-/*   Updated: 2023/09/25 11:00:47 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/25 19:14:59 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,12 @@ void	put_pixel(int x, int y, t_Color color, void *mlx, void *win)
  - Converts canvas coordinates into viewport coordinates.
  - Stores them in raydir.
 */
-void	canvas_to_viewport(int x, int y, t_Vector *ray)
+t_Vector	canvas_to_viewport(int x, int y)
 {
-	ray->x = x * ((float)viewport()->width / (float)canvas()->width);
-	ray->y = y * ((float)viewport()->height / (float)canvas()->height);
-	ray->z = viewport()->dist;
+	t_Vector	ray;
+
+	ray.x = x * ((float)viewport()->width / (float)canvas()->width);
+	ray.y = y * ((float)viewport()->height / (float)canvas()->height);
+	ray.z = viewport()->dist;
+	return (ray);
 }
