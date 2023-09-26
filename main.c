@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
-/*   Updated: 2023/09/25 12:17:41 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/26 02:27:22 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,20 @@ int	main(void)
 	t_Color		color;
 	int			x;
 	int			y;
-	t_Vector	ray;
+	t_Vector	D;
 
 	init_values();
 	x = ((canvas()->width / 2) * -1);
 	y = (canvas()->height / 2);
+	set_fov(75);
 	mlx = mlx_init();
 	window = mlx_new_window(mlx, canvas()->width, canvas()->height, "MiniRT");
 	while (--y >= (canvas()->height / 2) * -1)
 	{
 		while (++x <= (canvas()->width / 2))
 		{
-			canvas_to_viewport(x, y, &ray);
-			color = trace_ray(ray, 1, INT_MAX);
+			D = canvas_to_viewport(x, y);
+			color = trace_ray(D, 1, INT_MAX);
 			put_pixel(x, y, color, mlx, window);
 		}
 		x = ((canvas()->width / 2) * -1);
