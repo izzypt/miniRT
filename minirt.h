@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/09/25 11:52:59 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/25 19:15:20 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ t_Color		color_mult(t_Color *color1, float num);
 /**********/
 
 void		init_values(void);
-void		canvas_to_viewport(int x, int y, t_Vector *ray_dir);
+t_Vector	canvas_to_viewport(int x, int y);
 float		calculate_fov(void);
 void		set_fov(float degrees);
 void		put_pixel(int x, int y, t_Color color, void *mlx, void *win);
