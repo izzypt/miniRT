@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/09/25 19:15:20 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/27 16:14:41 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct point
 typedef struct sphere
 {
 	float		radius;
+	float		spec;
 	t_Color		color;
 	t_Vector	center;
 }	t_Sphere;
@@ -135,6 +136,7 @@ t_Vector	vector_div(t_Vector *vector1, float num);
 
 t_Point		intersects_sphere(t_Vector pos, t_Sphere sphere);
 t_Color		trace_ray(t_Vector pos, int t_min, int t_max);
+float		calculate_light(t_Vector *P, t_Vector *N, t_Vector V, int specular);
 
 /***********/
 /* COLORS */
