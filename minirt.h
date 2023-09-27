@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/09/27 16:14:41 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/27 16:54:15 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,5 +158,12 @@ t_Vector	canvas_to_viewport(int x, int y);
 float		calculate_fov(void);
 void		set_fov(float degrees);
 void		put_pixel(int x, int y, t_Color color, void *mlx, void *win);
+
+/****************/
+/* REFLECTIONS */
+/**************/
+
+void		diffuse_reflection(t_Vector norm, t_Vector lvec, float *i, int j);
+void		specular_reflection(t_Vector norm, t_Vector lvec, int spec, float *i, int j, t_Vector V);
 
 #endif

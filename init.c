@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/09/27 16:14:57 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/27 16:28:03 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ void	init_values(void)
 		if (i == 0)
 		{
 			scene()->lights[i].type = 'A';
-			scene()->lights[i].intensity = 0.4;
+			scene()->lights[i].intensity = 0.2;
 		}
 		if (i == 1)
 		{
 			scene()->lights[i].type = 'P';
-			scene()->lights[i].intensity = 0.4;
+			scene()->lights[i].intensity = 0.6;
 			scene()->lights[i].position.x = 2;
 			scene()->lights[i].position.y = 1;
 			scene()->lights[i].position.z = 0;
@@ -80,7 +80,7 @@ void	init_values(void)
 		if (i == 2)
 		{
 			scene()->lights[i].type = 'D';
-			scene()->lights[i].intensity = 0.1;
+			scene()->lights[i].intensity = 0.2;
 			scene()->lights[i].direction.x = 1;
 			scene()->lights[i].direction.y = 4;
 			scene()->lights[i].direction.z = 4;
