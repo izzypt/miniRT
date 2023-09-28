@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/09/27 16:54:15 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/28 01:49:19 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,62 +108,69 @@ typedef struct scene
 	t_Light		*lights;
 }	t_Scene;
 
+typedef struct close_intersection
+{
+	t_Sphere	*closest_sphere;
+	float		closest_t;
+}	t_Intersection;
+
 /**************/
 /* OBJECTS   */
 /************/
 
-t_Scene		*scene(void);
-t_Vector	*camera(void);
-t_Viewport	*viewport(void);
-t_Sphere	*sphere(void);
-t_Canvas	*canvas(void);
+t_Scene			*scene(void);
+t_Vector		*camera(void);
+t_Viewport		*viewport(void);
+t_Sphere		*sphere(void);
+t_Canvas		*canvas(void);
 
 /**************/
 /* VECTORS   */
 /************/
 
-float		dot_product(t_Vector vector1, t_Vector vector2);
-t_Vector	vector_normalize(t_Vector *vector1);
-float		vector_magnitude(t_Vector vector1);
-t_Vector	vector_sub(t_Vector *vector1, t_Vector *vector2);
-t_Vector	vector_add(t_Vector *vector1, t_Vector *vector2);
-t_Vector	vector_mult(t_Vector *vector1, float num);
-t_Vector	vector_div(t_Vector *vector1, float num);
+float			dot_product(t_Vector vector1, t_Vector vector2);
+t_Vector		vector_normalize(t_Vector *vector1);
+float			vector_magnitude(t_Vector vector1);
+t_Vector		vector_sub(t_Vector *vector1, t_Vector *vector2);
+t_Vector		vector_add(t_Vector *vector1, t_Vector *vector2);
+t_Vector		vector_mult(t_Vector *vector1, float num);
+t_Vector		vector_div(t_Vector *vector1, float num);
 
 /*******************/
 /* INTERSECTIONS  */
 /*****************/
 
-t_Point		intersects_sphere(t_Vector pos, t_Sphere sphere);
-t_Color		trace_ray(t_Vector pos, int t_min, int t_max);
-float		calculate_light(t_Vector *P, t_Vector *N, t_Vector V, int specular);
+t_Point			intersects_sphere(t_Vector O, t_Vector D, t_Sphere sphere);
+t_Color			trace_ray(t_Vector pos, int t_min, int t_max);
+float			calculate_light(t_Vector *P, t_Vector *N, t_Vector V, t_Sphere	*closest_sphere);
+t_Intersection	closest_intersect(t_Vector *O, t_Vector *D, float t_min, float t_max);
 
 /***********/
 /* COLORS */
 /**********/
 
-int			rgb_to_hex(t_Color color);
-t_Color		hex_to_rgb(int hex_color);
-t_Color		color_add(t_Color *color1, t_Color *color2);
-t_Color		color_mult(t_Color *color1, float num);
-t_Color		color_sub(t_Color *color1, t_Color *color2);
-t_Color		color_mult(t_Color *color1, float num);
+int				rgb_to_hex(t_Color color);
+t_Color			hex_to_rgb(int hex_color);
+t_Color			color_add(t_Color *color1, t_Color *color2);
+t_Color			color_mult(t_Color *color1, float num);
+t_Color			color_sub(t_Color *color1, t_Color *color2);
+t_Color			color_mult(t_Color *color1, float num);
 
 /************/
 /* UTILS   */
 /**********/
 
-void		init_values(void);
-t_Vector	canvas_to_viewport(int x, int y);
-float		calculate_fov(void);
-void		set_fov(float degrees);
-void		put_pixel(int x, int y, t_Color color, void *mlx, void *win);
+void			init_values(void);
+t_Vector		canvas_to_viewport(int x, int y);
+float			calculate_fov(void);
+void			set_fov(float degrees);
+void			put_pixel(int x, int y, t_Color color, void *mlx, void *win);
 
 /****************/
 /* REFLECTIONS */
 /**************/
 
-void		diffuse_reflection(t_Vector norm, t_Vector lvec, float *i, int j);
-void		specular_reflection(t_Vector norm, t_Vector lvec, int spec, float *i, int j, t_Vector V);
+void			diffuse_reflection(t_Vector norm, t_Vector lvec, float *i, int j);
+void			specular_reflection(t_Vector norm, t_Vector lvec, int spec, float *i, int j, t_Vector V);
 
 #endif
