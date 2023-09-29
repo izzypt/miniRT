@@ -1,13 +1,14 @@
 NAME=miniRT
 CFLAGS=-Wall
 CC=cc
-SRC=main.c libs/get_next_line/get_next_line.c objects.c vectors.c intersections.c canvas.c maths.c init.c colors.c
+SRC=src/main.c inc/libs/get_next_line/get_next_line.c src/objects.c src/vectors.c src/intersections.c \
+	src/canvas.c src/maths.c src/init.c src/colors.c src/reflections.c
 
-MLX_LIB=libs/mlx_linux/libmlx.a
+MLX_LIB=inc/libs/mlx_linux/libmlx.a
 
-LIBFT_LIB=libs/Libft_SB/libft.a
+LIBFT_LIB=inc/libs/Libft_SB/libft.a
 
-PRINTF_LIB=libs/printf/printf.a
+PRINTF_LIB=inc/libs/printf/printf.a
 
 LDFLAGS= $(PRINTF_LIB) $(LIBFT_LIB) $(MLX_LIB) -lXext -lX11 -lm -lz -g -fsanitize=address
 
@@ -17,22 +18,22 @@ $(NAME) : $(SRC) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB)
 	$(CC) $(SRC) -o $(NAME) $(CFLAGS) $(LDFLAGS)
 
 $(MLX_LIB):
-	cd libs/mlx_linux && make
+	cd inc/libs/mlx_linux && make
 	cd ..
 
 $(LIBFT_LIB):
-	cd libs/Libft_SB && make
+	cd inc/libs/Libft_SB && make
 	cd ..
 
 $(PRINTF_LIB):
-	cd libs/printf && make
+	cd inc/libs/printf && make
 	cd ..
 
 clean:
 	rm -f $(NAME)
-	make -C libs/Libft_SB clean
-	make -C libs/mlx_linux clean
-	make -C libs/printf clean
+	make -C inc/libs/Libft_SB clean
+	make -C inc/libs/mlx_linux clean
+	make -C inc/libs/printf clean
 
 fclean:		clean
 		rm -rf $(NAME)
