@@ -6,11 +6,11 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/09/28 12:58:17 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/29 13:00:08 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../inc/minirt.h"
 
 /*t_Color	color_to_paint(t_Sphere	*closest_sphere, float closest_t, t_Vector ray)
 {

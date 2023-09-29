@@ -6,12 +6,12 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/09/27 16:28:03 by simao            ###   ########.fr       */
+/*   Updated: 2023/09/29 13:00:02 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "minirt.h"
+#include "../inc/minirt.h"
 
 void	init_values(void)
 {
