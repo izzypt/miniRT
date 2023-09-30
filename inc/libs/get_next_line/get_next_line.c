@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen_ft(char *str)
 {
 	int	i;
 
@@ -46,13 +46,13 @@ int	ft_limpa_stash(char *buff)
 	return (is_nline);
 }
 
-char	*ft_strjoin(char *str1, char *str2)
+char	*ft_strjoin_ft(char *str1, char *str2)
 {
 	int		i;
 	char	*newstr;
 
 	i = 0;
-	newstr = malloc(ft_strlen(str1) + ft_strlen(str2) + 1);
+	newstr = malloc(ft_strlen_ft(str1) + ft_strlen_ft(str2) + 1);
 	if (!newstr)
 		return (NULL);
 	while (str1 && str1[i])
@@ -87,7 +87,7 @@ char	*get_next_line(int fd)
 	line = NULL;
 	while (buff[0] || read(fd, buff, BUFFER_SIZE) > 0)
 	{
-		line = ft_strjoin(line, buff);
+		line = ft_strjoin_ft(line, buff);
 		if (ft_limpa_stash(buff))
 			break ;
 	}

@@ -23,8 +23,8 @@
 # include <stdlib.h>
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(char *str);
-char	*ft_strjoin(char *l_str, char *buff);
+size_t	ft_strlen_ft(char *str);
+char	*ft_strjoin_ft(char *l_str, char *buff);
 int		ft_limpa_stash(char *str);
 
 #endif

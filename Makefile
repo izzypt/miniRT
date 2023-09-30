@@ -2,7 +2,7 @@ NAME=miniRT
 CFLAGS=-Wall
 CC=cc
 SRC=src/main.c inc/libs/get_next_line/get_next_line.c src/objects.c src/vectors.c src/intersections.c \
-	src/canvas.c src/maths.c src/init.c src/colors.c src/reflections.c
+	src/canvas.c src/maths.c src/init.c src/colors.c src/reflections.c src/free.c src/errors.c src/parser.c
 
 MLX_LIB=inc/libs/mlx_linux/libmlx.a
 
@@ -10,11 +10,11 @@ LIBFT_LIB=inc/libs/Libft_SB/libft.a
 
 PRINTF_LIB=inc/libs/printf/printf.a
 
-LDFLAGS= $(PRINTF_LIB) $(LIBFT_LIB) $(MLX_LIB) -L/usr/X11/lib  -lXext -lX11 -lm -lz -g -fsanitize=address
+LDFLAGS= $(PRINTF_LIB) $(MLX_LIB) -L/usr/X11/lib -lXext -lX11 -lm -lz -g -fsanitize=address
 
 all : $(NAME)
 
-$(NAME) : $(SRC) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB)
+$(NAME) : $(SRC) $(MLX_LIB) $(PRINTF_LIB)
 	$(CC) $(SRC) -o $(NAME) $(CFLAGS) $(LDFLAGS)
 
 $(MLX_LIB):
