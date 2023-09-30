@@ -10,7 +10,7 @@ LIBFT_LIB=inc/libs/Libft_SB/libft.a
 
 PRINTF_LIB=inc/libs/printf/printf.a
 
-LDFLAGS= $(PRINTF_LIB) $(LIBFT_LIB) $(MLX_LIB) -lXext -lX11 -lm -lz -g -fsanitize=address
+LDFLAGS= $(PRINTF_LIB) $(LIBFT_LIB) $(MLX_LIB) -L/usr/X11/lib  -lXext -lX11 -lm -lz -g -fsanitize=address
 
 all : $(NAME)
 
