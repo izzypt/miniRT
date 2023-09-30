@@ -169,6 +169,7 @@ void			put_pixel(int x, int y, t_Color color, void *mlx, void *win);
 int				parse_file(char **argv);
 void			free_matrix(char **matrix);
 void			send_error(char *error);
+int				ft_atoi(const char *str);
 
 /****************/
 /* REFLECTIONS */
