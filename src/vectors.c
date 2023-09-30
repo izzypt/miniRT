@@ -46,6 +46,12 @@ t_Vector	vector_normalize(t_Vector *vector1)
 		normalized_vector.y = (vector1->y / magnitude);
 		normalized_vector.z = (vector1->z / magnitude);
 	}
+	else
+	{
+		normalized_vector.x = vector1->x;
+		normalized_vector.y = vector1->y;
+		normalized_vector.z = vector1->z;
+	}	
 	return (normalized_vector);
 }
 

@@ -2,3 +2,5 @@
 .miniRT.dsYM/*
 miniRT
 info.plist
+*.o
+*.a

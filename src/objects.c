@@ -12,6 +12,13 @@
 
 #include "../inc/minirt.h"
 
+t_mlx	*mlibx(void)
+{
+	static t_mlx	mlx;
+
+	return (&mlx);
+}
+
 t_Scene	*scene(void)
 {
 	static t_Scene	scene;

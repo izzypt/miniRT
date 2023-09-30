@@ -123,6 +123,7 @@ t_Vector		*camera(void);
 t_Viewport		*viewport(void);
 t_Sphere		*sphere(void);
 t_Canvas		*canvas(void);
+t_mlx			*mlibx(void);
 
 /**************/
 /* VECTORS   */
@@ -165,6 +166,9 @@ t_Vector		canvas_to_viewport(int x, int y);
 float			calculate_fov(void);
 void			set_fov(float degrees);
 void			put_pixel(int x, int y, t_Color color, void *mlx, void *win);
+int				parse_file(char **argv);
+void			free_matrix(char **matrix);
+void			send_error(char *error);
 
 /****************/
 /* REFLECTIONS */

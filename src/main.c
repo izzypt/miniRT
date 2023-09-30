@@ -12,31 +12,28 @@
 
 #include "../inc/minirt.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	void		*mlx;
-	void		*window;
 	t_Color		color;
 	int			x;
 	int			y;
 	t_Vector	D;
 
+	parse_file(argv);
 	init_values();
 	x = ((canvas()->width / 2) * -1);
 	y = (canvas()->height / 2);
 	set_fov(75);
-	mlx = mlx_init();
-	window = mlx_new_window(mlx, canvas()->width, canvas()->height, "MiniRT");
 	while (--y >= (canvas()->height / 2) * -1)
 	{
 		while (++x <= (canvas()->width / 2))
 		{
 			D = canvas_to_viewport(x, y);
 			color = trace_ray(D, 1, INT_MAX);
-			put_pixel(x, y, color, mlx, window);
+			put_pixel(x, y, color, mlibx()->mlx, mlibx()->win);
 		}
 		x = ((canvas()->width / 2) * -1);
 	}
-	mlx_loop(mlx);
+	mlx_loop(mlibx()->mlx);
 	return (1);
 }

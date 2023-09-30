@@ -13,19 +13,31 @@
 
 #include "../inc/minirt.h"
 
-void	init_values(void)
+void	set_viewport(void)
 {
-	int	i = 0;
-
-	canvas()->width = 960;
-	canvas()->height = 540;
 	viewport()->width = 1;
 	viewport()->height = 1;
 	viewport()->dist = 1;
 	viewport()->aspect_ratio = (float)16 / (float)9;
-	camera()->x = 0;
-	camera()->y = 0;
-	camera()->z = 0;
+}
+
+void	set_camera(int x, int y, int z)
+{
+	camera()->x = x;
+	camera()->y = y;
+	camera()->z = z;
+}
+
+void	set_canvas(int width, int height)
+{
+	canvas()->width = width;
+	canvas()->height = height;
+}
+
+void	set_scene(void)
+{
+	int	i = 0;
+	
 	scene()->spheres = malloc(sizeof(t_Sphere) * 4);
 	scene()->lights = malloc(sizeof(t_Light) * 3);
 	scene()->spheres[3].radius = 5000;
@@ -87,4 +99,14 @@ void	init_values(void)
 		}
 		i++;
 	}
+}
+
+void	init_values(void)
+{
+	set_canvas(960, 540);
+	set_viewport();
+	set_camera(0, 0, 0);
+	mlibx()->mlx = mlx_init();
+	mlibx()->win = mlx_new_window(mlibx()->mlx, canvas()->width, canvas()->height, "MiniRT");
+	set_scene();
 }
