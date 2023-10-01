@@ -12,6 +12,11 @@
 
 #include "../inc/minirt.h"
 
+/**
+ * @brief Displays an error message and exits the program. 
+ * 
+ * @param error the error message to display on the console.
+ */
 void	send_error(char *error)
 {
     ft_putstr("\n", 2);

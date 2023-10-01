@@ -11,45 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
-/**
- * @brief Extract and validate ambient lightning values. 
- * 
- * @param **line a .rt file line splitted by spaces " " containing ambient lightning data.
- */
-void	parse_ambient(char **line)
-{
-	int		r;
-	int		g;
-	int		b;
-	float 	intensity;
-	char	**rgb_string;
-
-	if (!line[1])
-		send_error("Ambient lightning intensity value must be provided\n");
-	intensity = ft_atoi(line[1]);
-	if (intensity < 0 || intensity > 1)
-		send_error("Ambient lightning valid intensity must be between 0.0 and 1.0\n");
-	if (!line[2])
-		send_error("Ambient lightning RGB colors must be provided\n");
-	rgb_string = ft_split(line[2], ',');
-	if (!rgb_string[0] || !rgb_string[1] || !rgb_string[2])
-		send_error("Ambient light colors must be between 0-255 in format: 255,255,255\n");
-	r = ft_atoi(rgb_string[0]);
-	g = ft_atoi(rgb_string[1]);
-	b = ft_atoi(rgb_string[2]);
-	if (r > 255 || g > 255 || b > 255 || r < 0 || g < 0 || b < 0)
-		send_error("Ambient lightning RGB colors must be between 0-255\n");
-}
-
-/**
- * @brief Extract and validate camera values. 
- * 
- * @param **line a .rt file line splitted by spaces " " containing camera data.
- */
-void	parse_camera(char **line)
-{
-
-}
 
 /**
  * @brief Redirects the given line according to the identifier to the correct parser function.
@@ -63,7 +24,7 @@ void	redirect_line(char **line)
 	static int num_of_cylinder;
 
 	if (!ft_strncmp(line[0], "C", 1)) 
-		parse_camera();
+		parse_camera(line);
 	if (!ft_strncmp(line[0], "A", 1)) 
 		parse_ambient(line);
 	/*if (!ft_strncmp(line[0], "L", 1))

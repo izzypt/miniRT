@@ -19,6 +19,11 @@ t_mlx	*mlibx(void)
 	return (&mlx);
 }
 
+/**
+ * @brief Represents our scene. 
+ * 
+ * @return A t_Scene static struct containing data about our scene.
+ */
 t_Scene	*scene(void)
 {
 	static t_Scene	scene;
@@ -26,9 +31,11 @@ t_Scene	*scene(void)
 	return (&scene);
 }
 
-/*
- - Representa a nossa tela MLX.
-*/
+/**
+ * @brief Represents our canvas. 
+ * 
+ * @return A t_Canvas static struct containing data about our canvas.
+ */
 t_Canvas	*canvas(void)
 {
 	static t_Canvas	canvas;
@@ -36,9 +43,11 @@ t_Canvas	*canvas(void)
 	return (&canvas);
 }
 
-/*
-- A janela através da qual observamos a scene.
-*/
+/**
+ * @brief Represents our viewport. 
+ * 
+ * @return A t_Viewport static struct containing data about our viewport.
+ */
 t_Viewport	*viewport(void)
 {
 	static t_Viewport	viewport;
@@ -46,22 +55,14 @@ t_Viewport	*viewport(void)
 	return (&viewport);
 }
 
-/*
- - Ponto de origim a partir do qual enviamos os raios de luz.
-*/
+/**
+ * @brief Represents our camera. 
+ * 
+ * @return A t_Vector static struct containing data about our camera.
+ */
 t_Vector	*camera(void)
 {
 	static t_Vector	camera;
 
 	return (&camera);
-}
-
-/*
- - Representa a esfera.
-*/
-t_Sphere	*sphere(void)
-{
-	static t_Sphere	sphere;
-
-	return (&sphere);
 }
