@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 13:05:58 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 13:17:59 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,14 @@ int				parse_file(char **argv);
 void			parse_light(char **line);
 void			parse_camera(char **line);
 void			parse_ambient(char **line);
+
+/*****************/
+/* INITIALIZER  */
+/***************/
+void	set_viewport(void);
+void	set_camera(int x, int y, int z);
+void	set_canvas(int width, int height);
+void	set_scene(void);
 
 /*******************/
 /* INTERSECTIONS  */

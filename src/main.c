@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
-/*   Updated: 2023/09/29 13:00:12 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 13:16:00 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 		{
 			D = canvas_to_viewport(x, y);
 			color = trace_ray(D, 1, INT_MAX);
-			put_pixel(x, y, color, mlibx()->mlx, mlibx()->win);
+			put_pixel(x, y, color);
 		}
 		x = ((canvas()->width / 2) * -1);
 	}
