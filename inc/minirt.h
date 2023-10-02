@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 15:10:29 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 18:33:37 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,10 +154,13 @@ void    validate_normal_vector(int x, int y, int z);
 /*****************/
 /* INITIALIZER  */
 /***************/
+
 void	set_viewport(void);
 void	set_camera(int x, int y, int z);
 void	set_canvas(int width, int height);
 void	set_scene(void);
+void	set_ambient_light(float intensity);
+void	set_mlx(void);
 
 /*******************/
 /* INTERSECTIONS  */
@@ -191,6 +194,7 @@ void			put_pixel(int x, int y, t_Color color);
 void			free_matrix(char **matrix);
 void			send_error(char *error);
 int				ft_atoi(const char *str);
+float 			ft_atof(const char *str);
 
 /****************/
 /* REFLECTIONS */

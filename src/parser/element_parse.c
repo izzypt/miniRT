@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 15:12:03 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 18:42:52 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	parse_ambient(char **line)
 	color.g = ft_atoi(rgb_string[1]);
 	color.b = ft_atoi(rgb_string[2]);
 	validate_rgb_values(color.r, color.g, color.b);
+	set_ambient_light(intensity);
 }
 
 /**
@@ -71,6 +72,8 @@ void	parse_camera(char **line)
 	if (fov < 0 || fov > 180)
 		send_error("Camera field of view must be between 0 and 180\n");
 	set_camera(cam_pos.x, cam_pos.y, cam_pos.z);
+	free_matrix(camera_pos);
+	free_matrix(camera_dir);
 }
 
 /**
@@ -81,7 +84,7 @@ void	parse_camera(char **line)
 void	parse_light(char **line)
 {
 	char		**light_pos;
-	t_Vector	light;
+	t_Vector	light_position;
 	float		intensity;
 
 	if (!line[1] || !line[2] || !line[3])
@@ -89,12 +92,14 @@ void	parse_light(char **line)
 	light_pos = ft_split(line[1], ',');
 	if (!light_pos[0] || !light_pos[1] || !light_pos[2])
 		send_error("Camera values must be provided in format: x,y,z\n");
-	light.x = ft_atoi(light_pos[0]);
-	light.y = ft_atoi(light_pos[1]);
-	light.z = ft_atoi(light_pos[2]);
-	intensity = ft_atoi(line[2]);
+	light_position.x = ft_atoi(light_pos[0]);
+	light_position.y = ft_atoi(light_pos[1]);
+	light_position.z = ft_atoi(light_pos[2]);
+	intensity = ft_atof(line[2]);
 	if (intensity < 0.0 || intensity > 1.0)
 		send_error("Point Light intensity value must be between 0.0 and 1.0\n");
+	set_point_light(intensity, light_position);
+	free_matrix(light_pos);
 }
 
 /**
@@ -126,4 +131,6 @@ void	parse_sphere(char **line)
     color.g = ft_atoi(sphere_color[1]);
 	color.b = ft_atoi(sphere_color[2]);
 	validate_rgb_values(color.r, color.g, color.b);
+	free_matrix(sphere_pos);
+	free_matrix(sphere_color);
 }

@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 14:03:02 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 18:58:20 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,17 @@ void	end_file(char *buffer)
 }
 
 /**
- * @brief Check if the line has one of the valid identifiers from the subject.
+ * @brief Check if the line has one of the valid identifiers from the subject or if it is only a empty line.
  * 
- * @param buffer the line read by get_next_line
+ * @param buffer the line read by get_next_line.
  */
 int	check_line_identifier(char *buffer)
 {
 	char	**line;
 
 	end_file(buffer);
+	if (!ft_strncmp(buffer, "\n", 2))
+		return (1);
 	line = ft_split(buffer, ' ');
 	if (!line)
 		return (0);
@@ -101,7 +103,7 @@ int	valid_file_extension(char *file)
 }
 
 /**
- * @brief Check if file name is valid and read line after line
+ * @brief Check if the file extension and check each line for the valid identifiers.
  * 
  * @param argv 
  */

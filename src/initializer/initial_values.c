@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   initial_values.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 12:50:49 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 18:28:26 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ void	init_values(void)
 {
 	set_canvas(960, 540);
 	set_viewport();
-	set_camera(0, 0, 0);
 	set_scene();
-	mlibx()->mlx = mlx_init();
-	mlibx()->win = mlx_new_window(mlibx()->mlx, canvas()->width, canvas()->height, "MiniRT");
+	set_mlx();
 }
 
+void	set_canvas(int width, int height)
+{
+	canvas()->width = width;
+	canvas()->height = height;
+}
 
 void	set_viewport(void)
 {
@@ -39,18 +42,12 @@ void	set_camera(int x, int y, int z)
 	camera()->z = z;
 }
 
-void	set_canvas(int width, int height)
-{
-	canvas()->width = width;
-	canvas()->height = height;
-}
-
 void	set_scene(void)
 {
 	int	i = 0;
 	
 	scene()->spheres = malloc(sizeof(t_Sphere) * 4);
-	scene()->lights = malloc(sizeof(t_Light) * 3);
+	//scene()->lights = malloc(sizeof(t_Light) * 3);
 	scene()->spheres[3].radius = 5000;
 	scene()->spheres[3].center.x = 0;
 	scene()->spheres[3].center.y = -5001;
@@ -87,7 +84,7 @@ void	set_scene(void)
 			scene()->spheres[i].color = hex_to_rgb(GREEN);
 			scene()->spheres[i].spec = 10;
 		}
-		if (i == 0)
+		/*if (i == 0)
 		{
 			scene()->lights[i].type = 'A';
 			scene()->lights[i].intensity = 0.2;
@@ -107,7 +104,13 @@ void	set_scene(void)
 			scene()->lights[i].direction.x = 1;
 			scene()->lights[i].direction.y = 4;
 			scene()->lights[i].direction.z = 4;
-		}
+		}*/
 		i++;
 	}
+}
+
+void	set_mlx(void)
+{
+	mlibx()->mlx = mlx_init();
+	mlibx()->win = mlx_new_window(mlibx()->mlx, canvas()->width, canvas()->height, "MiniRT");
 }

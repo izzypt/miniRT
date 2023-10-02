@@ -6,7 +6,7 @@ SRC=src/main.c \
 	src/utils/getters.c src/utils/vectors.c src/utils/canvas.c src/utils/maths.c  src/utils/colors.c  src/utils/free.c src/utils/errors.c \
 	src/parser/file_parse.c src/parser/element_parse.c src/parser/validators.c\
 	src/renderer/intersections.c src/renderer/reflections.c \
-	src/initializer/init.c \
+	src/initializer/initial_values.c src/initializer/elements_values.c\
 	src/utils/ft_atoi.c \
 
 MLX_LIB=inc/libs/mlx_linux/libmlx.a
