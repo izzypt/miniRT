@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 18:40:37 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 21:02:23 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ float	calculate_light(t_Vector *P, t_Vector *N, t_Vector V, t_Sphere	*closest_sp
 			if (scene()->lights[j].type == 'P')
 			{
 				l_vector = vector_sub(&scene()->lights[j].position, P);
-				t_max = INT_MAX;
+				t_max = 1;
 			}
 			if (scene()->lights[j].type == 'D')
 			{
