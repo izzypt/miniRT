@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
-/*   Updated: 2023/10/02 13:16:00 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 13:42:38 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	main(int argc, char **argv)
 	int			y;
 	t_Vector	D;
 
+	if (argc != 2)
+		send_error("Please provide only a .rt file as program input\n");
 	parse_file(argv);
 	init_values();
 	x = ((canvas()->width / 2) * -1);
