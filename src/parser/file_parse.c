@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 18:58:20 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 22:20:54 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@
  */
 void	redirect_line(char **line)
 {
-	static int num_of_spheres;
-	//static int num_of_planes;
-	//static int num_of_cylinder;
-
 	if (!ft_strncmp(line[0], "C", 1)) 
 		parse_camera(line);
 	if (!ft_strncmp(line[0], "A", 1)) 
@@ -30,19 +26,11 @@ void	redirect_line(char **line)
 	if (!ft_strncmp(line[0], "L", 1))
 		parse_light(line);
 	if (!ft_strncmp(line[0], "sp", 2))
-	{
 		parse_sphere(line);
-		num_of_spheres++;
-	}
 	/*if (!ft_strncmp(line[0], "pl", 2))
-	{
 		parse_plane();
-		num_of_planes++;
-	}
 	if (!ft_strncmp(line[0], "cy", 2))
-	{
 		parse_cylinder();
-		num_of_cylinder++;
 	}*/
 }
 
@@ -67,7 +55,7 @@ void	end_file(char *buffer)
  * 
  * @param buffer the line read by get_next_line.
  */
-int	check_line_identifier(char *buffer)
+int	check_identifier(char *buffer)
 {
 	char	**line;
 
@@ -105,7 +93,7 @@ int	valid_file_extension(char *file)
 /**
  * @brief Check if the file extension and check each line for the valid identifiers.
  * 
- * @param argv 
+ * @param argv The command line arguments provided by the user.
  */
 int	parse_file(char **argv)
 {
@@ -121,7 +109,7 @@ int	parse_file(char **argv)
 	buffer = get_next_line(fd);
 	while (buffer)
 	{
-       if (!check_line_identifier(buffer))
+       if (!check_identifier(buffer))
 		{
 			free(buffer);
 			close(fd);

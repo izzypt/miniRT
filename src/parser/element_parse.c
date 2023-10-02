@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 18:42:52 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 22:23:55 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	parse_sphere(char **line)
 {
 	char		**sphere_pos;
 	char		**sphere_color;
-	float		radius;
+	float		diameter;
 	t_Color		color;
 	t_Vector    center;
 
@@ -123,7 +123,7 @@ void	parse_sphere(char **line)
 	center.x = ft_atoi(sphere_pos[0]);
 	center.y = ft_atoi(sphere_pos[1]);
 	center.z = ft_atoi(sphere_pos[2]);
-	radius = ft_atoi(line[2]) / 2;
+	diameter = ft_atoi(line[2]);
 	sphere_color = ft_split(line[3], ',');
 	if (!sphere_color[0] || !sphere_color[1] || !sphere_color[2])
 		send_error("Color values must be provided in format: R,G,B in the range 0-255.\n");
@@ -131,6 +131,7 @@ void	parse_sphere(char **line)
     color.g = ft_atoi(sphere_color[1]);
 	color.b = ft_atoi(sphere_color[2]);
 	validate_rgb_values(color.r, color.g, color.b);
+	set_sphere(diameter, center, color);
 	free_matrix(sphere_pos);
 	free_matrix(sphere_color);
 }
