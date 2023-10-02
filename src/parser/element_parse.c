@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 12:30:48 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 15:12:03 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ void	parse_ambient(char **line)
 	color.r = ft_atoi(rgb_string[0]);
 	color.g = ft_atoi(rgb_string[1]);
 	color.b = ft_atoi(rgb_string[2]);
-	if (color.r > 255 || color.g > 255 || color.b > 255 \
-        || color.r < 0 || color.g < 0 || color.b < 0)
-		send_error("Ambient lightning RGB colors must be between 0-255\n");
+	validate_rgb_values(color.r, color.g, color.b);
 }
 
 /**
@@ -68,12 +66,11 @@ void	parse_camera(char **line)
 	cam_dir.x = ft_atoi(camera_dir[0]);
 	cam_dir.y = ft_atoi(camera_dir[1]);
 	cam_dir.z = ft_atoi(camera_dir[2]);
-	if (cam_dir.x < 0.0 || cam_dir.y < 0.0 || cam_dir.z < 0.0 \
-		|| cam_dir.x > 1.0 || cam_dir.y > 1.0 || cam_dir.z > 1.0 )
-		send_error("Camera orientation vector must be between 0.0 and 1.0\n");
+	validate_normal_vector(cam_dir.x, cam_dir.y, cam_dir.z);
 	fov = ft_atoi(line[3]);
 	if (fov < 0 || fov > 180)
 		send_error("Camera field of view must be between 0 and 180\n");
+	set_camera(cam_pos.x, cam_pos.y, cam_pos.z);
 }
 
 /**
@@ -98,4 +95,35 @@ void	parse_light(char **line)
 	intensity = ft_atoi(line[2]);
 	if (intensity < 0.0 || intensity > 1.0)
 		send_error("Point Light intensity value must be between 0.0 and 1.0\n");
+}
+
+/**
+ * @brief Extract and validate sphere values. 
+ * 
+ * @param **line a .rt file line splitted by spaces " " containing sphere data.
+ */
+void	parse_sphere(char **line)
+{
+	char		**sphere_pos;
+	char		**sphere_color;
+	float		radius;
+	t_Color		color;
+	t_Vector    center;
+
+	if (!line[1] || !line[2] || !line[3])
+		send_error("One or more sphere values are missing\n");
+	sphere_pos = ft_split(line[1], ',');
+	if (!sphere_pos[0] || !sphere_pos[1] || !sphere_pos[2])
+		send_error("Sphere center values must be provided in format: x,y,z\n");
+	center.x = ft_atoi(sphere_pos[0]);
+	center.y = ft_atoi(sphere_pos[1]);
+	center.z = ft_atoi(sphere_pos[2]);
+	radius = ft_atoi(line[2]) / 2;
+	sphere_color = ft_split(line[3], ',');
+	if (!sphere_color[0] || !sphere_color[1] || !sphere_color[2])
+		send_error("Color values must be provided in format: R,G,B in the range 0-255.\n");
+	color.r = ft_atoi(sphere_color[0]);
+    color.g = ft_atoi(sphere_color[1]);
+	color.b = ft_atoi(sphere_color[2]);
+	validate_rgb_values(color.r, color.g, color.b);
 }

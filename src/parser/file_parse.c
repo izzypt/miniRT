@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 12:57:27 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 14:03:02 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@
 void	redirect_line(char **line)
 {
 	static int num_of_spheres;
-	static int num_of_planes;
-	static int num_of_cylinder;
+	//static int num_of_planes;
+	//static int num_of_cylinder;
 
 	if (!ft_strncmp(line[0], "C", 1)) 
 		parse_camera(line);
 	if (!ft_strncmp(line[0], "A", 1)) 
 		parse_ambient(line);
 	if (!ft_strncmp(line[0], "L", 1))
-		parse_light(line[0]);
-	/*if (!ft_strncmp(line[0], "sp", 2))
+		parse_light(line);
+	if (!ft_strncmp(line[0], "sp", 2))
 	{
-		parse_sphere();
+		parse_sphere(line);
 		num_of_spheres++;
 	}
-	if (!ft_strncmp(line[0], "pl", 2))
+	/*if (!ft_strncmp(line[0], "pl", 2))
 	{
 		parse_plane();
 		num_of_planes++;
@@ -110,8 +110,6 @@ int	parse_file(char **argv)
 	int		fd;
 	char	*buffer;
 
-    if (!argv[1] || argv[2])
-        send_error("Please provide only a .rt file as program input\n");
 	fd = open(argv[1], O_RDONLY);
 	if (valid_file_extension(argv[1]) == 0 || fd == -1)
 	{
