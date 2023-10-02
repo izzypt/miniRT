@@ -6,11 +6,11 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/09/29 18:07:46 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 12:50:41 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "../../inc/minirt.h"
 
 float	calculate_light(t_Vector *P, t_Vector *N, t_Vector V, t_Sphere	*closest_sphere)
 {

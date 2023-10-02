@@ -1,9 +1,13 @@
 NAME=miniRT
 CFLAGS=-Wall
 CC=cc
-SRC=src/main.c inc/libs/get_next_line/get_next_line.c src/objects.c src/vectors.c src/intersections.c \
-	src/canvas.c src/maths.c src/init.c src/colors.c src/reflections.c src/free.c src/errors.c \
-	src/utils/ft_atoi.c src/parser/file_parse.c src/parser/element_parse.c
+SRC=src/main.c \
+	inc/libs/get_next_line/get_next_line.c \
+	src/utils/getters.c src/utils/vectors.c src/utils/canvas.c src/utils/maths.c  src/utils/colors.c  src/utils/free.c src/utils/errors.c \
+	src/parser/file_parse.c src/parser/element_parse.c \
+	src/renderer/intersections.c src/renderer/reflections.c \
+	src/initializer/init.c \
+	src/utils/ft_atoi.c \
 
 MLX_LIB=inc/libs/mlx_linux/libmlx.a
 

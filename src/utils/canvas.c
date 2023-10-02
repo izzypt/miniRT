@@ -6,11 +6,11 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:46:50 by simao             #+#    #+#             */
-/*   Updated: 2023/09/29 12:59:56 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 13:01:53 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "../../inc/minirt.h"
 
 /*
  - Puts the pixel on the window.
@@ -19,7 +19,7 @@
    - (-960 to 960) on the x assuming 1920px.
    - (-540 to 50) on the y assuming 1080p.
 */
-void	put_pixel(int x, int y, t_Color color, void *mlx, void *win)
+void	put_pixel(int x, int y, t_Color color)
 {
 	int	new_x;
 	int	new_y;
@@ -28,7 +28,7 @@ void	put_pixel(int x, int y, t_Color color, void *mlx, void *win)
 	new_x = (canvas()->width / 2) + x;
 	new_y = (canvas()->height / 2) - y;
 	hex_color = rgb_to_hex(color);
-	mlx_pixel_put(mlx, win, new_x, new_y, hex_color);
+	mlx_pixel_put(mlibx()->mlx, mlibx()->win, new_x, new_y, hex_color);
 }
 
 /*

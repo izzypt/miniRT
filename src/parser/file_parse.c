@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 11:31:58 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 12:57:27 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	redirect_line(char **line)
 		parse_camera(line);
 	if (!ft_strncmp(line[0], "A", 1)) 
 		parse_ambient(line);
-	/*if (!ft_strncmp(line[0], "L", 1))
-		parse_light();
-	if (!ft_strncmp(line[0], "sp", 2))
+	if (!ft_strncmp(line[0], "L", 1))
+		parse_light(line[0]);
+	/*if (!ft_strncmp(line[0], "sp", 2))
 	{
 		parse_sphere();
 		num_of_spheres++;
@@ -49,7 +49,7 @@ void	redirect_line(char **line)
 /**
  * @brief Sets the end of every line to '\0'
  * 
- * @param buffer the line to set a null terminator.
+ * @param buffer the line to which we set a null terminator.
  */
 void	end_file(char *buffer)
 {

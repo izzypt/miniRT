@@ -6,11 +6,11 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/09/29 17:45:28 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 12:49:39 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "../../inc/minirt.h"
 
 /*
  - Calculates the closest intersection point from the origin (O) towards (D).

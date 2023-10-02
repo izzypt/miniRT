@@ -6,11 +6,11 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:37:11 by simao             #+#    #+#             */
-/*   Updated: 2023/09/29 13:00:15 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 12:51:11 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "../../inc/minirt.h"
 
 /*
  - Calculates viewport field of view in degrees.

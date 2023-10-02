@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/09/28 01:49:19 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 13:05:58 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ typedef struct close_intersection
 t_Scene			*scene(void);
 t_Vector		*camera(void);
 t_Viewport		*viewport(void);
-t_Sphere		*sphere(void);
 t_Canvas		*canvas(void);
 t_mlx			*mlibx(void);
 
@@ -136,6 +135,14 @@ t_Vector		vector_sub(t_Vector *vector1, t_Vector *vector2);
 t_Vector		vector_add(t_Vector *vector1, t_Vector *vector2);
 t_Vector		vector_mult(t_Vector *vector1, float num);
 t_Vector		vector_div(t_Vector *vector1, float num);
+
+/************/
+/* PARSER  */
+/**********/
+int				parse_file(char **argv);
+void			parse_light(char **line);
+void			parse_camera(char **line);
+void			parse_ambient(char **line);
 
 /*******************/
 /* INTERSECTIONS  */
@@ -165,8 +172,7 @@ void			init_values(void);
 t_Vector		canvas_to_viewport(int x, int y);
 float			calculate_fov(void);
 void			set_fov(float degrees);
-void			put_pixel(int x, int y, t_Color color, void *mlx, void *win);
-int				parse_file(char **argv);
+void			put_pixel(int x, int y, t_Color color);
 void			free_matrix(char **matrix);
 void			send_error(char *error);
 int				ft_atoi(const char *str);

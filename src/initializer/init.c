@@ -6,12 +6,23 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/09/29 13:00:02 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 12:50:49 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "../inc/minirt.h"
+#include "../../inc/minirt.h"
+
+void	init_values(void)
+{
+	set_canvas(960, 540);
+	set_viewport();
+	set_camera(0, 0, 0);
+	set_scene();
+	mlibx()->mlx = mlx_init();
+	mlibx()->win = mlx_new_window(mlibx()->mlx, canvas()->width, canvas()->height, "MiniRT");
+}
+
 
 void	set_viewport(void)
 {
@@ -99,14 +110,4 @@ void	set_scene(void)
 		}
 		i++;
 	}
-}
-
-void	init_values(void)
-{
-	set_canvas(960, 540);
-	set_viewport();
-	set_camera(0, 0, 0);
-	mlibx()->mlx = mlx_init();
-	mlibx()->win = mlx_new_window(mlibx()->mlx, canvas()->width, canvas()->height, "MiniRT");
-	set_scene();
 }

@@ -6,11 +6,11 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/09/29 17:13:59 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/02 12:49:57 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "../../inc/minirt.h"
 
 /*
  - Converts a given t_Color from rgb to hex.
