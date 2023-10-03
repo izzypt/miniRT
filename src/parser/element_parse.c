@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/03 12:27:15 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/03 12:42:36 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void	parse_camera(char **line)
 /**
  * @brief Extract and validate point light values. 
  * 
- * @param **line a .rt file line splitted by spaces " " containing point light data.
+ * @param line a .rt file line splitted by spaces " " 
+ * containing point light data.
  */
 void	parse_light(char **line)
 {

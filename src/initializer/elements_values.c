@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 22:32:53 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/03 12:36:00 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,31 +44,32 @@ void	set_point_light(float intensity, t_Vector position)
 }
 
 /**
- * @brief Defines the value of a sphere in the scene. It allocates memory if necessary.
+ * @brief Defines the value of a sphere in the scene. 
+ * It allocates memory if necessary.
  * 
  * @param diameter The sphere diameter.
  * @param center The sphere diameter.
  * @param color The sphere color.
- * @param spheres_num The number of spheres in the scene. It realocates the memory to adapt a new sphere.
+ * @param spheres_num The number of spheres in the scene.
+ * It realocates the memory to adapt a new sphere.
  */
-void	set_sphere(float	diameter, t_Vector center, t_Color color)
+void	set_sphere(float diameter, t_Vector center, t_Color color)
 {
-	static int num_of_spheres;
-	t_Sphere    *tmp;
-	int 		i;
+	t_Sphere	*tmp;
+	int			i;
 
-	num_of_spheres++;
+	scene()->spheres_count++;
 	i = 0;
 	if (scene()->spheres == NULL)
 		scene()->spheres = malloc(sizeof(t_Sphere) * 1);
 	else
 	{
 		tmp = scene()->spheres;
-		scene()->spheres = malloc(sizeof(t_Sphere) * num_of_spheres);
-    }
-	while (i < num_of_spheres)
+		scene()->spheres = malloc(sizeof(t_Sphere) * scene()->spheres_count);
+	}
+	while (i < scene()->spheres_count)
 	{
-		if (i == num_of_spheres - 1)
+		if (i == scene()->spheres_count - 1)
 		{
 			scene()->spheres[i].radius = diameter / 2;
 			scene()->spheres[i].center.x = center.x;
@@ -77,7 +78,7 @@ void	set_sphere(float	diameter, t_Vector center, t_Color color)
 			scene()->spheres[i].color.r = color.r;
 			scene()->spheres[i].color.g = color.g;
 			scene()->spheres[i].color.b = color.b;
-			scene()->spheres[i].spec = 500;			
+			scene()->spheres[i].spec = 500 + i;
 		}
 		else
 		{
@@ -88,7 +89,7 @@ void	set_sphere(float	diameter, t_Vector center, t_Color color)
 			scene()->spheres[i].color.r = tmp[i].color.r;
 			scene()->spheres[i].color.g = tmp[i].color.g;
 			scene()->spheres[i].color.b = tmp[i].color.b;
-			scene()->spheres[i].spec = tmp[i].spec;		
+			scene()->spheres[i].spec = tmp[i].spec;
 		}
 		i++;
 	}

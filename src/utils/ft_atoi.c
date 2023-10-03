@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 16:20:01 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/03 12:29:05 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ float ft_atof(const char *str)
     int i = 0;
     int signal = 1;
     float result = 0.0;
-    float decimalPlace = 0.1; // Used to calculate the decimal part
+    float decimalPlace = 0.1;
 
     while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t'
         || str[i] == '\v' || str[i] == '\f' || str[i] == '\r') {

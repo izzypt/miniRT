@@ -6,22 +6,23 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 22:20:54 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/03 12:56:14 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
 /**
- * @brief Redirects the given line according to the identifier to the correct parser function.
+ * @brief Redirects the given line according 
+ * to the identifier to the correct parser function.
  * 
  * @param **line a .rt file line splitted by spaces " "
  */
 void	redirect_line(char **line)
 {
-	if (!ft_strncmp(line[0], "C", 1)) 
+	if (!ft_strncmp(line[0], "C", 1))
 		parse_camera(line);
-	if (!ft_strncmp(line[0], "A", 1)) 
+	if (!ft_strncmp(line[0], "A", 1))
 		parse_ambient(line);
 	if (!ft_strncmp(line[0], "L", 1))
 		parse_light(line);
@@ -51,7 +52,8 @@ void	end_file(char *buffer)
 }
 
 /**
- * @brief Check if the line has one of the valid identifiers from the subject or if it is only a empty line.
+ * @brief Check if the line has one of the valid identifiers 
+ * from the subject or if it is only a empty line.
  * 
  * @param buffer the line read by get_next_line.
  */
@@ -65,10 +67,11 @@ int	check_identifier(char *buffer)
 	line = ft_split(buffer, ' ');
 	if (!line)
 		return (0);
-	if (!ft_strncmp(line[0], "C", 1) || !ft_strncmp(line[0], "A", 1) || !ft_strncmp(line[0], "L", 1) || !ft_strncmp(line[0], "sp", 2) )
+	if (!ft_strncmp(line[0], "C", 1) || !ft_strncmp(line[0], "A", 1) \
+		|| !ft_strncmp(line[0], "L", 1) || !ft_strncmp(line[0], "sp", 2))
 		redirect_line(line);
 	else
-		send_error("The valid identifiers are :\n - A \n - C \n - L \n - sp \n - pl \n - cy\n");
+		send_error("The valid identifiers are :\n A\n C\n L\n sp\n pl\n cy\n");
 	free_matrix(line);
 	return (1);
 }
@@ -91,7 +94,8 @@ int	valid_file_extension(char *file)
 }
 
 /**
- * @brief Check if the file extension and check each line for the valid identifiers.
+ * @brief Check if the file extension is valid and 
+ * check each line for the valid identifiers.
  * 
  * @param argv The command line arguments provided by the user.
  */
@@ -109,7 +113,7 @@ int	parse_file(char **argv)
 	buffer = get_next_line(fd);
 	while (buffer)
 	{
-       if (!check_identifier(buffer))
+		if (!check_identifier(buffer))
 		{
 			free(buffer);
 			close(fd);

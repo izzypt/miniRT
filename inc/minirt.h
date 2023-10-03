@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/03 12:24:41 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/03 12:47:44 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 /* DEFINES  */
 /***********/
 
+# define TITLE "MiniRT"
 # define PI 3.1415926
 # define BLUE 0x0000FF
 # define RED 0xFF0000
@@ -108,6 +109,8 @@ typedef struct scene
 	t_Sphere	*spheres;
 	t_Light		*lights;
 	int			spheres_count;
+	int			plane_count;
+	int			cylinder_count;
 }	t_Scene;
 
 typedef struct close_intersection
@@ -137,6 +140,17 @@ t_Vector		vector_sub(t_Vector *vector1, t_Vector *vector2);
 t_Vector		vector_add(t_Vector *vector1, t_Vector *vector2);
 t_Vector		vector_mult(t_Vector *vector1, float num);
 t_Vector		vector_div(t_Vector *vector1, float num);
+
+/***********/
+/* COLORS */
+/**********/
+
+int				rgb_to_hex(t_Color color);
+t_Color			hex_to_rgb(int hex_color);
+t_Color			color_add(t_Color *color1, t_Color *color2);
+t_Color			color_mult(t_Color *color1, float num);
+t_Color			color_sub(t_Color *color1, t_Color *color2);
+t_Color			color_mult(t_Color *color1, float num);
 
 /************/
 /* PARSER  */
@@ -174,16 +188,6 @@ t_Color			trace_ray(t_Vector pos, int t_min, int t_max);
 float			calculate_light(t_Vector *P, t_Vector *N, t_Vector V, t_Sphere	*closest_sphere);
 t_Intersection	closest_intersect(t_Vector *O, t_Vector *D, float t_min, float t_max);
 
-/***********/
-/* COLORS */
-/**********/
-
-int				rgb_to_hex(t_Color color);
-t_Color			hex_to_rgb(int hex_color);
-t_Color			color_add(t_Color *color1, t_Color *color2);
-t_Color			color_mult(t_Color *color1, float num);
-t_Color			color_sub(t_Color *color1, t_Color *color2);
-t_Color			color_mult(t_Color *color1, float num);
 
 /************/
 /* UTILS   */
