@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/03 12:23:17 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/03 15:44:46 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_Color	trace_ray(t_Vector ray, int t_min, int t_max)
 	n = vector_sub(&p, &intrsct.closest_sphere->center);
 	return (
 		color_mult(&intrsct.closest_sphere->color, \
-		calculate_light(&p, &n, vector_mult(&d, -1), intrsct.closest_sphere)));
+		calc_light(&p, &n, vector_mult(&d, -1), intrsct.closest_sphere)));
 }
 
 /*

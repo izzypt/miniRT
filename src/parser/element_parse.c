@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/03 12:42:36 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/03 16:41:02 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	parse_camera(char **line)
 	char		**camera_dir;
 	t_Vector	cam_pos;
 	t_Vector	cam_dir;
-	int			fov;
+	float		fov;
 
 	if (!line[1] || !line[2] || !line[3])
 		send_error("One or more camera values are missing\n");
@@ -68,10 +68,10 @@ void	parse_camera(char **line)
 	cam_dir.y = ft_atoi(camera_dir[1]);
 	cam_dir.z = ft_atoi(camera_dir[2]);
 	validate_normal_vector(cam_dir.x, cam_dir.y, cam_dir.z);
-	fov = ft_atoi(line[3]);
+	fov = ft_atof(line[3]);
 	if (fov < 0 || fov > 180)
 		send_error("Camera field of view must be between 0 and 180\n");
-	set_camera(cam_pos.x, cam_pos.y, cam_pos.z);
+	set_camera(cam_pos.x, cam_pos.y, cam_pos.z, fov);
 	free_matrix(camera_pos);
 	free_matrix(camera_dir);
 }
@@ -92,7 +92,7 @@ void	parse_light(char **line)
 		send_error("One or more light values are missing\n");
 	light_pos = ft_split(line[1], ',');
 	if (!light_pos[0] || !light_pos[1] || !light_pos[2])
-		send_error("Camera values must be provided in format: x,y,z\n");
+		send_error("Light values must be provided in format: x,y,z\n");
 	light_position.x = ft_atoi(light_pos[0]);
 	light_position.y = ft_atoi(light_pos[1]);
 	light_position.z = ft_atoi(light_pos[2]);

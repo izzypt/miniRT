@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
-/*   Updated: 2023/10/02 13:42:38 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/03 17:16:58 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,12 @@
 
 int	main(int argc, char **argv)
 {
-	t_Color		color;
-	int			x;
-	int			y;
-	t_Vector	D;
 
 	if (argc != 2)
 		send_error("Please provide only a .rt file as program input\n");
+	init_windows();
 	parse_file(argv);
-	init_values();
-	x = ((canvas()->width / 2) * -1);
-	y = (canvas()->height / 2);
-	set_fov(75);
-	while (--y >= (canvas()->height / 2) * -1)
-	{
-		while (++x <= (canvas()->width / 2))
-		{
-			D = canvas_to_viewport(x, y);
-			color = trace_ray(D, 1, INT_MAX);
-			put_pixel(x, y, color);
-		}
-		x = ((canvas()->width / 2) * -1);
-	}
+	render();
 	mlx_loop(mlibx()->mlx);
 	return (1);
 }

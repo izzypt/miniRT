@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/03 12:36:00 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/03 16:36:36 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,6 @@ void	set_sphere(float diameter, t_Vector center, t_Color color)
 		i++;
 	}
 }
-
-
-
-
-
 
 /*
 	scene()->lights[i].type = 'D';
