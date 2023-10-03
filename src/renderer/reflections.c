@@ -6,13 +6,13 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 21:02:23 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/03 17:20:45 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-float	calculate_light(t_Vector *P, t_Vector *N, t_Vector V, t_Sphere	*closest_sphere)
+float	calc_light(t_Vector *P, t_Vector *N, t_Vector V, t_Sphere *clst_s)
 {
 	float			i;
 	int				j;
@@ -42,13 +42,13 @@ float	calculate_light(t_Vector *P, t_Vector *N, t_Vector V, t_Sphere	*closest_sp
 		shadow = closest_intersect(P, &l_vector, 0.001, t_max);
 		if (shadow.closest_sphere != NULL)
 			continue ;
-		diffuse_reflection(*N, l_vector, &i, j);
-		specular_reflection(*N, l_vector, closest_sphere->spec, &i, j, V);
+		diff_reflection(*N, l_vector, &i, j);
+		spec_reflection(*N, l_vector, clst_s->spec, &i, j, V);
 	}
 	return (i);
 }
 
-void	diffuse_reflection(t_Vector norm, t_Vector lvec, float *i, int j)
+void	diff_reflection(t_Vector norm, t_Vector lvec, float *i, int j)
 {
 	float		n_dot_l;
 
@@ -60,7 +60,7 @@ void	diffuse_reflection(t_Vector norm, t_Vector lvec, float *i, int j)
 	}
 }
 
-void	specular_reflection(t_Vector norm, t_Vector lvec, int spec, float *i, int j, t_Vector V)
+void	spec_reflection(t_Vector norm, t_Vector lvec, int spec, float *i, int j, t_Vector V)
 {
 	float		r_dot_v;
 	t_Vector	normal_double;
