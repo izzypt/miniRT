@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 22:34:36 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/03 12:24:41 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@
 
 # define PI 3.1415926
 # define BLUE 0x0000FF
-# define GREEN 0x00FF00
 # define RED 0xFF0000
-# define WHITE 0xFFFFFF 
+# define GREEN 0x00FF00
 # define YELLOW 0xFFFF00 
+# define BLACK 0x000000 
+# define WHITE 0xFFFFFF
 
 /**************/
 /* STRUCTS   */
@@ -106,6 +107,7 @@ typedef struct scene
 {
 	t_Sphere	*spheres;
 	t_Light		*lights;
+	int			spheres_count;
 }	t_Scene;
 
 typedef struct close_intersection
@@ -148,20 +150,20 @@ void			parse_sphere(char **line);
 /***************/
 /* VALIDATORS */
 /*************/
-void    validate_rgb_values(int r, int g, int b);
-void    validate_normal_vector(int x, int y, int z);
+void			validate_rgb_values(int r, int g, int b);
+void			validate_normal_vector(int x, int y, int z);
 
 /*****************/
 /* INITIALIZER  */
 /***************/
 
-void	set_viewport(void);
-void	set_camera(int x, int y, int z);
-void	set_canvas(int width, int height);
-void	set_ambient_light(float intensity);
-void	set_point_light(float intensity, t_Vector position);
-void	set_mlx(void);
-void	set_sphere(float diameter, t_Vector center, t_Color color);
+void			set_viewport(void);
+void			set_camera(int x, int y, int z);
+void			set_canvas(int width, int height);
+void			set_ambient_light(float intensity);
+void			set_point_light(float intensity, t_Vector position);
+void			set_mlx(void);
+void			set_sphere(float diameter, t_Vector center, t_Color color);
 
 /*******************/
 /* INTERSECTIONS  */
@@ -195,7 +197,7 @@ void			put_pixel(int x, int y, t_Color color);
 void			free_matrix(char **matrix);
 void			send_error(char *error);
 int				ft_atoi(const char *str);
-float 			ft_atof(const char *str);
+float			ft_atof(const char *str);
 
 /****************/
 /* REFLECTIONS */
