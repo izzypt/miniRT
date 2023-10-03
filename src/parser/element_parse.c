@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 22:23:55 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/03 12:27:15 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,24 @@
 /**
  * @brief Extract and validate ambient light values. 
  * 
- * @param **line a .rt file line splitted by spaces " " containing ambient light data.
+ * @param line a .rt file line splitted by spaces " " containing ambt light data.
  */
 void	parse_ambient(char **line)
 {
-    t_Color color;
-	float 	intensity;
+	t_Color	color;
+	float	intensity;
 	char	**rgb_string;
 
 	if (!line[1])
-		send_error("Ambient lightning intensity value must be provided\n");
+		send_error("Ambient light intensity value must be provided\n");
 	intensity = ft_atoi(line[1]);
 	if (intensity < 0 || intensity > 1)
-		send_error("Ambient lightning valid intensity must be between 0.0 and 1.0\n");
+		send_error("Ambient light intensity must be between 0.0 and 1.0\n");
 	if (!line[2])
-		send_error("Ambient lightning RGB colors must be provided\n");
+		send_error("Ambient light RGB colors must be provided\n");
 	rgb_string = ft_split(line[2], ',');
 	if (!rgb_string[0] || !rgb_string[1] || !rgb_string[2])
-		send_error("Ambient light colors must be between 0-255 in format: 255,255,255\n");
+		send_error("A.Light colors must be between 0-255: 255,255,255\n");
 	color.r = ft_atoi(rgb_string[0]);
 	color.g = ft_atoi(rgb_string[1]);
 	color.b = ft_atoi(rgb_string[2]);
@@ -113,7 +113,7 @@ void	parse_sphere(char **line)
 	char		**sphere_color;
 	float		diameter;
 	t_Color		color;
-	t_Vector    center;
+	t_Vector	center;
 
 	if (!line[1] || !line[2] || !line[3])
 		send_error("One or more sphere values are missing\n");
@@ -126,9 +126,9 @@ void	parse_sphere(char **line)
 	diameter = ft_atoi(line[2]);
 	sphere_color = ft_split(line[3], ',');
 	if (!sphere_color[0] || !sphere_color[1] || !sphere_color[2])
-		send_error("Color values must be provided in format: R,G,B in the range 0-255.\n");
+		send_error("Color values must be in format: R,G,B. range 0-255.\n");
 	color.r = ft_atoi(sphere_color[0]);
-    color.g = ft_atoi(sphere_color[1]);
+	color.g = ft_atoi(sphere_color[1]);
 	color.b = ft_atoi(sphere_color[2]);
 	validate_rgb_values(color.r, color.g, color.b);
 	set_sphere(diameter, center, color);
