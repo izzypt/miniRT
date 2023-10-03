@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 12:49:39 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/03 12:23:17 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,17 @@ t_Color	trace_ray(t_Vector ray, int t_min, int t_max)
 	t_Vector		p;
 	t_Vector		n;
 	t_Vector		d;
-	t_Intersection	intersect;
+	t_Intersection	intrsct;
 
-	intersect = closest_intersect(camera(), &ray, t_min, t_max);
-	if (intersect.closest_sphere == NULL)
-		return (hex_to_rgb(WHITE));
-	d = vector_mult(&ray, intersect.closest_t);
+	intrsct = closest_intersect(camera(), &ray, t_min, t_max);
+	if (intrsct.closest_sphere == NULL)
+		return (hex_to_rgb(BLACK));
+	d = vector_mult(&ray, intrsct.closest_t);
 	p = vector_add(camera(), &d);
-	n = vector_sub(&p, &intersect.closest_sphere->center);
+	n = vector_sub(&p, &intrsct.closest_sphere->center);
 	return (
-		color_mult(&intersect.closest_sphere->color, \
-		calculate_light(&p, &n, vector_mult(&d, -1), intersect.closest_sphere)));
+		color_mult(&intrsct.closest_sphere->color, \
+		calculate_light(&p, &n, vector_mult(&d, -1), intrsct.closest_sphere)));
 }
 
 /*
