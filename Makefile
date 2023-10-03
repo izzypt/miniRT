@@ -5,7 +5,7 @@ SRC=src/main.c \
 	inc/libs/get_next_line/get_next_line.c \
 	src/utils/getters.c src/utils/vectors.c src/utils/canvas.c src/utils/maths.c  src/utils/colors.c  src/utils/free.c src/utils/errors.c \
 	src/parser/file_parse.c src/parser/element_parse.c src/parser/validators.c\
-	src/renderer/intersections.c src/renderer/reflections.c \
+	src/renderer/intersections.c src/renderer/reflections.c src/renderer/render.c \
 	src/initializer/initial_values.c src/initializer/elements_values.c\
 	src/utils/ft_atoi.c \
 
