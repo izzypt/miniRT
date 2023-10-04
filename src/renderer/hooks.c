@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
-/*   Updated: 2023/10/04 11:59:51 by simao            ###   ########.fr       */
+/*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
+/*   Updated: 2023/10/04 12:34:22 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
 
-int	main(int argc, char **argv)
+#include "../../inc/minirt.h"
+
+int	close_window(void)
 {
+	end_program();
+	return (0);
+}
 
-	if (argc != 2)
-		send_error("Please provide only a .rt file as program input\n");
-	init_windows();
-	parse_file(argv);
-	set_mlx();
-	render();
-	mlx_hook(mlibx()->win, 2, 0, key_press, NULL);
-	mlx_hook(mlibx()->win, 17, 17, close_window, NULL);
-	mlx_loop(mlibx()->mlx);
+int	key_press(int keycode)
+{
+	if (keycode == 65307)
+		end_program();
 	return (1);
 }
