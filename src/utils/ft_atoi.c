@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/03 12:29:05 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/04 12:47:36 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,26 @@ float ft_atof(const char *str)
     }
     result *= signal;
     return result;
+}
+
+/*
+ - Duplicates memory for the given string.
+*/
+char	*ft_strdup(char *s1)
+{
+	char	*help;
+	int		len;
+	int		i;
+
+	len = ft_strlen(s1);
+	help = (char *) malloc((len + 1) * sizeof(char));
+	if (help == NULL)
+		return (NULL);
+	i = 0;
+	while (i <= len)
+	{
+		help[i] = s1[i];
+		i++;
+	}
+	return (help);
 }
