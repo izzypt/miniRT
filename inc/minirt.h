@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/03 17:14:49 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/04 14:10:31 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ typedef struct color
 
 typedef struct camera
 {
-	float	x;
-	float	y;
-	float	z;
+	t_Vector	pos;
+	t_Vector	dir;
+	float		fov;
 }	t_Camera;
 
 typedef struct viewport
@@ -124,7 +124,7 @@ typedef struct close_intersection
 /************/
 
 t_Scene			*scene(void);
-t_Vector		*camera(void);
+t_Camera		*camera(void);
 t_Viewport		*viewport(void);
 t_Canvas		*canvas(void);
 t_mlx			*mlibx(void);
@@ -173,23 +173,31 @@ void			validate_normal_vector(int x, int y, int z);
 
 void			init_windows(void);
 void			set_viewport(void);
-void			set_camera(int x, int y, int z, float fov);
+void			set_camera(t_Vector cam_pos, t_Vector cam_dir, float fov);
 void			set_canvas(int width, int height);
 void			set_ambient_light(float intensity);
 void			set_point_light(float intensity, t_Vector position);
 void			set_mlx(void);
 void			set_sphere(float diameter, t_Vector center, t_Color color);
 
-/*************/
+/**************/
 /* RENDERER  */
 /************/
 
 void			render(void);
 t_Point			intersects_sphere(t_Vector O, t_Vector D, t_Sphere sphere);
+t_Intersection	closest_intersect(t_Vector *O, t_Vector *D, float t_min, float t_max);
 t_Color			trace_ray(t_Vector pos, int t_min, int t_max);
 float			calc_light(t_Vector *P, t_Vector *N, t_Vector V, t_Sphere *clst_s);
-t_Intersection	closest_intersect(t_Vector *O, t_Vector *D, float t_min, float t_max);
+void			diff_reflection(t_Vector norm, t_Vector lvec, float *i, int j);
+void			spec_reflection(t_Vector norm, t_Vector lvec, int spec, float *i, int j, t_Vector V);
 
+/******************/
+/* KEYS MANAGER  */
+/****************/
+
+int				close_window(void);
+int				key_press(int keycode);
 
 /************/
 /* UTILS   */
@@ -200,15 +208,10 @@ float			calculate_fov(void);
 void			set_fov(float degrees);
 void			put_pixel(int x, int y, t_Color color);
 void			free_matrix(char **matrix);
+void			end_program(void);
 void			send_error(char *error);
 int				ft_atoi(const char *str);
 float			ft_atof(const char *str);
-
-/****************/
-/* REFLECTIONS */
-/**************/
-
-void			diff_reflection(t_Vector norm, t_Vector lvec, float *i, int j);
-void			spec_reflection(t_Vector norm, t_Vector lvec, int spec, float *i, int j, t_Vector V);
+char			*ft_strdup(char *s1);
 
 #endif
