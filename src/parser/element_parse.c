@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/03 16:41:02 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/04 14:03:55 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	parse_ambient(char **line)
 
 	if (!line[1])
 		send_error("Ambient light intensity value must be provided\n");
-	intensity = ft_atoi(line[1]);
+	intensity = ft_atof(line[1]);
 	if (intensity < 0 || intensity > 1)
 		send_error("Ambient light intensity must be between 0.0 and 1.0\n");
 	if (!line[2])
@@ -38,6 +38,7 @@ void	parse_ambient(char **line)
 	color.b = ft_atoi(rgb_string[2]);
 	validate_rgb_values(color.r, color.g, color.b);
 	set_ambient_light(intensity);
+	free_matrix(rgb_string);
 }
 
 /**
@@ -71,7 +72,7 @@ void	parse_camera(char **line)
 	fov = ft_atof(line[3]);
 	if (fov < 0 || fov > 180)
 		send_error("Camera field of view must be between 0 and 180\n");
-	set_camera(cam_pos.x, cam_pos.y, cam_pos.z, fov);
+	set_camera(cam_pos, cam_dir, fov);
 	free_matrix(camera_pos);
 	free_matrix(camera_dir);
 }
