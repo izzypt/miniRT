@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/03 16:36:36 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/03 18:57:35 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,53 @@ void	set_point_light(float intensity, t_Vector position)
 }
 
 /**
+ * @brief Copies the data of the spheres from temporary buffer to the scene.
+ * 
+ * @param i The index of the sphere in the temporary buffer.
+ * @param tmp The temporary buffer.
+ */
+void	copy_sphere(int i, t_Sphere *tmp)
+{
+	scene()->spheres[i].radius = tmp[i].radius;
+	scene()->spheres[i].center.x = tmp[i].center.x;
+	scene()->spheres[i].center.y = tmp[i].center.y;
+	scene()->spheres[i].center.z = tmp[i].center.z;
+	scene()->spheres[i].color.r = tmp[i].color.r;
+	scene()->spheres[i].color.g = tmp[i].color.g;
+	scene()->spheres[i].color.b = tmp[i].color.b;
+	scene()->spheres[i].spec = tmp[i].spec;
+}
+
+/**
+ * @brief Creates a new sphere with the given values.
+ * 
+ * @param i The index of the new sphere in the array.
+ * @param diameter The sphere diameter.
+ * @param center The sphere diameter.
+ * @param color The sphere color.
+ * @param spheres_num The number of spheres in the scene.
+ */
+void	new_sphere(int i, float diameter, t_Vector center, t_Color color)
+{
+	scene()->spheres[i].radius = diameter / 2;
+	scene()->spheres[i].center.x = center.x;
+	scene()->spheres[i].center.y = center.y;
+	scene()->spheres[i].center.z = center.z;
+	scene()->spheres[i].color.r = color.r;
+	scene()->spheres[i].color.g = color.g;
+	scene()->spheres[i].color.b = color.b;
+	scene()->spheres[i].spec = 500 + i;
+}
+
+/**
  * @brief Defines the value of a sphere in the scene. 
- * It allocates memory if necessary.
+ * It allocates memory if necessary 
+ * or realocates the memory to adapt a new sphere.
  * 
  * @param diameter The sphere diameter.
  * @param center The sphere diameter.
  * @param color The sphere color.
  * @param spheres_num The number of spheres in the scene.
- * It realocates the memory to adapt a new sphere.
  */
 void	set_sphere(float diameter, t_Vector center, t_Color color)
 {
@@ -59,7 +98,7 @@ void	set_sphere(float diameter, t_Vector center, t_Color color)
 	int			i;
 
 	scene()->spheres_count++;
-	i = 0;
+	i = -1;
 	if (scene()->spheres == NULL)
 		scene()->spheres = malloc(sizeof(t_Sphere) * 1);
 	else
@@ -67,33 +106,15 @@ void	set_sphere(float diameter, t_Vector center, t_Color color)
 		tmp = scene()->spheres;
 		scene()->spheres = malloc(sizeof(t_Sphere) * scene()->spheres_count);
 	}
-	while (i < scene()->spheres_count)
+	while (++i < scene()->spheres_count)
 	{
 		if (i == scene()->spheres_count - 1)
-		{
-			scene()->spheres[i].radius = diameter / 2;
-			scene()->spheres[i].center.x = center.x;
-			scene()->spheres[i].center.y = center.y;
-			scene()->spheres[i].center.z = center.z;
-			scene()->spheres[i].color.r = color.r;
-			scene()->spheres[i].color.g = color.g;
-			scene()->spheres[i].color.b = color.b;
-			scene()->spheres[i].spec = 500 + i;
-		}
+			new_sphere(i, diameter, center, color);
 		else
-		{
-			scene()->spheres[i].radius = tmp[i].radius;
-			scene()->spheres[i].center.x = tmp[i].center.x;
-			scene()->spheres[i].center.y = tmp[i].center.y;
-			scene()->spheres[i].center.z = tmp[i].center.z;
-			scene()->spheres[i].color.r = tmp[i].color.r;
-			scene()->spheres[i].color.g = tmp[i].color.g;
-			scene()->spheres[i].color.b = tmp[i].color.b;
-			scene()->spheres[i].spec = tmp[i].spec;
-		}
-		i++;
+			copy_sphere(i, tmp);
 	}
 }
+
 
 /*
 	scene()->lights[i].type = 'D';
