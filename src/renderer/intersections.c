@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/03 15:44:46 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/04 19:45:24 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ t_Color	trace_ray(t_Vector ray, int t_min, int t_max)
 	t_Vector		d;
 	t_Intersection	intrsct;
 
-	intrsct = closest_intersect(camera(), &ray, t_min, t_max);
+	intrsct = closest_intersect(&camera()->pos, &ray, t_min, t_max);
 	if (intrsct.closest_sphere == NULL)
 		return (hex_to_rgb(BLACK));
 	d = vector_mult(&ray, intrsct.closest_t);
-	p = vector_add(camera(), &d);
+	p = vector_add(&camera()->pos, &d);
 	n = vector_sub(&p, &intrsct.closest_sphere->center);
 	return (
 		color_mult(&intrsct.closest_sphere->color, \

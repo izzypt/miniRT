@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:05:41 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 12:50:19 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/04 14:09:47 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ t_Viewport	*viewport(void)
  * 
  * @return A t_Vector static struct containing data about our camera.
  */
-t_Vector	*camera(void)
+t_Camera	*camera(void)
 {
-	static t_Vector	camera;
+	static t_Camera	camera;
 
 	return (&camera);
 }

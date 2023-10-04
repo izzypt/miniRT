@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/03 16:41:09 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/04 14:10:49 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	init_windows(void)
 {
 	set_canvas(960, 540);
 	set_viewport();
-	set_mlx();
 }
 
 /**
@@ -58,11 +57,14 @@ void	set_viewport(void)
  * @param z The z coordinate of the camera.
  * @param fov The field of view of the camera.
  */
-void	set_camera(int x, int y, int z, float fov)
+void	set_camera(t_Vector cam_pos, t_Vector cam_dir, float fov)
 {
-	camera()->x = x;
-	camera()->y = y;
-	camera()->z = z;
+	camera()->pos.x = cam_pos.x;
+	camera()->pos.y = cam_pos.y;
+	camera()->pos.z = cam_pos.z;
+	camera()->dir.x = cam_dir.x;
+	camera()->dir.y = cam_dir.y;
+	camera()->dir.z = cam_dir.z;
 	set_fov(fov);
 }
 
