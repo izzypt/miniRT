@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/04 14:03:55 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/06 12:01:41 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,27 +113,60 @@ void	parse_sphere(char **line)
 {
 	char		**sphere_pos;
 	char		**sphere_color;
-	float		diameter;
-	t_Color		color;
-	t_Vector	center;
+	t_Sphere	sphr;
 
-	if (!line[1] || !line[2] || !line[3])
-		send_error("One or more sphere values are missing\n");
 	sphere_pos = ft_split(line[1], ',');
 	if (!sphere_pos[0] || !sphere_pos[1] || !sphere_pos[2])
 		send_error("Sphere center values must be provided in format: x,y,z\n");
-	center.x = ft_atoi(sphere_pos[0]);
-	center.y = ft_atoi(sphere_pos[1]);
-	center.z = ft_atoi(sphere_pos[2]);
-	diameter = ft_atoi(line[2]);
+	sphr.center.x = ft_atoi(sphere_pos[0]);
+	sphr.center.y = ft_atoi(sphere_pos[1]);
+	sphr.center.z = ft_atoi(sphere_pos[2]);
+	sphr.radius = ft_atof(line[2]) / 2;
 	sphere_color = ft_split(line[3], ',');
 	if (!sphere_color[0] || !sphere_color[1] || !sphere_color[2])
 		send_error("Color values must be in format: R,G,B. range 0-255.\n");
-	color.r = ft_atoi(sphere_color[0]);
-	color.g = ft_atoi(sphere_color[1]);
-	color.b = ft_atoi(sphere_color[2]);
-	validate_rgb_values(color.r, color.g, color.b);
-	set_sphere(diameter, center, color);
+	sphr.color.r = ft_atoi(sphere_color[0]);
+	sphr.color.g = ft_atoi(sphere_color[1]);
+	sphr.color.b = ft_atoi(sphere_color[2]);
+	validate_rgb_values(sphr.color.r, sphr.color.g, sphr.color.b);
+	set_sphere(sphr.radius, sphr.center, sphr.color);
 	free_matrix(sphere_pos);
 	free_matrix(sphere_color);
+}
+
+/**
+ * @brief Extract and validate plane values. 
+ * 
+ * @param **line a .rt file line splitted by spaces " " containing sphere data.
+ */
+void	parse_plane(char **line)
+{
+	char		**plane_point;
+	char		**plane_normal;
+	char		**plane_color;
+	t_Plane		plane;
+
+	plane_point = ft_split(line[1], ',');
+	if (!plane_point[0] || !plane_point[1] || !plane_point[2])
+		send_error("Plane point values must be provided in format: x,y,z\n");	
+	plane.point.x = ft_atoi(plane_point[0]);
+	plane.point.y = ft_atoi(plane_point[1]);
+	plane.point.z = ft_atoi(plane_point[2]);
+	plane_normal = ft_split(line[2], ',');
+	if (!plane_normal[0] || !plane_normal[1] || !plane_normal[2])
+		send_error("Plane normal values must be provided in format: x,y,z\n");
+	plane.normal.x = ft_atoi(plane_normal[0]);
+	plane.normal.y = ft_atoi(plane_normal[1]);
+	plane.normal.z = ft_atoi(plane_normal[2]);
+	plane_color = ft_split(line[3], ',');
+	if (!plane_color[0] || !plane_color[1] || !plane_color[2])
+		send_error("Color values must be in format: R,G,B. range 0-255.\n");
+	plane.color.r = ft_atoi(plane_color[0]);
+	plane.color.g = ft_atoi(plane_color[1]);
+	plane.color.b = ft_atoi(plane_color[2]);
+	validate_rgb_values(plane.color.r, plane.color.g, plane.color.b);
+	set_plane(plane.point, plane.normal, plane.color);
+	free_matrix(plane_point);
+	free_matrix(plane_normal);
+	free_matrix(plane_color);
 }
