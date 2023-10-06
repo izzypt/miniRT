@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:58:52 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 12:50:22 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/06 12:15:29 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,18 @@ t_Vector	vector_div(t_Vector *vector1, float num)
 	result.x = vector1->x / num;
 	result.y = vector1->y / num;
 	result.z = vector1->z / num;
+	return (result);
+}
+
+t_Vector MultiplyMatrixVector(const t_RotationMatrix* matrix, const t_Vector* vector)
+{
+	t_Vector	result;
+
+	result.x = (matrix->m[0][0] * vector->x) \
+	+ (matrix->m[0][1] * vector->y) + (matrix->m[0][2] * vector->z);
+	result.y = (matrix->m[1][0] * vector->x) \
+	+ matrix->m[1][1] * vector->y + matrix->m[1][2] * vector->z;
+	result.z = matrix->m[2][0] * vector->x + matrix->m[2][1] * vector->y + matrix->m[2][2] * vector->z;
+
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/03 17:20:45 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/05 16:37:27 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,8 @@ float	calc_light(t_Vector *P, t_Vector *N, t_Vector V, t_Sphere *clst_s)
 				l_vector = vector_sub(&scene()->lights[j].position, P);
 				t_max = 1;
 			}
-			if (scene()->lights[j].type == 'D')
-			{
-				l_vector = scene()->lights[j].direction;
-				t_max = INT_MAX;
-			}
 		}
-		shadow = closest_intersect(P, &l_vector, 0.001, t_max);
+		shadow = clst_intsct(P, &l_vector, 0.001, t_max);
 		if (shadow.closest_sphere != NULL)
 			continue ;
 		diff_reflection(*N, l_vector, &i, j);
