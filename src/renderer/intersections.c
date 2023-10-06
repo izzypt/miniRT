@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/04 19:45:24 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/06 11:48:19 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,31 @@
  - Calculates the closest intersection point from the origin (O) towards (D).
  - Returns t_Intersection (closes_t and closest_sphere).
 */
-t_Intersection	closest_intersect(t_Vector *O, t_Vector *D, float t_min, float t_max)
+t_Intersection	clst_intsct(t_Vector *O, t_Vector *D, float t_min, float t_max)
 {
-	t_Point			intersections;
-	t_Sphere		*closest_sphere;
-	float			closest_t;
+	t_Point			sphr_intrsct;
 	int				i;
 	t_Intersection	inter;
 
 	i = -1;
-	closest_t = INT_MAX;
-	closest_sphere = NULL;
-	while (++i < 4)
+	inter.closest_t = INT_MAX;
+	inter.closest_sphere = NULL;
+	while (++i < scene()->spheres_count)
 	{
-		intersections = intersects_sphere(*O, *D, scene()->spheres[i]);
-		if (intersections.t1 < closest_t && intersections.t1 >= t_min \
-			&& intersections.t1 <= t_max)
+		sphr_intrsct = intersects_sphere(*O, *D, scene()->spheres[i]);
+		if (sphr_intrsct.t1 < inter.closest_t && sphr_intrsct.t1 >= t_min \
+			&& sphr_intrsct.t1 <= t_max)
 		{
-			closest_t = intersections.t1;
-			closest_sphere = &scene()->spheres[i];
+			inter.closest_t = sphr_intrsct.t1;
+			inter.closest_sphere = &scene()->spheres[i];
 		}
-		if (intersections.t2 < closest_t && intersections.t2 >= t_min \
-			&& intersections.t2 <= t_max)
+		if (sphr_intrsct.t2 < inter.closest_t && sphr_intrsct.t2 >= t_min \
+			&& sphr_intrsct.t2 <= t_max)
 		{
-			closest_t = intersections.t2;
-			closest_sphere = &scene()->spheres[i];
+			inter.closest_t = sphr_intrsct.t2;
+			inter.closest_sphere = &scene()->spheres[i];
 		}
 	}
-	inter.closest_sphere = closest_sphere;
-	inter.closest_t = closest_t;
 	return (inter);
 }
 
@@ -60,7 +56,7 @@ t_Color	trace_ray(t_Vector ray, int t_min, int t_max)
 	t_Vector		d;
 	t_Intersection	intrsct;
 
-	intrsct = closest_intersect(&camera()->pos, &ray, t_min, t_max);
+	intrsct = clst_intsct(&camera()->pos, &ray, t_min, t_max);
 	if (intrsct.closest_sphere == NULL)
 		return (hex_to_rgb(BLACK));
 	d = vector_mult(&ray, intrsct.closest_t);
@@ -97,4 +93,29 @@ t_Point	intersects_sphere(t_Vector O, t_Vector D, t_Sphere sphere)
 		intersections.t2 = INT_MAX;
 	}
 	return (intersections);
+}
+
+/*
+ - Checks for intersections with a plane.
+ - Returns a float with the intersection points, if any.
+ - In geometric terms, denom measures how aligned the ray direction is with the plane's normal.
+ - O produto escalar entre o normal do plano e a direcção do raio igual a 0 indica que o raio e o plano são paralelos, logo não intersectam.
+*/
+float	intersects_plane(t_Vector nmal, t_Vector plan_p, t_Vector O, t_Vector D)
+{
+	t_Vector	planetoorigin;
+	float		denom;
+	float		t;
+
+	t = (float)INT_MAX;
+	denom = dot_product(nmal, D);
+	if (denom > 0)
+	{
+		planetoorigin = vector_sub(&plan_p, &O);
+		t = dot_product(planetoorigin, nmal) / denom;
+		if (t < 0)
+			t = INT_MAX;
+		return (t);
+	}
+	return (t);
 }
