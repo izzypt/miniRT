@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/04 14:10:49 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/05 17:35:58 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,13 @@ void	set_camera(t_Vector cam_pos, t_Vector cam_dir, float fov)
  */
 void	set_mlx(void)
 {
+	int		width;
+	int		height;
+	void	*mlx_window;
+
 	mlibx()->mlx = mlx_init();
-	mlibx()->win = mlx_new_window(mlibx()->mlx, \
-					canvas()->width, canvas()->height, TITLE);
+	width = canvas()->width;
+	height = canvas()->height;
+	mlx_window = mlx_new_window(mlibx()->mlx, width, height, "MiniRT");
+	mlibx()->win = mlx_window;
 }

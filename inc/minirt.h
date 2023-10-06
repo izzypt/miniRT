@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/04 14:10:31 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/06 18:38:33 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,13 @@ typedef struct sphere
 	t_Vector	center;
 }	t_Sphere;
 
+typedef struct plane
+{
+	t_Vector	point;
+	t_Vector	normal;
+	t_Color		color;
+}	t_Plane;
+
 typedef struct light
 {
 	char		type;
@@ -108,6 +115,7 @@ typedef struct scene
 {
 	t_Sphere	*spheres;
 	t_Light		*lights;
+	t_Plane		*planes;
 	int			spheres_count;
 	int			plane_count;
 	int			cylinder_count;
@@ -116,6 +124,7 @@ typedef struct scene
 typedef struct close_intersection
 {
 	t_Sphere	*closest_sphere;
+	t_Sphere	*closest_plane;
 	float		closest_t;
 }	t_Intersection;
 
@@ -155,15 +164,18 @@ t_Color			color_mult(t_Color *color1, float num);
 /************/
 /* PARSER  */
 /**********/
+
 int				parse_file(char **argv);
 void			parse_light(char **line);
 void			parse_camera(char **line);
 void			parse_ambient(char **line);
 void			parse_sphere(char **line);
+void			parse_plane(char **line);
 
 /***************/
 /* VALIDATORS */
 /*************/
+
 void			validate_rgb_values(int r, int g, int b);
 void			validate_normal_vector(int x, int y, int z);
 
@@ -179,6 +191,7 @@ void			set_ambient_light(float intensity);
 void			set_point_light(float intensity, t_Vector position);
 void			set_mlx(void);
 void			set_sphere(float diameter, t_Vector center, t_Color color);
+void			set_plane(t_Vector point, t_Vector normal, t_Color color);
 
 /**************/
 /* RENDERER  */
@@ -186,7 +199,7 @@ void			set_sphere(float diameter, t_Vector center, t_Color color);
 
 void			render(void);
 t_Point			intersects_sphere(t_Vector O, t_Vector D, t_Sphere sphere);
-t_Intersection	closest_intersect(t_Vector *O, t_Vector *D, float t_min, float t_max);
+t_Intersection	clst_intsct(t_Vector *O, t_Vector *D, float t_min, float t_max);
 t_Color			trace_ray(t_Vector pos, int t_min, int t_max);
 float			calc_light(t_Vector *P, t_Vector *N, t_Vector V, t_Sphere *clst_s);
 void			diff_reflection(t_Vector norm, t_Vector lvec, float *i, int j);
