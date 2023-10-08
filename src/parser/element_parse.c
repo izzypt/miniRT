@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/06 12:01:41 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/08 17:04:11 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void	parse_camera(char **line)
 	camera_dir = ft_split(line[2], ',');
 	if (!camera_dir[0] || !camera_dir[1] || !camera_dir[2])
 		send_error("Camera values must be provided in format: x,y,z\n");
-	cam_dir.x = ft_atoi(camera_dir[0]);
-	cam_dir.y = ft_atoi(camera_dir[1]);
-	cam_dir.z = ft_atoi(camera_dir[2]);
+	cam_dir.x = ft_atof(camera_dir[0]);
+	cam_dir.y = ft_atof(camera_dir[1]);
+	cam_dir.z = ft_atof(camera_dir[2]);
 	validate_normal_vector(cam_dir.x, cam_dir.y, cam_dir.z);
 	fov = ft_atof(line[3]);
 	if (fov < 0 || fov > 180)
