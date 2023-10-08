@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/06 18:38:33 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/08 13:30:06 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,16 @@ typedef struct color
 	float	b;
 }	t_Color;
 
+typedef struct rotation_matrix
+{
+	float	m[3][3];
+}	t_RotMatrix;
+
 typedef struct camera
 {
 	t_Vector	pos;
 	t_Vector	dir;
+	t_Vector	initial_dir;
 	float		fov;
 }	t_Camera;
 
@@ -149,6 +155,7 @@ t_Vector		vector_sub(t_Vector *vector1, t_Vector *vector2);
 t_Vector		vector_add(t_Vector *vector1, t_Vector *vector2);
 t_Vector		vector_mult(t_Vector *vector1, float num);
 t_Vector		vector_div(t_Vector *vector1, float num);
+t_Vector		cross_product(t_Vector A, t_Vector B);
 
 /***********/
 /* COLORS */
@@ -226,5 +233,9 @@ void			send_error(char *error);
 int				ft_atoi(const char *str);
 float			ft_atof(const char *str);
 char			*ft_strdup(char *s1);
+t_RotMatrix		create_rot_matrix(t_Vector axis, float angle);
+t_Vector		mult_mtrx_vector(t_RotMatrix *matrix, t_Vector vector);
+float			angle_btwn_vectors(t_Vector vector1, t_Vector vector2);
+t_RotMatrix		rotate_camera(void);
 
 #endif

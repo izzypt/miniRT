@@ -6,16 +6,15 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:37:11 by simao             #+#    #+#             */
-/*   Updated: 2023/10/07 12:20:06 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/08 17:12:09 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-/*
- - Calculates viewport field of view in degrees.
-
-*/
+/**
+ * @brief Calculates and prints the current viewport angle.
+ */
 float	calculate_fov(void)
 {
 	float	hipo;
@@ -50,83 +49,77 @@ void	set_fov(float degrees)
 	radians = (degrees * (PI / 180)) / 2;
 	viewport()->width = (tan(radians) * viewport()->dist) * 2;
 	viewport()->height = viewport()->width / viewport()->aspect_ratio;
-	printf("Redefining viewport:\nNew Width: %f\n", viewport()->width);
 	calculate_fov();
 }
 
-t_RotMatrix	CreateRotationMatrix(float angle_x, float angle_y, float angle_z)
+/**
+ * @brief Finds the angle between 2 vectors.
+ * 
+ * @param vector1 The first vector.
+ * @param vector2 The second vector.
+ */
+float	angle_btwn_vectors(t_Vector vector1, t_Vector vector2)
 {
-	t_RotMatrix	matrix;
+	float	magnitude1;
+	float	magnitude2;
+	float	dot;
+	float	radians;
 
-	float cos_x = cos(angle_x);
-	float sin_x = sin(angle_x);
-	float cos_y = cos(angle_y);
-	float sin_y = sin(angle_y);
-	float cos_z = cos(angle_z);
-	float sin_z = sin(angle_z);
+	magnitude1 = vector_magnitude(vector1);
+	magnitude2 = vector_magnitude(vector2);
+	dot = dot_product(vector1, vector2);
+	radians = (acos(dot / (magnitude1 * magnitude2)));
 
-	matrix.m[0][0] = cos_y * cos_z;
-	matrix.m[0][1] = -cos_x * sin_z + sin_x * sin_y * cos_z;
-	matrix.m[0][2] = sin_x * sin_z + cos_x * sin_y * cos_z;
-
-	matrix.m[1][0] = cos_y * sin_z;
-	matrix.m[1][1] = cos_x * cos_z + sin_x * sin_y * sin_z;
-	matrix.m[1][2] = -sin_x * cos_z + cos_x * sin_y * sin_z;
-
-	matrix.m[2][0] = -sin_y;
-	matrix.m[2][1] = sin_x * cos_y;
-	matrix.m[2][2] = cos_x * cos_y;
-
-	return (matrix);
+	return (radians);
 }
 
-t_Vector	MultiplyMatrixVector(t_RotMatrix *matrix, t_Vector vector)
+/**
+ * @brief Appplies rotation matrix to a vector and returns the result.
+ * 
+ * @param matrix The matrix.
+ * @param vector2 The vector to apply the rotation matrix to.
+ */
+t_Vector	mult_mtrx_vector(t_RotMatrix *matrix, t_Vector vector)
 {
 	t_Vector	result;
 
-	result.x = matrix->m[0][0] * vector.x + matrix->m[0][1] * vector.y + matrix->m[0][2] * vector.z;
-	result.y = matrix->m[1][0] * vector.x + matrix->m[1][1] * vector.y + matrix->m[1][2] * vector.z;
-	result.z = matrix->m[2][0] * vector.x + matrix->m[2][1] * vector.y + matrix->m[2][2] * vector.z;
+	result.x = matrix->m[0][0] * vector.x + matrix->m[0][1] * \
+	vector.y + matrix->m[0][2] * vector.z;
+	result.y = matrix->m[1][0] * vector.x + matrix->m[1][1] * \
+	vector.y + matrix->m[1][2] * vector.z;
+	result.z = matrix->m[2][0] * vector.x + matrix->m[2][1] * \
+	vector.y + matrix->m[2][2] * vector.z;
 
 	return (result);
 }
 
-t_RotMatrix	matrixFromVector(t_Vector *vector)
+/**
+ * @brief Creates a rotation matrix from the given axis and angle.
+ * 
+ * @param axis The axis we want to rotate around.
+ * @param angle The angle between the two vectors from wich we want to rotate.
+ */
+t_RotMatrix	create_rot_matrix(t_Vector axis, float angle)
 {
 	t_RotMatrix	matrix;
+	float		cos_theta;
+	float		sin_theta;
+	float		one_minus_cos_theta;
 
-    float cos_theta = cos(acos(vector->z)); // Cosine of the angle between the input vector and the positive z-axis
-    float sin_theta = sin(acos(vector->z)); // Sine of the angle
-    
-    if (fabs(1.0 - cos_theta) < 1e-6) {
-        // Special case when the input vector is aligned with the positive z-axis
-        matrix.m[0][0] = 1.0;
-        matrix.m[0][1] = 0.0;
-        matrix.m[0][2] = 0.0;
+	cos_theta = cos(angle);
+	sin_theta = sin(angle);
+	one_minus_cos_theta = 1.0 - cos_theta;
+	matrix.m[0][0] = cos_theta + axis.x * axis.x * one_minus_cos_theta;
+	matrix.m[0][1] = axis.x * axis.y * one_minus_cos_theta - axis.z * sin_theta;
+	matrix.m[0][2] = axis.x * axis.z * one_minus_cos_theta + axis.y * sin_theta;
 
-        matrix.m[1][0] = 0.0;
-        matrix.m[1][1] = 1.0;
-        matrix.m[1][2] = 0.0;
+	matrix.m[1][0] = axis.y * axis.x * one_minus_cos_theta + axis.z * sin_theta;
+	matrix.m[1][1] = cos_theta + axis.y * axis.y * one_minus_cos_theta;
+	matrix.m[1][2] = axis.y * axis.z * one_minus_cos_theta - axis.x * sin_theta;
 
-        matrix.m[2][0] = 0.0;
-        matrix.m[2][1] = 0.0;
-        matrix.m[2][2] = 1.0;
-    } else {
-        // General case
-        float one_minus_cos = 1.0 - cos_theta;
-        
-		matrix.m[0][0] = cos_theta + vector->x * vector->x * one_minus_cos;
-		matrix.m[0][1] = vector->x * vector->y * one_minus_cos - vector->z * sin_theta;
-		matrix.m[0][2] = vector->x * vector->z * one_minus_cos + vector->y * sin_theta;
+	matrix.m[2][0] = axis.z * axis.x * one_minus_cos_theta - axis.y * sin_theta;
+	matrix.m[2][1] = axis.z * axis.y * one_minus_cos_theta + axis.x * sin_theta;
+	matrix.m[2][2] = cos_theta + axis.z * axis.z * one_minus_cos_theta;
 
-		matrix.m[1][0] = vector->y * vector->x * one_minus_cos + vector->z * sin_theta;
-		matrix.m[1][1] = cos_theta + vector->y * vector->y * one_minus_cos;
-		matrix.m[1][2] = vector->y * vector->z * one_minus_cos - vector->x * sin_theta;
-
-		matrix.m[2][0] = vector->z * vector->x * one_minus_cos - vector->y * sin_theta;
-		matrix.m[2][1] = vector->z * vector->y * one_minus_cos + vector->x * sin_theta;
-		matrix.m[2][2] = cos_theta + vector->z * vector->z * one_minus_cos;
-    }
-
-    return matrix;
+	return (matrix);
 }
