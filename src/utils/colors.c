@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/02 12:49:57 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/08 17:12:49 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ int	rgb_to_hex(t_Color color)
 	return (hex_color);
 }
 
-/*
- - Converts a given int from hex to rgb.
- - Returns a rbg t_Color.
-*/
+/**
+ * @brief Converts a color from hexadecimal to RGB values..
+ * 
+ * @param int The color in hexadecimal value of int type.
+ * @returns a t_Color type represented by red, green and blue values.
+ */
 t_Color	hex_to_rgb(int hex_color)
 {
 	t_Color	color;
@@ -42,12 +44,12 @@ t_Color	hex_to_rgb(int hex_color)
 	return (color);
 }
 
-/*
- - Adds color1 and color2.
- - Max value is 255. 
- - Min value is 0.
- - Returns t_Color.
-*/
+/**
+ * @brief Adds two colors together and clamps the values between 0-255.
+ * 
+ * @param color1 The first color.
+ * @param color2 The second color.
+ */
 t_Color	color_add(t_Color *color1, t_Color *color2)
 {
 	t_Color	result;
@@ -70,12 +72,12 @@ t_Color	color_add(t_Color *color1, t_Color *color2)
 	return (result);
 }
 
-/*
- - Subtracts color1 and color2.
- - Max value is 255. 
- - Min value is 0.
- - Returns t_Color.
-*/
+/**
+ * @brief Substract color2 from color1. (color1 - color2)
+ * and clamps the values between 0-255.
+ * @param color1 The first color.
+ * @param color2 The second color.
+ */
 t_Color	color_sub(t_Color *color1, t_Color *color2)
 {
 	t_Color	result;
@@ -98,12 +100,12 @@ t_Color	color_sub(t_Color *color1, t_Color *color2)
 	return (result);
 }
 
-/*
- - Multiplies color1 by num.
- - Max value is 255. 
- - Min value is 0.
- - Returns t_Color.
-*/
+/**
+ * @brief Multiplies color1 by num. (color1 * num)
+ * and clamps the values between 0-255.
+ * @param color1 The first color.
+ * @param num The value to multiply by.
+ */
 t_Color	color_mult(t_Color *color1, float num)
 {
 	t_Color	result;
