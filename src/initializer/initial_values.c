@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/05 17:35:58 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/08 17:01:49 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 /**
  * @brief Calls the functions that set the value for 
- * the canvas, viewport and mlx.
- * 
+ * the canvas and viewport. 
  */
 void	init_windows(void)
 {
@@ -38,8 +37,10 @@ void	set_canvas(int width, int height)
 
 /**
  * @brief Defines the viewport width and height.
- * The default is set to 1. 
- * The objects inside the scene must be coherent with the viewport.
+ * 
+ * @note The default is set to 1. 
+ * @note The objects position inside the scene must be 
+ * coherent with the viewport.
  */
 void	set_viewport(void)
 {
@@ -65,13 +66,17 @@ void	set_camera(t_Vector cam_pos, t_Vector cam_dir, float fov)
 	camera()->dir.x = cam_dir.x;
 	camera()->dir.y = cam_dir.y;
 	camera()->dir.z = cam_dir.z;
+	camera()->initial_dir.x = 0.0;
+	camera()->initial_dir.y = 0.0;
+	camera()->initial_dir.z = viewport()->dist;
 	set_fov(fov);
 }
 
 /**
  * @brief Creates a mlx instance. 
- * The pointer to the mlx instance and the window are saved on mlibx struct.
  * 
+ * @note The pointer to the mlx instance is saved on mlibx()->mlx. 
+ * @note The pointerto the window are saved on mlibx()->win.
  */
 void	set_mlx(void)
 {
