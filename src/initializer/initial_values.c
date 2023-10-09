@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/09 12:05:49 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/09 16:11:36 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  */
 void	init_windows(void)
 {
-	set_canvas(960, 540);
+	set_canvas(640, 360);
 	set_viewport();
 }
 
@@ -83,13 +83,17 @@ void	set_mlx(void)
 	int		width;
 	int		height;
 	void	*mlx_window;
+	void	*mlx_addr;
+	void	*mlx_img;
 
 	mlibx()->mlx = mlx_init();
 	width = canvas()->width;
 	height = canvas()->height;
 	mlx_window = mlx_new_window(mlibx()->mlx, width, height, "MiniRT");
-	mlibx()->img = mlx_new_image(mlibx()->mlx, canvas()->width, canvas()->height);
-	mlibx()->addr = mlx_get_data_addr(mlibx()->img, \
+	mlx_img = mlx_new_image(mlibx()->mlx, canvas()->width, canvas()->height);
+	mlibx()->img = mlx_img;
+	mlx_addr = mlx_get_data_addr(mlibx()->img, \
 	&(mlibx()->bpp), &(mlibx()->line_len), &(mlibx()->endian));
+	mlibx()->addr = mlx_addr;
 	mlibx()->win = mlx_window;
 }

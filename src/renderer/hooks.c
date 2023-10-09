@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/09 13:07:46 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/09 15:57:41 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,22 @@ int	key_press(int keycode)
 {
 	if (keycode == 65307)
 		end_program();
-	if (keycode == 100)
+	if (keycode == KEY_D)
 		camera()->pos.x += 0.5;
-	if (keycode == 97)
+	if (keycode == KEY_A)
 		camera()->pos.x -= 0.5;
-	if (keycode == 119)
+	if (keycode == KEY_W)
 		camera()->pos.z += 0.5;
-	if (keycode == 115)
+	if (keycode == KEY_S)
 		camera()->pos.z -= 0.5;
-	if (keycode == 113)
+	if (keycode == ARROW_LEFT)
 		camera()->dir.x -= 0.1;
-	if (keycode == 101)
+	if (keycode == ARROW_RIGHT)
 		camera()->dir.x += 0.1;
+	if (keycode == ARROW_UP)
+		camera()->dir.y += 0.1;
+	if (keycode == ARROW_DOWN)
+		camera()->dir.y -= 0.1;
 	render();
 	return (1);
 }

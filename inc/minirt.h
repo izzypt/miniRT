@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/09 15:33:38 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/09 16:38:50 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@
 # define YELLOW 0xFFFF00 
 # define BLACK 0x000000 
 # define WHITE 0xFFFFFF
+# define ARROW_LEFT 65361
+# define ARROW_RIGHT 65363
+# define ARROW_UP 65362
+# define ARROW_DOWN 65364
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
 
 /**************/
 /* STRUCTS   */
