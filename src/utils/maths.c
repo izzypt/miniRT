@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:37:11 by simao             #+#    #+#             */
-/*   Updated: 2023/10/08 17:12:09 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/09 11:49:28 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,3 +123,75 @@ t_RotMatrix	create_rot_matrix(t_Vector axis, float angle)
 
 	return (matrix);
 }
+
+
+void	rotate_x(t_Vector old, float angle)
+{
+	t_Vector	new;
+
+	new.x = old.x;
+	new.y = old.x * cos(angle) - old.z * sin(angle);
+	new.z = old.y * sin(angle) + old.x * cos(angle);
+}
+
+void	rotate_y(t_Vector old, float  angle)
+{
+	t_Vector	new;
+
+	new.x = old.z * sin(angle) + old.x * cos(angle);
+	new.y = old.y;
+	new.z = old.y * cos(angle) - old.x * sin(angle);
+
+}
+
+void	rotate_z(t_Vector old, float  angle)
+{
+	t_Vector	new;
+
+	new.x = old.x * cos(angle) - old.y * sin(angle);
+	new.y = old.x * sin(angle) + old.y * cos(angle);
+	new.z = old.z;
+}
+
+/*
+
+Consider a point object O has to be rotated from one angle to another in a 3D plane.
+
+Let:
+
+- Initial coordinates of the object O = (Xold, Yold, Zold)
+- Initial angle of the object O with respect to origin = Φ
+- Rotation angle = θ
+
+New coordinates of the object O after rotation = (Xnew, Ynew, Znew)
+
+For X-Axis Rotation
+ 
+
+This rotation is achieved by using the following rotation equations-
+
+Xnew = Xold
+Ynew = Yold x cosθ – Zold x sinθ
+Znew = Yold x sinθ + Zold x cosθ
+
+----------------------------------------------------------------------------
+
+For Y-Axis Rotation
+ 
+
+This rotation is achieved by using the following rotation equations-
+
+Xnew = Zold x sinθ + Xold x cosθ
+Ynew = Yold
+Znew = Yold x cosθ – Xold x sinθ
+
+----------------------------------------------------------
+
+For Z-Axis Rotation
+ 
+This rotation is achieved by using the following rotation equations-
+
+Xnew = Xold x cosθ – Yold x sinθ
+Ynew = Xold x sinθ + Yold x cosθ
+Znew = Zold
+*/

@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
-/*   Updated: 2023/10/04 11:59:51 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/09 11:54:30 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	main(int argc, char **argv)
 	init_windows();
 	parse_file(argv);
 	set_mlx();
-	render();
 	mlx_hook(mlibx()->win, 2, 0, key_press, NULL);
 	mlx_hook(mlibx()->win, 17, 17, close_window, NULL);
+	render();
 	mlx_loop(mlibx()->mlx);
 	return (1);
 }

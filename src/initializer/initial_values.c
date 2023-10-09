@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/08 17:01:49 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/09 12:05:49 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,8 @@ void	set_mlx(void)
 	width = canvas()->width;
 	height = canvas()->height;
 	mlx_window = mlx_new_window(mlibx()->mlx, width, height, "MiniRT");
+	mlibx()->img = mlx_new_image(mlibx()->mlx, canvas()->width, canvas()->height);
+	mlibx()->addr = mlx_get_data_addr(mlibx()->img, \
+	&(mlibx()->bpp), &(mlibx()->line_len), &(mlibx()->endian));
 	mlibx()->win = mlx_window;
 }
