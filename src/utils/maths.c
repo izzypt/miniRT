@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:37:11 by simao             #+#    #+#             */
-/*   Updated: 2023/10/09 11:49:28 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/10 15:09:05 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,16 +125,18 @@ t_RotMatrix	create_rot_matrix(t_Vector axis, float angle)
 }
 
 
-void	rotate_x(t_Vector old, float angle)
+t_Vector	rotate_x(t_Vector old, float angle)
 {
 	t_Vector	new;
 
 	new.x = old.x;
 	new.y = old.x * cos(angle) - old.z * sin(angle);
 	new.z = old.y * sin(angle) + old.x * cos(angle);
+
+	return (new);
 }
 
-void	rotate_y(t_Vector old, float  angle)
+t_Vector	rotate_y(t_Vector old, float  angle)
 {
 	t_Vector	new;
 
@@ -142,15 +144,18 @@ void	rotate_y(t_Vector old, float  angle)
 	new.y = old.y;
 	new.z = old.y * cos(angle) - old.x * sin(angle);
 
+	return (new);
 }
 
-void	rotate_z(t_Vector old, float  angle)
+t_Vector	rotate_z(t_Vector old, float  angle)
 {
 	t_Vector	new;
 
 	new.x = old.x * cos(angle) - old.y * sin(angle);
 	new.y = old.x * sin(angle) + old.y * cos(angle);
 	new.z = old.z;
+
+	return (new);
 }
 
 /*
