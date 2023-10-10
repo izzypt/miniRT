@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/06 11:52:08 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/10 14:54:41 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	set_plane(t_Vector point, t_Vector normal, t_Color color)
 		tmp = scene()->planes;
 		scene()->planes = malloc(sizeof(t_Plane) * scene()->plane_count);
 	}
-	while (++i < scene()->spheres_count)
+	while (++i < scene()->plane_count)
 	{
-		if (i == scene()->spheres_count - 1)
+		if (i == scene()->plane_count - 1)
 			new_plane(i, point, normal, color);
 		else
 			copy_plane(i, tmp);

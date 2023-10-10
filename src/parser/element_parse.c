@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/08 17:04:11 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/10 16:59:08 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,15 +149,15 @@ void	parse_plane(char **line)
 	plane_point = ft_split(line[1], ',');
 	if (!plane_point[0] || !plane_point[1] || !plane_point[2])
 		send_error("Plane point values must be provided in format: x,y,z\n");	
-	plane.point.x = ft_atoi(plane_point[0]);
-	plane.point.y = ft_atoi(plane_point[1]);
-	plane.point.z = ft_atoi(plane_point[2]);
+	plane.point.x = ft_atof(plane_point[0]);
+	plane.point.y = ft_atof(plane_point[1]);
+	plane.point.z = ft_atof(plane_point[2]);
 	plane_normal = ft_split(line[2], ',');
 	if (!plane_normal[0] || !plane_normal[1] || !plane_normal[2])
 		send_error("Plane normal values must be provided in format: x,y,z\n");
-	plane.normal.x = ft_atoi(plane_normal[0]);
-	plane.normal.y = ft_atoi(plane_normal[1]);
-	plane.normal.z = ft_atoi(plane_normal[2]);
+	plane.normal.x = ft_atof(plane_normal[0]);
+	plane.normal.y = ft_atof(plane_normal[1]);
+	plane.normal.z = ft_atof(plane_normal[2]);
 	plane_color = ft_split(line[3], ',');
 	if (!plane_color[0] || !plane_color[1] || !plane_color[2])
 		send_error("Color values must be in format: R,G,B. range 0-255.\n");
