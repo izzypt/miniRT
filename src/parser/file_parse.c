@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/06 12:00:19 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/10 14:55:18 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int	check_identifier(char *buffer)
 	if (!line)
 		return (0);
 	if (!ft_strncmp(line[0], "C", 1) || !ft_strncmp(line[0], "A", 1) \
-		|| !ft_strncmp(line[0], "L", 1) || !ft_strncmp(line[0], "sp", 2))
+		|| !ft_strncmp(line[0], "L", 1) || !ft_strncmp(line[0], "sp", 2) \
+		|| !ft_strncmp(line[0], "pl", 2) || !ft_strncmp(line[0], "cy", 2))
 		redirect_line(line);
 	else
 		send_error("The valid identifiers are :\n A\n C\n L\n sp\n pl\n cy\n");
