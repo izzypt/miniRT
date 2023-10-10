@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/09 16:38:50 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/10 01:47:15 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
+# define MENU "../scenes/menu.xpm"
 
 /**************/
 /* STRUCTS   */
@@ -55,6 +56,7 @@ typedef struct mlx
 	void		*win;
 	void		*img;
 	char		*addr;
+	void		*menu_img;
 	int			bpp;
 	int			line_len;
 	int			endian;
