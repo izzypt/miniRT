@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/06 11:48:19 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/10 18:34:49 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,21 @@ t_Point	intersects_sphere(t_Vector O, t_Vector D, t_Sphere sphere)
 	return (intersections);
 }
 
-/*
- - Checks for intersections with a plane.
- - Returns a float with the intersection points, if any.
- - In geometric terms, denom measures how aligned the ray direction is with the plane's normal.
- - O produto escalar entre o normal do plano e a direcção do raio igual a 0 indica que o raio e o plano são paralelos, logo não intersectam.
+/**
+ * @brief Checks for intersections with a plane.
+ * @param nmal The normal of the plane.
+ * @param plan_p A point on the plane.
+ * @param D the direction of the ray.
+ * @returns Returns a float with the intersection points, if any.
+ * @note The equation of the plane is ```(p - a) * n = 0``` , where:
+ * @note ```a``` is a point on the plane
+ * @note ```n``` is the normal of the plane. 
+ * @note ```P``` is the point we are testing for intersection with the plane.
+ * @note ``` ```
+ * @note In order for ```P``` to intersect with the plane, 
+ * the vector from ```a``` to ```P``` has to be perpendicular to ```n```.
+ * @note i.e , the dot product of vector from ```a``` to ```P``` and ```n``` 
+ * has to be zero.
 */
 float	intersects_plane(t_Vector nmal, t_Vector plan_p, t_Vector O, t_Vector D)
 {
