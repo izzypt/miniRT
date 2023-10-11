@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/10 01:47:15 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/11 12:33:37 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ typedef struct plane
 	t_Vector	point;
 	t_Vector	normal;
 	t_Color		color;
+	float		spec;
 }	t_Plane;
 
 typedef struct light
@@ -145,7 +146,7 @@ typedef struct scene
 typedef struct close_intersection
 {
 	t_Sphere	*closest_sphere;
-	t_Sphere	*closest_plane;
+	t_Plane		*closest_plane;
 	float		closest_t;
 }	t_Intersection;
 
@@ -221,6 +222,7 @@ void			set_plane(t_Vector point, t_Vector normal, t_Color color);
 
 void			render(void);
 t_Point			intersects_sphere(t_Vector O, t_Vector D, t_Sphere sphere);
+float			intersects_plane(t_Vector nml, t_Vector pl_p, t_Vector O, t_Vector D);
 t_Intersection	clst_intsct(t_Vector *O, t_Vector *D, float t_min, float t_max);
 t_Color			trace_ray(t_Vector pos, int t_min, int t_max);
 float			calc_light(t_Vector *P, t_Vector *N, t_Vector V, t_Sphere *clst_s);

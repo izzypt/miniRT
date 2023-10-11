@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/10 14:54:41 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/11 12:36:27 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	new_plane(int i, t_Vector point, t_Vector normal, t_Color color)
 	scene()->planes[i].color.r = color.r;
 	scene()->planes[i].color.g = color.g;
 	scene()->planes[i].color.b = color.b;
+	scene()->planes[i].spec = 500 + i;
 }
 
 /**
