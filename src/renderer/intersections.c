@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/12 19:07:58 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/12 22:03:21 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_Color	trace_ray(t_Vector ray, int t_min, int t_max)
 
 	intrsct = clst_intsct(&camera()->pos, &ray, t_min, t_max);
 	if (intrsct.clst_sphr == NULL && intrsct.clst_pln == NULL)
-		return (blue_sky(ray));
+		return (background_color(ray));
 	dt = vector_mult(&ray, intrsct.closest_t);
 	p = vector_add(&camera()->pos, &dt);
 	if (intrsct.clst_pln != NULL)

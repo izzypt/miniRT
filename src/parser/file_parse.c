@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/12 18:52:46 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/12 23:16:37 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	redirect_line(char **line)
 			send_error("One or more plane values are missing\n");
 		parse_cylinder(line);
 	}
+	if (!ft_strncmp(line[0], "NIGHT", 5))
+		scene()->background = 1;
 }
 
 /**
@@ -80,10 +82,12 @@ int	check_identifier(char *buffer)
 		return (0);
 	if (!ft_strncmp(line[0], "C", 1) || !ft_strncmp(line[0], "A", 1) \
 		|| !ft_strncmp(line[0], "L", 1) || !ft_strncmp(line[0], "sp", 2) \
-		|| !ft_strncmp(line[0], "pl", 2) || !ft_strncmp(line[0], "cy", 2))
+		|| !ft_strncmp(line[0], "pl", 2) || !ft_strncmp(line[0], "cy", 2) \
+		|| !ft_strncmp(line[0], "NIGHT", 5) || !ft_strncmp(line[0], "DAY", 3))
 		redirect_line(line);
 	else
-		send_error("The valid identifiers are :\n A\n C\n L\n sp\n pl\n cy\n");
+		send_error("Valid identifiers are :\n A\n C\n L\n sp\n pl\n cy\n \
+		NIGHT\n DAY\n MAke sure to leave a space after each one\n");
 	free_matrix(line);
 	return (1);
 }

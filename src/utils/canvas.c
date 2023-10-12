@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:46:50 by simao             #+#    #+#             */
-/*   Updated: 2023/10/12 20:29:53 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/12 22:56:13 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_Color	night_sky(void)
 {
 	static int	randomnumber;
 
-	randomnumber = rand() % 255 + 1;
+	randomnumber = rand() % 500 + 1;
 	if (randomnumber <= 1)
 		return (hex_to_rgb((WHITE)));
 	else
@@ -114,5 +114,17 @@ t_Color	blue_sky(t_Vector ray)
 	blue_sky_color.g *= intensity;
 	blue_sky_color.b *= intensity;
 
-    return (blue_sky_color);
+	return (blue_sky_color);
+}
+
+t_Color	background_color(t_Vector ray)
+{
+	t_Color	color;
+
+	if (!scene()->background)
+		color = blue_sky(ray);
+	if (scene()->background == 1)
+		color = night_sky();
+
+	return (color);
 }
