@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/12 16:16:25 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/12 16:43:00 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ t_Intersection	clst_intsct(t_Vector *O, t_Vector *D, float t_min, float t_max)
 		if (i < scene()->plane_count)
 			pln_intsct = intrscts_pln(scene()->planes[i].normal, scene()->planes[i].point, *O, *D);
 		if (sphr_intrsct.t1 < inter.closest_t && sphr_intrsct.t1 >= t_min \
-			&& sphr_intrsct.t1 <= t_max && sphr_intrsct.t1 < pln_intsct)
+			&& sphr_intrsct.t1 <= t_max)
 		{
 			inter.closest_t = sphr_intrsct.t1;
 			inter.clst_sphr = &scene()->spheres[i];
 		}
 		if (sphr_intrsct.t2 < inter.closest_t && sphr_intrsct.t2 >= t_min \
-			&& sphr_intrsct.t2 <= t_max && sphr_intrsct.t2 < pln_intsct)
+			&& sphr_intrsct.t2 <= t_max)
 		{
 			inter.closest_t = sphr_intrsct.t2;
 			inter.clst_sphr = &scene()->spheres[i];
@@ -132,7 +132,7 @@ float	intrscts_pln(t_Vector nmal, t_Vector plan_p, t_Vector O, t_Vector D)
 
 	t = (float)INT_MAX;
 	denom = dot_product(nmal, D);
-	if (fabs(denom) > 0)
+	if (fabs(denom) > 0.001)
 	{
 		planetoorigin = vector_sub(&plan_p, &O);
 		t = dot_product(planetoorigin, nmal) / denom;
