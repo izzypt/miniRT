@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/12 16:23:59 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/12 16:46:37 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,9 @@ void	parse_sphere(char **line)
 	sphere_pos = ft_split(line[1], ',');
 	if (!sphere_pos[0] || !sphere_pos[1] || !sphere_pos[2])
 		send_error("Sphere center values must be provided in format: x,y,z\n");
-	sphr.center.x = ft_atoi(sphere_pos[0]);
-	sphr.center.y = ft_atoi(sphere_pos[1]);
-	sphr.center.z = ft_atoi(sphere_pos[2]);
+	sphr.center.x = ft_atof(sphere_pos[0]);
+	sphr.center.y = ft_atof(sphere_pos[1]);
+	sphr.center.z = ft_atof(sphere_pos[2]);
 	sphr.radius = ft_atof(line[2]) / 2;
 	sphere_color = ft_split(line[3], ',');
 	if (!sphere_color[0] || !sphere_color[1] || !sphere_color[2])
