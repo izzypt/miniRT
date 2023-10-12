@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/12 17:01:14 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/12 18:35:48 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,16 @@ typedef struct plane
 	t_Color		color;
 	float		spec;
 }	t_Plane;
+
+typedef struct cylinder
+{
+	t_Vector	pos;
+	t_Vector	normal;
+	t_Color		color;
+	float		radius;
+	float		height;
+	float		spec;
+}	t_Cylinder;
 
 typedef struct light
 {

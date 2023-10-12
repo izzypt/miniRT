@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/10 14:55:18 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/12 18:52:46 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@ void	redirect_line(char **line)
 			send_error("One or more plane values are missing\n");
 		parse_plane(line);
 	}
-	/*if (!ft_strncmp(line[0], "cy", 2))
-		parse_cylinder();
-	}*/
+	if (!ft_strncmp(line[0], "cy", 2))
+	{
+		if (!line[1] || !line[2] || !line[3] || !line[4] || !line[5])
+			send_error("One or more plane values are missing\n");
+		parse_cylinder(line);
+	}
 }
 
 /**
