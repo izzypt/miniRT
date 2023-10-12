@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/12 16:19:16 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/12 18:07:47 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ float	calc_light(t_Vector *P, t_Vector *N, t_Vector V, float spec)
 				t_max = 1;
 			}
 		}
-		shadow = clst_intsct(P, &l_vector, 0.00001, t_max);
+		shadow = clst_intsct(P, &l_vector, 0.001, t_max);
 		if (shadow.clst_sphr != NULL || shadow.clst_pln != NULL)
 			continue ;
 		diff_reflection(*N, l_vector, &i, j);
