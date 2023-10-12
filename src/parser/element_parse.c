@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/12 18:56:38 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/12 21:59:48 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,6 @@ void	parse_plane(char **line)
 	char		**plane_point;
 	char		**plane_normal;
 	char		**plane_color;
-	t_Color		color;
 	t_Plane		pln;
 
 	plane_point = ft_split(line[1], ',');
@@ -183,7 +182,6 @@ void	parse_cylinder(char **line)
 	char		**cyl_color;
 	float		diameter;
 	float		height;
-	t_Color		color;
 	t_Cylinder	cyl;
 
 	cyl_pos = ft_split(line[1], ',');
