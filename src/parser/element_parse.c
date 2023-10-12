@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/10 16:59:08 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/12 16:23:59 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ void	parse_light(char **line)
 	light_pos = ft_split(line[1], ',');
 	if (!light_pos[0] || !light_pos[1] || !light_pos[2])
 		send_error("Light values must be provided in format: x,y,z\n");
-	light_position.x = ft_atoi(light_pos[0]);
-	light_position.y = ft_atoi(light_pos[1]);
-	light_position.z = ft_atoi(light_pos[2]);
+	light_position.x = ft_atof(light_pos[0]);
+	light_position.y = ft_atof(light_pos[1]);
+	light_position.z = ft_atof(light_pos[2]);
 	intensity = ft_atof(line[2]);
 	if (intensity < 0.0 || intensity > 1.0)
 		send_error("Point Light intensity value must be between 0.0 and 1.0\n");

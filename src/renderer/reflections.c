@@ -6,13 +6,21 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/05 16:37:27 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/12 16:19:16 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
-
-float	calc_light(t_Vector *P, t_Vector *N, t_Vector V, t_Sphere *clst_s)
+/**
+ * @brief Calculate the light and shadow at a given point in the scene.
+ * @param P Any point on the scene that we will check for light 
+ * and shadow by casting a ray backwards from this point to the light point.
+ * @param N the normal vector of the geometrical shape.
+ * @param V the light vector from P to the camera origin.
+ * @param spec the specular reflection coefficient of the object material.
+ * @returns The calculated intensity of a light for point P.
+*/
+float	calc_light(t_Vector *P, t_Vector *N, t_Vector V, float spec)
 {
 	float			i;
 	int				j;
@@ -34,11 +42,11 @@ float	calc_light(t_Vector *P, t_Vector *N, t_Vector V, t_Sphere *clst_s)
 				t_max = 1;
 			}
 		}
-		shadow = clst_intsct(P, &l_vector, 0.001, t_max);
-		if (shadow.closest_sphere != NULL)
+		shadow = clst_intsct(P, &l_vector, 0.00001, t_max);
+		if (shadow.clst_sphr != NULL || shadow.clst_pln != NULL)
 			continue ;
 		diff_reflection(*N, l_vector, &i, j);
-		spec_reflection(*N, l_vector, clst_s->spec, &i, j, V);
+		spec_reflection(*N, l_vector, spec, &i, j, V);
 	}
 	return (i);
 }
