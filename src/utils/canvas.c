@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:46:50 by simao             #+#    #+#             */
-/*   Updated: 2023/10/09 15:17:16 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/12 17:23:46 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,23 @@ t_RotMatrix	rotate_camera(void)
 	t_RotMatrix	matrix;
 
 	angle = angle_btwn_vectors(camera()->initial_dir, camera()->dir);
-	//printf("Angle between initial dir and dir is %f\n", angle / (PI / 180));
 	cross = cross_product(camera()->initial_dir, camera()->dir);
 	axis = cross;
 	matrix = create_rot_matrix(axis, angle);
 	return (matrix);
 }
 
-	//printf("Angle between ray and newOrientation is %f\n",angle);
-	//printf("Cross product vector is %f %f %f\n", cross.x, cross.y, cross.z);
+/**
+ * @brief Return a color black or white, The highest probability is black.
+ * @returns t_Color to paint on the canvas.
+ */
+t_Color	night_sky(void)
+{
+	static int	randomnumber;
+
+	randomnumber = rand() % 255 + 1;
+	if (randomnumber <= 1)
+		return (hex_to_rgb((WHITE)));
+	else
+		return (hex_to_rgb((BLACK)));
+}

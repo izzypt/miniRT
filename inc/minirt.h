@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/12 12:19:05 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/12 17:01:14 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdio.h>
 # include <math.h>
 # include <limits.h>
+# include <time.h>
 
 /*************/
 /* DEFINES  */
@@ -254,5 +255,6 @@ t_RotMatrix		create_rot_matrix(t_Vector axis, float angle);
 t_Vector		mult_mtrx_vector(t_RotMatrix *matrix, t_Vector vector);
 float			angle_btwn_vectors(t_Vector vector1, t_Vector vector2);
 t_RotMatrix		rotate_camera(void);
+t_Color			night_sky(void);
 
 #endif

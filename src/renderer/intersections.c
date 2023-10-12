@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/12 16:43:00 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/12 17:00:30 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_Color	trace_ray(t_Vector ray, int t_min, int t_max)
 
 	intrsct = clst_intsct(&camera()->pos, &ray, t_min, t_max);
 	if (intrsct.clst_sphr == NULL && intrsct.clst_pln == NULL)
-		return (hex_to_rgb(BLACK));
+		return (night_sky());
 	dt = vector_mult(&ray, intrsct.closest_t);
 	p = vector_add(&camera()->pos, &dt);
 	if (intrsct.clst_pln != NULL)
