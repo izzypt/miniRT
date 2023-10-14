@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/12 21:59:48 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/14 22:30:15 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	parse_ambient(char **line)
 	rgb_string = ft_split(line[2], ',');
 	if (!rgb_string[0] || !rgb_string[1] || !rgb_string[2])
 		send_error("A.Light colors must be between 0-255: 255,255,255\n");
-	color.r = ft_atoi(rgb_string[0]);
-	color.g = ft_atoi(rgb_string[1]);
-	color.b = ft_atoi(rgb_string[2]);
+	color.r = ft_atof(rgb_string[0]);
+	color.g = ft_atof(rgb_string[1]);
+	color.b = ft_atof(rgb_string[2]);
 	validate_rgb_values(color.r, color.g, color.b);
 	set_ambient_light(intensity);
 	free_matrix(rgb_string);
@@ -125,9 +125,9 @@ void	parse_sphere(char **line)
 	sphere_color = ft_split(line[3], ',');
 	if (!sphere_color[0] || !sphere_color[1] || !sphere_color[2])
 		send_error("Color values must be in format: R,G,B. range 0-255.\n");
-	sphr.color.r = ft_atoi(sphere_color[0]);
-	sphr.color.g = ft_atoi(sphere_color[1]);
-	sphr.color.b = ft_atoi(sphere_color[2]);
+	sphr.color.r = ft_atof(sphere_color[0]);
+	sphr.color.g = ft_atof(sphere_color[1]);
+	sphr.color.b = ft_atof(sphere_color[2]);
 	validate_rgb_values(sphr.color.r, sphr.color.g, sphr.color.b);
 	set_sphere(sphr.radius, sphr.center, sphr.color);
 	free_matrix(sphere_pos);
@@ -148,7 +148,7 @@ void	parse_plane(char **line)
 
 	plane_point = ft_split(line[1], ',');
 	if (!plane_point[0] || !plane_point[1] || !plane_point[2])
-		send_error("Plane point values must be provided in format: x,y,z\n");	
+		send_error("Plane point values must be provided in format: x,y,z\n");
 	pln.point.x = ft_atof(plane_point[0]);
 	pln.point.y = ft_atof(plane_point[1]);
 	pln.point.z = ft_atof(plane_point[2]);
@@ -158,12 +158,13 @@ void	parse_plane(char **line)
 	pln.normal.x = ft_atof(plane_normal[0]);
 	pln.normal.y = ft_atof(plane_normal[1]);
 	pln.normal.z = ft_atof(plane_normal[2]);
+	validate_normal_vector(pln.normal.x, pln.normal.y, pln.normal.z);
 	plane_color = ft_split(line[3], ',');
 	if (!plane_color[0] || !plane_color[1] || !plane_color[2])
 		send_error("Color values must be in format: R,G,B. range 0-255.\n");
-	pln.color.r = ft_atoi(plane_color[0]);
-	pln.color.g = ft_atoi(plane_color[1]);
-	pln.color.b = ft_atoi(plane_color[2]);
+	pln.color.r = ft_atof(plane_color[0]);
+	pln.color.g = ft_atof(plane_color[1]);
+	pln.color.b = ft_atof(plane_color[2]);
 	validate_rgb_values(pln.color.r, pln.color.g, pln.color.b);
 	set_plane(pln.point, pln.normal, pln.color);
 	free_matrix(plane_point);
@@ -178,27 +179,33 @@ void	parse_plane(char **line)
  */
 void	parse_cylinder(char **line)
 {
-	char		**cyl_pos;
-	char		**cyl_color;
-	float		diameter;
-	float		height;
+	char		**position;
+	char		**color;
+	char		**normal;
 	t_Cylinder	cyl;
 
-	cyl_pos = ft_split(line[1], ',');
-	if (!cyl_pos[0] || !cyl_pos[1] || !cyl_pos[2])
+	position = ft_split(line[1], ',');
+	if (!position[0] || !position[1] || !position[2])
 		send_error("cylinder values must be provided in format: x,y,z\n");
-	cyl.pos.x = ft_atof(cyl_pos[0]);
-	cyl.pos.y = ft_atof(cyl_pos[1]);
-	cyl.pos.z = ft_atof(cyl_pos[2]);
-	cyl.radius = ft_atof(line[2]) / 2;
-	cyl_color = ft_split(line[3], ',');
-	if (!cyl_color[0] || !cyl_color[1] || !cyl_color[2])
+	cyl.pos.x = ft_atof(position[0]);
+	cyl.pos.y = ft_atof(position[1]);
+	cyl.pos.z = ft_atof(position[2]);
+	normal = ft_split(line[2], ',');
+	if (!normal[0] || !normal[1] || !normal[2])
+		send_error("cylinder normal must be provided in format: x,y,z\n");
+	cyl.normal.x = ft_atof(normal[0]);
+	cyl.normal.y = ft_atof(normal[1]);
+	cyl.normal.z = ft_atof(normal[2]);
+	cyl.radius = ft_atof(line[3]) / 2;
+	cyl.height = ft_atof(line[4]);
+	color = ft_split(line[5], ',');
+	if (!color[0] || !color[1] || !color[2])
 		send_error("Color values must be in format: R,G,B. range 0-255.\n");
-	cyl.color.r = ft_atoi(cyl_color[0]);
-	cyl.color.g = ft_atoi(cyl_color[1]);
-	cyl.color.b = ft_atoi(cyl_color[2]);
+	cyl.color.r = ft_atof(color[0]);
+	cyl.color.g = ft_atof(color[1]);
+	cyl.color.b = ft_atof(color[2]);
 	validate_rgb_values(cyl.color.r, cyl.color.g, cyl.color.b);
-	set_sphere(cyl.radius, cyl.pos, cyl.color);
-	free_matrix(cyl_color);
-	free_matrix(cyl_color);
+	set_cylinder(cyl);
+	free_matrix(color);
+	free_matrix(position);
 }

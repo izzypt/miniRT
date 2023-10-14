@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/12 23:00:27 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/14 22:27:09 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,9 +149,10 @@ typedef struct scene
 	t_Sphere	*spheres;
 	t_Light		*lights;
 	t_Plane		*planes;
+	t_Cylinder	*cylinders;
 	int			spheres_count;
 	int			plane_count;
-	int			cylinder_count;
+	int			cyl_count;
 	int			background;
 }	t_Scene;
 
@@ -232,6 +233,7 @@ void			set_point_light(float intensity, t_Vector position);
 void			set_mlx(void);
 void			set_sphere(float diameter, t_Vector center, t_Color color);
 void			set_plane(t_Vector point, t_Vector normal, t_Color color);
+void			set_cylinder(t_Cylinder cylinder);
 
 /**************/
 /* RENDERER  */

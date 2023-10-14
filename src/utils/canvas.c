@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:46:50 by simao             #+#    #+#             */
-/*   Updated: 2023/10/12 22:56:13 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/14 12:50:04 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_Color	night_sky(void)
 {
 	static int	randomnumber;
 
-	randomnumber = rand() % 500 + 1;
+	randomnumber = rand() % 750 + 1;
 	if (randomnumber <= 1)
 		return (hex_to_rgb((WHITE)));
 	else

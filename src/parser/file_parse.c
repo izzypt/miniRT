@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/12 23:16:37 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/14 22:37:31 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	check_identifier(char *buffer)
 		redirect_line(line);
 	else
 		send_error("Valid identifiers are :\n A\n C\n L\n sp\n pl\n cy\n \
-		NIGHT\n DAY\n MAke sure to leave a space after each one\n");
+		NIGHT\n MAke sure to leave a space after each one\n");
 	free_matrix(line);
 	return (1);
 }
