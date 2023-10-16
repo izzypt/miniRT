@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/14 22:27:09 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/16 14:59:59 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,8 @@ typedef struct close_intersection
 {
 	t_Sphere	*clst_sphr;
 	t_Plane		*clst_pln;
-	float		closest_t;
+	t_Cylinder	*clst_cyl;
+	float		clst_t;
 }	t_Intersection;
 
 /**************/
@@ -241,7 +242,8 @@ void			set_cylinder(t_Cylinder cylinder);
 
 void			render(void);
 t_Point			intrscts_sphr(t_Vector O, t_Vector D, t_Sphere sphere);
-float			intrscts_pln(t_Vector nml, t_Vector pl_p, t_Vector O, t_Vector D);
+float			intrscts_pln(t_Vector O, t_Vector D, t_Plane pln);
+t_Point			intrscts_cyl(t_Vector O, t_Vector D, t_Cylinder cylinder);
 t_Intersection	clst_intsct(t_Vector *O, t_Vector *D, float t_min, float t_max);
 t_Color			trace_ray(t_Vector pos, int t_min, int t_max);
 float			calc_light(t_Vector *P, t_Vector *N, t_Vector V, float spec);
