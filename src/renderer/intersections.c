@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/16 15:10:34 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/16 21:07:56 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ t_Point	intrscts_cyl(t_Vector O, t_Vector D, t_Cylinder cylinder)
 	result.y = 2 * (dot_product(D, delta_p) - dot_product(D, cylinder.normal) * dot_product(delta_p, cylinder.normal));
 	result.z = dot_product(delta_p, delta_p) - pow(dot_product(delta_p, cylinder.normal), 2) - pow(cylinder.radius, 2);
 
-	discriminant = result.y * result.y - 4.0f * result.x * result.x;
+	discriminant = result.y * result.y - 4.0f * result.x * result.z;
 	if (discriminant < 0)
 	{
 		intersections.t1 = INT_MAX;
