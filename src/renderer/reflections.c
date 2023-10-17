@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/12 18:07:47 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/17 11:43:37 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @param spec the specular reflection coefficient of the object material.
  * @returns The calculated intensity of a light for point P.
 */
-float	calc_light(t_Vector *P, t_Vector *N, t_Vector V, float spec)
+float	calc_light(t_Vector P, t_Vector N, t_Vector V, float spec)
 {
 	float			i;
 	int				j;
@@ -38,15 +38,15 @@ float	calc_light(t_Vector *P, t_Vector *N, t_Vector V, float spec)
 		{
 			if (scene()->lights[j].type == 'P')
 			{
-				l_vector = vector_sub(&scene()->lights[j].position, P);
+				l_vector = vector_sub(scene()->lights[j].position, P);
 				t_max = 1;
 			}
 		}
-		shadow = clst_intsct(P, &l_vector, 0.001, t_max);
-		if (shadow.clst_sphr != NULL || shadow.clst_pln != NULL)
+		shadow = clst_intsct(P, l_vector, 0.001, t_max);
+		if (shadow.clst_sphr != NULL || shadow.clst_pln != NULL || shadow.clst_cyl != NULL)
 			continue ;
-		diff_reflection(*N, l_vector, &i, j);
-		spec_reflection(*N, l_vector, spec, &i, j, V);
+		diff_reflection(N, l_vector, &i, j);
+		spec_reflection(N, l_vector, spec, &i, j, V);
 	}
 	return (i);
 }
@@ -70,11 +70,11 @@ void	spec_reflection(t_Vector norm, t_Vector lvec, int spec, float *i, int j, t_
 	t_Vector	temp;
 	t_Vector	R;
 
-	normal_double = vector_mult(&norm, 2);
-	temp = vector_mult(&normal_double, dot_product(norm, lvec));
+	normal_double = vector_mult(norm, 2);
+	temp = vector_mult(normal_double, dot_product(norm, lvec));
 	if (spec != -1)
 	{
-		R = vector_sub(&temp, &lvec);
+		R = vector_sub(temp, lvec);
 		r_dot_v = dot_product(R, V);
 		if (r_dot_v > 0)
 			*i += scene()->lights[j].intensity * \

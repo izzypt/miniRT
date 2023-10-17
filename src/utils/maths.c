@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:37:11 by simao             #+#    #+#             */
-/*   Updated: 2023/10/10 15:09:05 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/17 02:16:40 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ float	calculate_fov(void)
 	sine = (viewport()->width / 2) / hipo;
 	fov = (asin(sine) * 2) * 180 / PI;
 
-	printf("Viewport fov is %f\n", fov);
 	return (fov);
 }
 

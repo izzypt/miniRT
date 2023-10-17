@@ -6,17 +6,23 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/16 21:07:56 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/17 12:39:37 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-/*
- - Calculates the closest intersection point from the origin (O) towards (D).
- - Returns t_Intersection (closes_t and closest_sphere/plane).
+/**
+ * @brief Performs the calculus to find the distance of the intersection points 
+ * of a ray with a sphere.
+ * @param O The origin of the ray.
+ * @param D The direction of the ray.
+ * @param t_min The minimum value of the distance (t).
+ * @param t_max The maximum value of the distance (t).
+ * @returns t_Intersection holding data about the closest intersection 
+ * and the closest object we intersected with.
 */
-t_Intersection	clst_intsct(t_Vector *O, t_Vector *D, float t_min, float t_max)
+t_Intersection	clst_intsct(t_Vector O, t_Vector D, float t_min, float t_max)
 {
 	t_Point			sphr_intrsct;
 	t_Point			cyl_intrsct;
@@ -30,11 +36,14 @@ t_Intersection	clst_intsct(t_Vector *O, t_Vector *D, float t_min, float t_max)
 	inter.clst_sphr = NULL;
 	inter.clst_pln = NULL;
 	inter.clst_cyl = NULL;
-	while (++i < scene()->spheres_count)
+	while (++i < scene()->cyl_count)
 	{
-		sphr_intrsct = intrscts_sphr(*O, *D, scene()->spheres[i]);
-		pln_intsct = intrscts_pln(*O, *D, scene()->planes[i]);
-		cyl_intrsct = intrscts_cyl(*O, *D, scene()->cylinders[i]);
+		if (i < scene()->spheres_count)
+			sphr_intrsct = intrscts_sphr(O, D, scene()->spheres[i]);
+		if (i < scene()->plane_count)
+			pln_intsct = intrscts_pln(O, D, scene()->planes[i]);
+		if (i < scene()->cyl_count)
+			cyl_intrsct = intrscts_cyl(O, D, scene()->cylinders[i]);
 		if (sphr_intrsct.t1 < inter.clst_t && sphr_intrsct.t1 >= t_min \
 			&& sphr_intrsct.t1 <= t_max)
 		{
@@ -68,6 +77,60 @@ t_Intersection	clst_intsct(t_Vector *O, t_Vector *D, float t_min, float t_max)
 	return (inter);
 }
 
+/**
+ * @brief Multiplies the color of the object by the cooeficient of light
+ * @param itsct the intersection object
+ * @param ray the ray vector we shot from the camera
+ * @param p the point of intersection. It is the origin plus dt.
+ * @param dt the direction of the ray times the distance of "t".
+*/
+t_Color	cyl_color(t_Intersection itsct, t_Vector ray, t_Vector p, t_Vector dt)
+{
+	t_Color		color;
+	t_Vector	n;
+
+	n = vector_sub(p, itsct.clst_cyl->pos);
+	color = color_mult(itsct.clst_cyl->color, \
+			calc_light(p, n, vector_mult(dt, -1), \
+						itsct.clst_cyl->spec) \
+			);
+	return (color);
+}
+
+/**
+ * @brief Multiplies the color of the object by the cooeficient of light
+ * @param itsct the intersection object
+ * @param ray the ray vector we shot from the camera
+ * @param p the point of intersection. It is the origin plus dt.
+ * @param dt the direction of the ray times the distance of "t".
+*/
+t_Color	pln_color(t_Intersection itsct, t_Vector ray, t_Vector p, t_Vector dt)
+{
+	t_Color		color;
+
+	color = color_mult(itsct.clst_pln->color, \
+			calc_light(p, itsct.clst_pln->normal, \
+			vector_mult(dt, -1), itsct.clst_pln->spec));
+	return (color);
+}
+
+/**
+ * @brief Multiplies the color of the object by the cooeficient of light
+ * @param itsct the intersection object
+ * @param ray the ray vector we shot from the camera
+ * @param p the point of intersection. It is the origin plus dt.
+ * @param dt the direction of the ray times the distance of "t".
+*/
+t_Color	sphr_color(t_Intersection itsct, t_Vector ray, t_Vector p, t_Vector dt)
+{
+	t_Vector	n;
+
+	n = vector_sub(p, itsct.clst_sphr->center);
+	return (
+		color_mult(itsct.clst_sphr->color, \
+		calc_light(p, n, vector_mult(dt, -1), itsct.clst_sphr->spec)));
+}
+
 /*
  - Follows ray to the intersection point (clst_t).
  - Calculates the object normal.
@@ -75,30 +138,29 @@ t_Intersection	clst_intsct(t_Vector *O, t_Vector *D, float t_min, float t_max)
 */
 t_Color	trace_ray(t_Vector ray, int t_min, int t_max)
 {
+	t_Intersection	itsct;
 	t_Vector		p;
-	t_Vector		n;
 	t_Vector		dt;
-	t_Intersection	intrsct;
 
-	intrsct = clst_intsct(&camera()->pos, &ray, t_min, t_max);
-	if (intrsct.clst_sphr == NULL && intrsct.clst_pln == NULL)
-		return (background_color(ray));
-	dt = vector_mult(&ray, intrsct.clst_t);
-	p = vector_add(&camera()->pos, &dt);
-	if (intrsct.clst_cyl != NULL)
-		return (intrsct.clst_cyl->color);
-	if (intrsct.clst_pln != NULL)
-		return (color_mult(&intrsct.clst_pln->color, \
-		calc_light(&p, &intrsct.clst_pln->normal, vector_mult(&dt, -1), intrsct.clst_pln->spec)));
-	n = vector_sub(&p, &intrsct.clst_sphr->center);
-	return (
-		color_mult(&intrsct.clst_sphr->color, \
-		calc_light(&p, &n, vector_mult(&dt, -1), intrsct.clst_sphr->spec)));
+	itsct = clst_intsct(camera()->pos, ray, t_min, t_max);
+	dt = vector_mult(ray, itsct.clst_t);
+	p = vector_add(camera()->pos, dt);
+	if (itsct.clst_cyl != NULL)
+		return (cyl_color(itsct, ray, p, dt));
+	if (itsct.clst_pln != NULL)
+		return (pln_color(itsct, ray, p, dt));
+	if (itsct.clst_sphr != NULL)
+		return (sphr_color(itsct, ray, p, dt));
+	return (background_color(ray));
 }
 
-/*
- - Checks if the ray with origin (O) and direction (D) intersects with sphere.
- - Returns a t_Point with the intersection points, if any.
+/**
+ * @brief Performs the calculus to find the distance of the intersection points 
+ * of a ray with a sphere.
+ * @param O The origin of the ray.
+ * @param D The direction of the ray.
+ * @param sphere The sphere to intersect with.
+ * @returns t_Point (t1 and t2). The intersection points.
 */
 t_Point	intrscts_sphr(t_Vector O, t_Vector D, t_Sphere sphere)
 {
@@ -109,9 +171,9 @@ t_Point	intrscts_sphr(t_Vector O, t_Vector D, t_Sphere sphere)
 	t_Point		intersections;
 
 	a = dot_product(D, D);
-	b = 2 * dot_product(vector_sub(&O, &sphere.center), D);
-	c = dot_product(vector_sub(&O, &sphere.center), \
-	vector_sub(&O, &sphere.center)) - sphere.radius * sphere.radius;
+	b = 2 * dot_product(vector_sub(O, sphere.center), D);
+	c = dot_product(vector_sub(O, sphere.center), \
+	vector_sub(O, sphere.center)) - sphere.radius * sphere.radius;
 
 	discriminant = b * b - 4.0f * a * c;
 	intersections.t1 = (-b + sqrt(discriminant)) / (2 * a);
@@ -150,7 +212,7 @@ float	intrscts_pln(t_Vector O, t_Vector D, t_Plane pln)
 	denom = dot_product(pln.normal, D);
 	if (fabs(denom) > 0.001)
 	{
-		planetoorigin = vector_sub(&pln.point, &O);
+		planetoorigin = vector_sub(pln.point, O);
 		t = dot_product(planetoorigin, pln.normal) / denom;
 		if (t < 0)
 			t = INT_MAX;
@@ -159,23 +221,29 @@ float	intrscts_pln(t_Vector O, t_Vector D, t_Plane pln)
 	return (t);
 }
 
-/*
- - Checks if the ray with origin (O) and direction (D) intersects with a cylinder.
- - Returns a t_Point with the intersection points, if any.
+/**
+ * @brief Performs the calculus to find the distance of the intersection points 
+ * of a ray with a cylinder.
+ * @param O The origin of the ray.
+ * @param D The direction of the ray.
+ * @param cylinder The cylinder to intersect with.
+ * @returns t_Point (t1 and t2). The intersection points.
 */
 t_Point	intrscts_cyl(t_Vector O, t_Vector D, t_Cylinder cylinder)
 {
-	t_Vector	result;
+	float		a, b, c;
 	t_Point		intersections;
 	t_Vector	delta_p;
 	float		discriminant;
 
-	delta_p = vector_sub(&O, &cylinder.pos);
-	result.x = dot_product(D, D) - pow(dot_product(D, cylinder.normal), 2);
-	result.y = 2 * (dot_product(D, delta_p) - dot_product(D, cylinder.normal) * dot_product(delta_p, cylinder.normal));
-	result.z = dot_product(delta_p, delta_p) - pow(dot_product(delta_p, cylinder.normal), 2) - pow(cylinder.radius, 2);
+	delta_p = vector_sub(O, cylinder.pos);
+	a = dot_product(D, D) - pow(dot_product(D, cylinder.normal), 2);
+	b = 2 * (dot_product(D, delta_p) \
+	- dot_product(D, cylinder.normal) * dot_product(delta_p, cylinder.normal));
+	c = dot_product(delta_p, delta_p) \
+	- pow(dot_product(delta_p, cylinder.normal), 2) - pow(cylinder.radius, 2);
 
-	discriminant = result.y * result.y - 4.0f * result.x * result.z;
+	discriminant = b * b - 4.0f * a * c;
 	if (discriminant < 0)
 	{
 		intersections.t1 = INT_MAX;
@@ -183,8 +251,8 @@ t_Point	intrscts_cyl(t_Vector O, t_Vector D, t_Cylinder cylinder)
 	}
 	else
 	{
-		intersections.t1 = (-result.y + sqrt(discriminant)) / (2 * result.x);
-		intersections.t2 = (-result.y - sqrt(discriminant)) / (2 * result.x);
+		intersections.t1 = (-b + sqrt(discriminant)) / (2 * a);
+		intersections.t2 = (-b - sqrt(discriminant)) / (2 * a);
 	}
 
 	return (intersections);

@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:58:52 by simao             #+#    #+#             */
-/*   Updated: 2023/10/07 18:54:37 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/17 12:42:32 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,37 +62,37 @@ t_Vector	vector_normalize(t_Vector *vector1)
 		normalized_vector.x = vector1->x;
 		normalized_vector.y = vector1->y;
 		normalized_vector.z = vector1->z;
-	}	
+	}
 	return (normalized_vector);
 }
 
-t_Vector	vector_add(t_Vector *vector1, t_Vector *vector2)
+t_Vector	vector_add(t_Vector vector1, t_Vector vector2)
 {
 	t_Vector	result;
 
-	result.x = vector1->x + vector2->x;
-	result.y = vector1->y + vector2->y;
-	result.z = vector1->z + vector2->z;
+	result.x = vector1.x + vector2.x;
+	result.y = vector1.y + vector2.y;
+	result.z = vector1.z + vector2.z;
 	return (result);
 }
 
-t_Vector	vector_sub(t_Vector *vector1, t_Vector *vector2)
+t_Vector	vector_sub(t_Vector vector1, t_Vector vector2)
 {
 	t_Vector	result;
 
-	result.x = vector1->x - vector2->x;
-	result.y = vector1->y - vector2->y;
-	result.z = vector1->z - vector2->z;
+	result.x = vector1.x - vector2.x;
+	result.y = vector1.y - vector2.y;
+	result.z = vector1.z - vector2.z;
 	return (result);
 }
 
-t_Vector	vector_mult(t_Vector *vector1, float num)
+t_Vector	vector_mult(t_Vector vector1, float num)
 {
 	t_Vector	result;
 
-	result.x = vector1->x * num;
-	result.y = vector1->y * num;
-	result.z = vector1->z * num;
+	result.x = vector1.x * num;
+	result.y = vector1.y * num;
+	result.z = vector1.z * num;
 	return (result);
 }
 

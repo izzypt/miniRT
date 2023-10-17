@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/16 14:59:59 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/17 11:37:03 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,9 +181,9 @@ t_mlx			*mlibx(void);
 float			dot_product(t_Vector vector1, t_Vector vector2);
 t_Vector		vector_normalize(t_Vector *vector1);
 float			vector_magnitude(t_Vector vector1);
-t_Vector		vector_sub(t_Vector *vector1, t_Vector *vector2);
-t_Vector		vector_add(t_Vector *vector1, t_Vector *vector2);
-t_Vector		vector_mult(t_Vector *vector1, float num);
+t_Vector		vector_sub(t_Vector vector1, t_Vector vector2);
+t_Vector		vector_add(t_Vector vector1, t_Vector vector2);
+t_Vector		vector_mult(t_Vector vector1, float num);
 t_Vector		vector_div(t_Vector *vector1, float num);
 t_Vector		cross_product(t_Vector A, t_Vector B);
 t_Vector		mult_mtrx_vector(t_RotMatrix *matrix, t_Vector vector);
@@ -195,10 +195,10 @@ float			angle_btwn_vectors(t_Vector vector1, t_Vector vector2);
 
 int				rgb_to_hex(t_Color color);
 t_Color			hex_to_rgb(int hex_color);
-t_Color			color_add(t_Color *color1, t_Color *color2);
-t_Color			color_mult(t_Color *color1, float num);
-t_Color			color_sub(t_Color *color1, t_Color *color2);
-t_Color			color_mult(t_Color *color1, float num);
+t_Color			color_add(t_Color color1, t_Color color2);
+t_Color			color_mult(t_Color color1, float num);
+t_Color			color_sub(t_Color color1, t_Color color2);
+t_Color			color_mult(t_Color color1, float num);
 t_Color			night_sky(void);
 t_Color			blue_sky(t_Vector ray);
 t_Color			background_color(t_Vector ray);
@@ -244,9 +244,9 @@ void			render(void);
 t_Point			intrscts_sphr(t_Vector O, t_Vector D, t_Sphere sphere);
 float			intrscts_pln(t_Vector O, t_Vector D, t_Plane pln);
 t_Point			intrscts_cyl(t_Vector O, t_Vector D, t_Cylinder cylinder);
-t_Intersection	clst_intsct(t_Vector *O, t_Vector *D, float t_min, float t_max);
+t_Intersection	clst_intsct(t_Vector O, t_Vector D, float t_min, float t_max);
 t_Color			trace_ray(t_Vector pos, int t_min, int t_max);
-float			calc_light(t_Vector *P, t_Vector *N, t_Vector V, float spec);
+float			calc_light(t_Vector P, t_Vector N, t_Vector V, float spec);
 void			diff_reflection(t_Vector norm, t_Vector lvec, float *i, int j);
 void			spec_reflection(t_Vector norm, t_Vector lvec, int spec, float *i, int j, t_Vector V);
 

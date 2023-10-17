@@ -6,12 +6,15 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/10 11:41:04 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/17 11:41:12 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
+/**
+ * @brief Renders the scene, iterating through each pixel in the canvas.
+*/
 void	render(void)
 {
 	t_Color		color;
