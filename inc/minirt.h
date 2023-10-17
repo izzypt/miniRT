@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/17 16:12:48 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/17 21:40:26 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ typedef struct close_intersection
 	t_Plane		*clst_pl;
 	t_Cylinder	*clst_cy;
 	float		clst_t;
+	char		*object;
 }	t_Intersection;
 
 /**************/
@@ -204,6 +205,12 @@ t_Color			color_mult(t_Color color1, float num);
 t_Color			night_sky(void);
 t_Color			blue_sky(t_Vector ray);
 t_Color			background_color(t_Vector ray);
+t_Color			cyl_color(t_Intersection itsct, t_Vector ray, \
+				t_Vector p, t_Vector dt);
+t_Color			pln_color(t_Intersection itsct, \
+				t_Vector ray, t_Vector p, t_Vector dt);
+t_Color			sphr_color(t_Intersection itsct, t_Vector ray, \
+				t_Vector p, t_Vector dt);
 
 /************/
 /* PARSER  */
