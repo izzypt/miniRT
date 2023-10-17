@@ -6,15 +6,15 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/17 12:39:37 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/17 16:24:02 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
 /**
- * @brief Performs the calculus to find the distance of the intersection points 
- * of a ray with a sphere.
+ * @brief Compare all the objects intersection distance in the scene
+ * and determine which one is closest to the camera
  * @param O The origin of the ray.
  * @param D The direction of the ray.
  * @param t_min The minimum value of the distance (t).
@@ -33,9 +33,9 @@ t_Intersection	clst_intsct(t_Vector O, t_Vector D, float t_min, float t_max)
 	i = -1;
 	inter.clst_t = INT_MAX;
 	pln_intsct = INT_MAX;
-	inter.clst_sphr = NULL;
-	inter.clst_pln = NULL;
-	inter.clst_cyl = NULL;
+	inter.clst_sp = NULL;
+	inter.clst_pl = NULL;
+	inter.clst_cy = NULL;
 	while (++i < scene()->cyl_count)
 	{
 		if (i < scene()->spheres_count)
@@ -48,30 +48,30 @@ t_Intersection	clst_intsct(t_Vector O, t_Vector D, float t_min, float t_max)
 			&& sphr_intrsct.t1 <= t_max)
 		{
 			inter.clst_t = sphr_intrsct.t1;
-			inter.clst_sphr = &scene()->spheres[i];
+			inter.clst_sp = &scene()->spheres[i];
 		}
 		if (sphr_intrsct.t2 < inter.clst_t && sphr_intrsct.t2 >= t_min \
 			&& sphr_intrsct.t2 <= t_max)
 		{
 			inter.clst_t = sphr_intrsct.t2;
-			inter.clst_sphr = &scene()->spheres[i];
+			inter.clst_sp = &scene()->spheres[i];
 		}
 		if (pln_intsct < inter.clst_t && pln_intsct >= t_min && pln_intsct <= t_max)
 		{
 			inter.clst_t = pln_intsct;
-			inter.clst_pln = &scene()->planes[i];
+			inter.clst_pl = &scene()->planes[i];
 		}
 		if (cyl_intrsct.t1 < inter.clst_t && cyl_intrsct.t1 >= t_min \
 			&& cyl_intrsct.t1 <= t_max)
 		{
 			inter.clst_t = cyl_intrsct.t1;
-			inter.clst_cyl = &scene()->cylinders[i];
+			inter.clst_cy = &scene()->cylinders[i];
 		}
 		if (cyl_intrsct.t2 < inter.clst_t && cyl_intrsct.t2 >= t_min \
 			&& cyl_intrsct.t2 <= t_max)
 		{
 			inter.clst_t = cyl_intrsct.t2;
-			inter.clst_cyl = &scene()->cylinders[i];
+			inter.clst_cy = &scene()->cylinders[i];
 		}
 	}
 	return (inter);
@@ -89,10 +89,10 @@ t_Color	cyl_color(t_Intersection itsct, t_Vector ray, t_Vector p, t_Vector dt)
 	t_Color		color;
 	t_Vector	n;
 
-	n = vector_sub(p, itsct.clst_cyl->pos);
-	color = color_mult(itsct.clst_cyl->color, \
+	n = vector_sub(p, itsct.clst_cy->pos);
+	color = color_mult(itsct.clst_cy->color, \
 			calc_light(p, n, vector_mult(dt, -1), \
-						itsct.clst_cyl->spec) \
+						itsct.clst_cy->spec) \
 			);
 	return (color);
 }
@@ -108,9 +108,9 @@ t_Color	pln_color(t_Intersection itsct, t_Vector ray, t_Vector p, t_Vector dt)
 {
 	t_Color		color;
 
-	color = color_mult(itsct.clst_pln->color, \
-			calc_light(p, itsct.clst_pln->normal, \
-			vector_mult(dt, -1), itsct.clst_pln->spec));
+	color = color_mult(itsct.clst_pl->color, \
+			calc_light(p, itsct.clst_pl->normal, \
+			vector_mult(dt, -1), itsct.clst_pl->spec));
 	return (color);
 }
 
@@ -125,10 +125,10 @@ t_Color	sphr_color(t_Intersection itsct, t_Vector ray, t_Vector p, t_Vector dt)
 {
 	t_Vector	n;
 
-	n = vector_sub(p, itsct.clst_sphr->center);
+	n = vector_sub(p, itsct.clst_sp->center);
 	return (
-		color_mult(itsct.clst_sphr->color, \
-		calc_light(p, n, vector_mult(dt, -1), itsct.clst_sphr->spec)));
+		color_mult(itsct.clst_sp->color, \
+		calc_light(p, n, vector_mult(dt, -1), itsct.clst_sp->spec)));
 }
 
 /*
@@ -145,18 +145,18 @@ t_Color	trace_ray(t_Vector ray, int t_min, int t_max)
 	itsct = clst_intsct(camera()->pos, ray, t_min, t_max);
 	dt = vector_mult(ray, itsct.clst_t);
 	p = vector_add(camera()->pos, dt);
-	if (itsct.clst_cyl != NULL)
+	if (itsct.clst_cy != NULL)
 		return (cyl_color(itsct, ray, p, dt));
-	if (itsct.clst_pln != NULL)
+	if (itsct.clst_pl != NULL)
 		return (pln_color(itsct, ray, p, dt));
-	if (itsct.clst_sphr != NULL)
+	if (itsct.clst_sp != NULL)
 		return (sphr_color(itsct, ray, p, dt));
 	return (background_color(ray));
 }
 
 /**
- * @brief Performs the calculus to find the distance of the intersection points 
- * of a ray with a sphere.
+ * @brief Performs the calculus to find the distance at which the ray intersect
+ * with a sphere.
  * @param O The origin of the ray.
  * @param D The direction of the ray.
  * @param sphere The sphere to intersect with.
@@ -222,8 +222,8 @@ float	intrscts_pln(t_Vector O, t_Vector D, t_Plane pln)
 }
 
 /**
- * @brief Performs the calculus to find the distance of the intersection points 
- * of a ray with a cylinder.
+ * @brief Performs the calculus to find the distance at which the ray intersect
+ * with a cylinder.
  * @param O The origin of the ray.
  * @param D The direction of the ray.
  * @param cylinder The cylinder to intersect with.

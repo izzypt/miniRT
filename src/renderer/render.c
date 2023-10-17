@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/17 11:41:12 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/17 16:13:28 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	render(void)
 		while (++x <= (canvas()->width / 2))
 		{
 			d = mult_mtrx_vector(&rotation_matrix, canvas_to_viewport(x, y));
-			color = trace_ray(d, 1, INT_MAX);
+			color = trace_ray(d, T_MIN, T_MAX);
 			put_pixel(x, y, color);
 		}
 		x = ((canvas()->width / 2) * -1);

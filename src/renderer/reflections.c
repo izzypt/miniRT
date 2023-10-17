@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/17 11:43:37 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/17 16:13:37 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ float	calc_light(t_Vector P, t_Vector N, t_Vector V, float spec)
 {
 	float			i;
 	int				j;
-	float			t_max;
 	t_Vector		l_vector;
-	t_Intersection	shadow;
+	t_Intersection	sdw;
 
 	j = -1;
 	i = 0.0;
@@ -37,13 +36,10 @@ float	calc_light(t_Vector P, t_Vector N, t_Vector V, float spec)
 		else
 		{
 			if (scene()->lights[j].type == 'P')
-			{
 				l_vector = vector_sub(scene()->lights[j].position, P);
-				t_max = 1;
-			}
 		}
-		shadow = clst_intsct(P, l_vector, 0.001, t_max);
-		if (shadow.clst_sphr != NULL || shadow.clst_pln != NULL || shadow.clst_cyl != NULL)
+		sdw = clst_intsct(P, l_vector, 0.001, T_MIN);
+		if (sdw.clst_sp != NULL || sdw.clst_pl != NULL || sdw.clst_cy != NULL)
 			continue ;
 		diff_reflection(N, l_vector, &i, j);
 		spec_reflection(N, l_vector, spec, &i, j, V);
