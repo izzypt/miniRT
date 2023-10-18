@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/11 12:36:27 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/18 12:32:06 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	set_plane(t_Vector point, t_Vector normal, t_Color color)
 	int			i;
 
 	scene()->plane_count++;
+	if (scene()->plane_count > scene()->object_count)
+		scene()->object_count = scene()->plane_count;
 	i = -1;
 	if (scene()->planes == NULL)
 		scene()->planes = malloc(sizeof(t_Plane) * 1);

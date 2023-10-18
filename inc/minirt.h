@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/17 21:40:26 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/18 12:31:38 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@
 # define MENU "../scenes/menu.xpm"
 # define T_MIN 1
 # define T_MAX 2147483646
+# define CY 934
+# define PL 933
+# define SP 932
 
 /**************/
 /* STRUCTS   */
@@ -156,6 +159,7 @@ typedef struct scene
 	int			plane_count;
 	int			cyl_count;
 	int			background;
+	int			object_count;
 }	t_Scene;
 
 typedef struct close_intersection
@@ -164,7 +168,10 @@ typedef struct close_intersection
 	t_Plane		*clst_pl;
 	t_Cylinder	*clst_cy;
 	float		clst_t;
-	char		*object;
+	int			object;
+	t_Point		sp;
+	t_Point		cy;
+	float		pl;
 }	t_Intersection;
 
 /**************/
