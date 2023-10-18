@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/17 12:39:37 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/18 13:47:33 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,38 @@ float	intrscts_pln(t_Vector O, t_Vector D, t_Plane pln)
 		return (t);
 	}
 	return (t);
+}
+
+/**
+ * @brief Check if the intersection point lie within the cylinder height.
+ * @param itsct The two intersections distance in a t_Point struct.
+ * @param cy The cylinder structure containing data about the cylinder.
+ * @param O The camera origin point.
+ * @param D The ray direction.
+*/
+void	check_cy_height(t_Point *itsct, t_Cylinder cy, t_Vector O, t_Vector D)
+{
+	float		half_height;
+	t_Vector	point1;
+	t_Vector	point2;
+	float		y1;
+	float		y2;
+
+	half_height = cy.height / 2.0;
+	if (itsct->t1 != INT_MAX)
+	{
+		point1 = vector_add(O, vector_mult(D, itsct->t1));
+		y1 = point1.y - cy.pos.y;
+		if (y1 < -half_height || y1 > half_height)
+			itsct->t1 = INT_MAX;
+	}
+	if (itsct->t2 != INT_MAX)
+	{
+		point2 = vector_add(O, vector_mult(D, itsct->t2));
+		y2 = point2.y - cy.pos.y;
+		if (y2 < -half_height || y2 > half_height)
+			itsct->t2 = INT_MAX;
+	}
 }
 
 /**
