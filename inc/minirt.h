@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/17 11:37:03 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/18 13:51:11 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ typedef struct scene
 	int			plane_count;
 	int			cyl_count;
 	int			background;
+	int			max_obj_count;
 }	t_Scene;
 
 typedef struct close_intersection

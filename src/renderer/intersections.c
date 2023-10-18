@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/18 13:47:33 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/18 13:52:47 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_Intersection	clst_intsct(t_Vector O, t_Vector D, float t_min, float t_max)
 	inter.clst_sphr = NULL;
 	inter.clst_pln = NULL;
 	inter.clst_cyl = NULL;
-	while (++i < scene()->cyl_count)
+	while (++i < scene()->max_obj_count)
 	{
 		if (i < scene()->spheres_count)
 			sphr_intrsct = intrscts_sphr(O, D, scene()->spheres[i]);
@@ -286,6 +286,6 @@ t_Point	intrscts_cyl(t_Vector O, t_Vector D, t_Cylinder cylinder)
 		intersections.t1 = (-b + sqrt(discriminant)) / (2 * a);
 		intersections.t2 = (-b - sqrt(discriminant)) / (2 * a);
 	}
-
+	check_cy_height(&intersections, cylinder, O, D);
 	return (intersections);
 }

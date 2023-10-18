@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/16 20:54:58 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/18 13:52:32 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	set_cylinder(t_Cylinder cylinder)
 	int				i;
 
 	scene()->cyl_count++;
+	if (scene()->cyl_count > scene()->max_obj_count)
+		scene()->max_obj_count = scene()->cyl_count;
 	i = -1;
 	if (scene()->cylinders == NULL)
 		scene()->cylinders = malloc(sizeof(t_Cylinder) * 1);
