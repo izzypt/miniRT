@@ -6,44 +6,11 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:46:50 by simao             #+#    #+#             */
-/*   Updated: 2023/10/14 12:50:04 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/03 13:38:43 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
-
-/**
- * @brief Puts a pixel in the canvas considering a new coordinate system.
- * 
- * @param x The x coordinate from the canvas.
- * @param y The y coordinate from the canvas.
- * @param color The color of the pixel.
- * 
- * @note To put pixel by pixel, instead of writing to image first, 
- * replace the last two lines with:
- * ```
- * mlx_pixel_put(mlibx()->mlx, mlibx()->win, new_x, new_y, hex_color);
- * ```
- * @note Also comment the line:
- * ```
- * mlx_put_image_to_window(mlibx()->mlx, mlibx()->win, mlibx()->img, 0, 0);
- * ```
- * in the render() function
- */
-void	put_pixel(int x, int y, t_Color color)
-{
-	int		new_x;
-	int		new_y;
-	int		hex_color;
-	char	*dst;
-
-	new_x = (canvas()->width / 2) + x;
-	new_y = (canvas()->height / 2) - y;
-	hex_color = rgb_to_hex(color);
-	dst = mlibx()->addr + \
-	(new_y * mlibx()->line_len + new_x * (mlibx()->bpp / 8));
-	*(unsigned int *)dst = hex_color;
-}
 
 /**
  * @brief Converts a canvas coordinate to a viewport coordinate.
