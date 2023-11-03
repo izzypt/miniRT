@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 13:55:50 by smagalha          #+#    #+#             */
-/*   Updated: 2023/10/12 17:11:48 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/03 16:11:34 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	main(int argc, char **argv)
 {
-
 	if (argc != 2)
 		send_error("Please provide only a .rt file as program input\n");
 	set_canvas(960, 540);
