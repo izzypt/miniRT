@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/11/03 12:00:42 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/03 15:05:48 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,7 +238,10 @@ void			parse_cylinder(char **line);
 void			validate_rgb_values(int r, int g, int b);
 void			validate_normal_vector(int x, int y, int z);
 float			validate_fov(float fov);
-
+void			validate_plane_values(char **plane_point, char **plane_normal, \
+							char **plane_color);
+void			validate_cyl_values(char **plane_point, char **plane_normal, \
+							char **plane_color);
 /*****************/
 /* INITIALIZER  */
 /***************/

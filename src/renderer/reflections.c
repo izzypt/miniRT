@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/11/03 12:21:22 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/03 15:18:43 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ float	calc_light(t_Vector P, t_Vector N, t_Vector V, float spec)
 {
 	float			i;
 	int				j;
+	float			t_max;
 	t_Vector		l_vector;
 	t_Intersection	sh;
 
@@ -47,7 +48,7 @@ float	calc_light(t_Vector P, t_Vector N, t_Vector V, float spec)
 			t_max = 1;
 		}
 		sh = clst_intsct(P, l_vector, 0.001, t_max);
-		if (sh.clst_sphr != NULL || sh.clst_pln != NULL || sh.clst_cyl != NULL)
+		if (sh.clst_sp != NULL || sh.clst_pl != NULL || sh.clst_cy != NULL)
 			continue ;
 		diff_reflection(N, l_vector, &i, j);
 		spec_reflection(N, l_vector, spec, &i, j, V);
