@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/14 22:30:15 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/03 13:06:07 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,7 @@ void	parse_camera(char **line)
 	cam_dir.y = ft_atof(camera_dir[1]);
 	cam_dir.z = ft_atof(camera_dir[2]);
 	validate_normal_vector(cam_dir.x, cam_dir.y, cam_dir.z);
-	fov = ft_atof(line[3]);
-	if (fov < 0 || fov > 180)
-		send_error("Camera field of view must be between 0 and 180\n");
+	fov = validate_fov(ft_atof(line[3]));
 	set_camera(cam_pos, cam_dir, fov);
 	free_matrix(camera_pos);
 	free_matrix(camera_dir);
@@ -147,21 +145,16 @@ void	parse_plane(char **line)
 	t_Plane		pln;
 
 	plane_point = ft_split(line[1], ',');
-	if (!plane_point[0] || !plane_point[1] || !plane_point[2])
-		send_error("Plane point values must be provided in format: x,y,z\n");
+	plane_normal = ft_split(line[2], ',');
+	plane_color = ft_split(line[3], ',');
+	validate_values(plane_point, plane_normal, plane_color);
 	pln.point.x = ft_atof(plane_point[0]);
 	pln.point.y = ft_atof(plane_point[1]);
 	pln.point.z = ft_atof(plane_point[2]);
-	plane_normal = ft_split(line[2], ',');
-	if (!plane_normal[0] || !plane_normal[1] || !plane_normal[2])
-		send_error("Plane normal values must be provided in format: x,y,z\n");
 	pln.normal.x = ft_atof(plane_normal[0]);
 	pln.normal.y = ft_atof(plane_normal[1]);
 	pln.normal.z = ft_atof(plane_normal[2]);
 	validate_normal_vector(pln.normal.x, pln.normal.y, pln.normal.z);
-	plane_color = ft_split(line[3], ',');
-	if (!plane_color[0] || !plane_color[1] || !plane_color[2])
-		send_error("Color values must be in format: R,G,B. range 0-255.\n");
 	pln.color.r = ft_atof(plane_color[0]);
 	pln.color.g = ft_atof(plane_color[1]);
 	pln.color.b = ft_atof(plane_color[2]);
@@ -185,22 +178,17 @@ void	parse_cylinder(char **line)
 	t_Cylinder	cyl;
 
 	position = ft_split(line[1], ',');
-	if (!position[0] || !position[1] || !position[2])
-		send_error("cylinder values must be provided in format: x,y,z\n");
+	normal = ft_split(line[2], ',');
+	color = ft_split(line[5], ',');
+	validate_cyl_values(position, normal, color);
 	cyl.pos.x = ft_atof(position[0]);
 	cyl.pos.y = ft_atof(position[1]);
 	cyl.pos.z = ft_atof(position[2]);
-	normal = ft_split(line[2], ',');
-	if (!normal[0] || !normal[1] || !normal[2])
-		send_error("cylinder normal must be provided in format: x,y,z\n");
 	cyl.normal.x = ft_atof(normal[0]);
 	cyl.normal.y = ft_atof(normal[1]);
 	cyl.normal.z = ft_atof(normal[2]);
 	cyl.radius = ft_atof(line[3]) / 2;
 	cyl.height = ft_atof(line[4]);
-	color = ft_split(line[5], ',');
-	if (!color[0] || !color[1] || !color[2])
-		send_error("Color values must be in format: R,G,B. range 0-255.\n");
 	cyl.color.r = ft_atof(color[0]);
 	cyl.color.g = ft_atof(color[1]);
 	cyl.color.b = ft_atof(color[2]);
