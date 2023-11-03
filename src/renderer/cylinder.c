@@ -24,10 +24,10 @@ t_Color	cyl_color(t_Intersection itsct, t_Vector ray, t_Vector p, t_Vector dt)
 	t_Color		color;
 	t_Vector	n;
 
-	n = vector_sub(p, itsct.clst_cyl->pos);
-	color = color_mult(itsct.clst_cyl->color, \
+	n = vector_sub(p, itsct.clst_cy->pos);
+	color = color_mult(itsct.clst_cy->color, \
 			calc_light(p, n, vector_mult(dt, -1), \
-						itsct.clst_cyl->spec) \
+						itsct.clst_cy->spec) \
 			);
 	return (color);
 }
@@ -65,8 +65,8 @@ void	check_cy_height(t_Point *itsct, t_Cylinder cy, t_Vector O, t_Vector D)
 }
 
 /**
- * @brief Performs the calculus to find the distance of the intersection points 
- * of a ray with a cylinder.
+ * @brief Performs the calculus to find the distance at which the ray intersect
+ * with a cylinder.
  * @param O The origin of the ray.
  * @param D The direction of the ray.
  * @param cylinder The cylinder to intersect with.
@@ -100,3 +100,4 @@ t_Point	intrscts_cyl(t_Vector O, t_Vector D, t_Cylinder cylinder)
 	check_cy_height(&intersections, cylinder, O, D);
 	return (intersections);
 }
+

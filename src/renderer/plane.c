@@ -23,9 +23,9 @@ t_Color	pln_color(t_Intersection itsct, t_Vector ray, t_Vector p, t_Vector dt)
 {
 	t_Color		color;
 
-	color = color_mult(itsct.clst_pln->color, \
-			calc_light(p, itsct.clst_pln->normal, \
-			vector_mult(dt, -1), itsct.clst_pln->spec));
+	color = color_mult(itsct.clst_pl->color, \
+			calc_light(p, itsct.clst_pl->normal, \
+			vector_mult(dt, -1), itsct.clst_pl->spec));
 	return (color);
 }
 

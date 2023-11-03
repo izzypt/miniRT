@@ -46,6 +46,11 @@
 # define KEY_S 115
 # define KEY_D 100
 # define MENU "../scenes/menu.xpm"
+# define T_MIN 1
+# define T_MAX 2147483646
+# define CY 934
+# define PL 933
+# define SP 932
 
 /**************/
 /* STRUCTS   */
@@ -159,10 +164,14 @@ typedef struct scene
 
 typedef struct close_intersection
 {
-	t_Sphere	*clst_sphr;
-	t_Plane		*clst_pln;
-	t_Cylinder	*clst_cyl;
+	t_Sphere	*clst_sp;
+	t_Plane		*clst_pl;
+	t_Cylinder	*clst_cy;
 	float		clst_t;
+	int			object;
+	t_Point		sp;
+	t_Point		cy;
+	float		pl;
 }	t_Intersection;
 
 /**************/
@@ -203,11 +212,11 @@ t_Color			color_mult(t_Color color1, float num);
 t_Color			night_sky(void);
 t_Color			blue_sky(t_Vector ray);
 t_Color			background_color(t_Vector ray);
-t_Color			sphr_color(t_Intersection itsct, t_Vector ray, \
-				t_Vector p, t_Vector dt);
 t_Color			cyl_color(t_Intersection itsct, t_Vector ray, \
 				t_Vector p, t_Vector dt);
-t_Color			pln_color(t_Intersection itsct, t_Vector ray, \
+t_Color			pln_color(t_Intersection itsct, \
+				t_Vector ray, t_Vector p, t_Vector dt);
+t_Color			sphr_color(t_Intersection itsct, t_Vector ray, \
 				t_Vector p, t_Vector dt);
 
 /************/
