@@ -13,8 +13,25 @@
 #include "../../inc/minirt.h"
 
 /**
- * @brief Performs the calculus to find the distance of the intersection points 
- * of a ray with a sphere.
+ * @brief Multiplies the color of the object by the cooeficient of light
+ * @param itsct the intersection object
+ * @param ray the ray vector we shot from the camera
+ * @param p the point of intersection. It is the origin plus dt.
+ * @param dt the direction of the ray times the distance of "t".
+*/
+t_Color	sphr_color(t_Intersection itsct, t_Vector ray, t_Vector p, t_Vector dt)
+{
+	t_Vector	n;
+
+	n = vector_sub(p, itsct.clst_sp->center);
+	return (
+		color_mult(itsct.clst_sp->color, \
+		calc_light(p, n, vector_mult(dt, -1), itsct.clst_sp->spec)));
+}
+
+/**
+ * @brief Performs the calculus to find the distance at which the ray intersect
+ * with a sphere.
  * @param O The origin of the ray.
  * @param D The direction of the ray.
  * @param sphere The sphere to intersect with.
@@ -42,21 +59,4 @@ t_Point	intrscts_sphr(t_Vector O, t_Vector D, t_Sphere sphere)
 		intersections.t2 = INT_MAX;
 	}
 	return (intersections);
-}
-
-/**
- * @brief Multiplies the color of the object by the cooeficient of light
- * @param itsct the intersection object
- * @param ray the ray vector we shot from the camera
- * @param p the point of intersection. It is the origin plus dt.
- * @param dt the direction of the ray times the distance of "t".
-*/
-t_Color	sphr_color(t_Intersection itsct, t_Vector ray, t_Vector p, t_Vector dt)
-{
-	t_Vector	n;
-
-	n = vector_sub(p, itsct.clst_sphr->center);
-	return (
-		color_mult(itsct.clst_sphr->color, \
-		calc_light(p, n, vector_mult(dt, -1), itsct.clst_sphr->spec)));
 }

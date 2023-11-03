@@ -32,9 +32,9 @@ float	calc_light(t_Vector P, t_Vector N, t_Vector V, float spec)
 {
 	float			i;
 	int				j;
-	float			t_max;
 	t_Vector		l_vector;
 	t_Intersection	sh;
+
 
 	j = -1;
 	i = 0.0;
