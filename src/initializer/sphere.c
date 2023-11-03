@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/18 12:32:14 by simao            ###   ########.fr       */
+/*   Updated: 2023/10/18 13:52:03 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void	set_sphere(float radius, t_Vector center, t_Color color)
 	int			i;
 
 	scene()->spheres_count++;
-	if (scene()->spheres_count > scene()->object_count)
-		scene()->object_count = scene()->spheres_count;
+	if (scene()->spheres_count > scene()->max_obj_count)
+		scene()->max_obj_count = scene()->spheres_count;
 	i = -1;
 	if (scene()->spheres == NULL)
 		scene()->spheres = malloc(sizeof(t_Sphere) * 1);

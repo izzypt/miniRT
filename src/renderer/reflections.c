@@ -6,11 +6,19 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:33:12 by simao             #+#    #+#             */
-/*   Updated: 2023/10/17 16:13:37 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/03 12:21:22 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
+
+float	add_ambient_light(float i, int j)
+{
+	if (scene()->lights[j].type == 'A')
+		i = i + scene()->lights[j].intensity;
+	return (i);
+}
+
 /**
  * @brief Calculate the light and shadow at a given point in the scene.
  * @param P Any point on the scene that we will check for light 
@@ -25,21 +33,21 @@ float	calc_light(t_Vector P, t_Vector N, t_Vector V, float spec)
 	float			i;
 	int				j;
 	t_Vector		l_vector;
-	t_Intersection	sdw;
+	t_Intersection	sh;
+
 
 	j = -1;
 	i = 0.0;
 	while (++j < 2)
 	{
-		if (scene()->lights[j].type == 'A')
-			i = i + scene()->lights[j].intensity;
-		else
+		i = add_ambient_light(i, j);
+		if (scene()->lights[j].type == 'P')
 		{
-			if (scene()->lights[j].type == 'P')
-				l_vector = vector_sub(scene()->lights[j].position, P);
+			l_vector = vector_sub(scene()->lights[j].position, P);
+			t_max = 1;
 		}
-		sdw = clst_intsct(P, l_vector, 0.001, T_MIN);
-		if (sdw.clst_sp != NULL || sdw.clst_pl != NULL || sdw.clst_cy != NULL)
+		sh = clst_intsct(P, l_vector, 0.001, t_max);
+		if (sh.clst_sphr != NULL || sh.clst_pln != NULL || sh.clst_cyl != NULL)
 			continue ;
 		diff_reflection(N, l_vector, &i, j);
 		spec_reflection(N, l_vector, spec, &i, j, V);

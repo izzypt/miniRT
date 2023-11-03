@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/10/18 12:31:38 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/03 12:00:42 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ typedef struct scene
 	int			plane_count;
 	int			cyl_count;
 	int			background;
-	int			object_count;
+	int			max_obj_count;
 }	t_Scene;
 
 typedef struct close_intersection
@@ -237,6 +237,7 @@ void			parse_cylinder(char **line);
 
 void			validate_rgb_values(int r, int g, int b);
 void			validate_normal_vector(int x, int y, int z);
+float			validate_fov(float fov);
 
 /*****************/
 /* INITIALIZER  */
@@ -264,7 +265,8 @@ t_Intersection	clst_intsct(t_Vector O, t_Vector D, float t_min, float t_max);
 t_Color			trace_ray(t_Vector pos, int t_min, int t_max);
 float			calc_light(t_Vector P, t_Vector N, t_Vector V, float spec);
 void			diff_reflection(t_Vector norm, t_Vector lvec, float *i, int j);
-void			spec_reflection(t_Vector norm, t_Vector lvec, int spec, float *i, int j, t_Vector V);
+void			spec_reflection(t_Vector norm, t_Vector lvec, int spec, \
+				float *i, int j, t_Vector V);
 
 /******************/
 /* KEYS MANAGER  */

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 21:03:04 by simao             #+#    #+#             */
-/*   Updated: 2023/10/17 21:04:40 by simao            ###   ########.fr       */
+/*   Created: 2023/10/19 15:34:54 by simao             #+#    #+#             */
+/*   Updated: 2023/10/19 15:53:15 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,4 @@ t_Point	intrscts_cyl(t_Vector O, t_Vector D, t_Cylinder cylinder)
 	check_cy_height(&intersections, cylinder, O, D);
 	return (intersections);
 }
-
 
