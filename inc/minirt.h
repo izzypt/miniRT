@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/11/03 15:05:48 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/07 16:55:38 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct mlx
 	int			bpp;
 	int			line_len;
 	int			endian;
+	int			wdth;
+	int			hght;
 }	t_mlx;
 
 typedef struct vector
