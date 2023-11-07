@@ -4,7 +4,7 @@ CC=cc
 SRC=src/main.c \
 	inc/libs/get_next_line/get_next_line.c \
 	src/utils/getters.c src/utils/vectors.c src/utils/canvas.c src/utils/maths.c  src/utils/colors.c  src/utils/free.c src/utils/errors.c \
-	src/parser/file_parse.c src/parser/parse_elements.c src/parser/parse_shapes.c src/parser/validators.c\
+	src/parser/file_parse.c src/parser/parse_elements.c src/parser/parse_shapes.c src/parser/validators.c src/parser/validators2.c\
 	src/renderer/intersections.c src/renderer/reflections.c src/renderer/render.c src/renderer/hooks.c src/renderer/sphere.c src/renderer/plane.c src/renderer/cylinder.c\
 	src/initializer/initial_values.c src/initializer/light.c src/initializer/plane.c src/initializer/sphere.c src/initializer/cylinder.c\
 	src/utils/ft_atoi.c src/utils/ft_atof.c src/utils/vectors2.c \
