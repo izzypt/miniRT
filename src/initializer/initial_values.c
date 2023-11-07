@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/11/03 16:12:02 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/07 16:59:20 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,9 @@ void	set_mlx(void)
 	void	*mlx_addr;
 	void	*mlx_img;
 	void	*mlx_menu;
-	int		wdth;
-	int     hght;
 
-	wdth = 5;
-	hght = 15;
+	mlibx()->wdth = 5;
+	mlibx()->hght = 15;
 	mlibx()->mlx = mlx_init();
 	mlx_window = mlx_new_window(mlibx()->mlx, \
 	canvas()->width, canvas()->height, "MiniRT");
@@ -98,6 +96,6 @@ void	set_mlx(void)
 	mlibx()->addr = mlx_addr;
 	mlibx()->win = mlx_window;
 	mlx_menu = mlx_xpm_file_to_image(mlibx()->mlx, \
-	"scenes/menu.xpm", &wdth, &hght);
+	"scenes/menu.xpm", &mlibx()->wdth, &mlibx()->hght);
 	mlibx()->menu_img = mlx_menu;
 }

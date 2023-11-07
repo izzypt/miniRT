@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/04 12:47:36 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/07 22:25:56 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,42 +36,6 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (result * signal);
-}
-
-float ft_atof(const char *str)
-{
-    int i = 0;
-    int signal = 1;
-    float result = 0.0;
-    float decimalPlace = 0.1;
-
-    while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t'
-        || str[i] == '\v' || str[i] == '\f' || str[i] == '\r') {
-        i++;
-    }
-    if (str[i] == '-') {
-        signal = -1;
-        i++;
-    } else if (str[i] == '+') {
-        i++;
-    }
-
-    while (str[i] >= '0' && str[i] <= '9') {
-        result = result * 10.0 + (str[i] - '0');
-        i++;
-    }
-    if (str[i] == '.') 
-	{
-        i++;
-
-        while (str[i] >= '0' && str[i] <= '9') {
-            result = result + (str[i] - '0') * decimalPlace;
-            decimalPlace *= 0.1;
-            i++;
-        }
-    }
-    result *= signal;
-    return result;
 }
 
 /*

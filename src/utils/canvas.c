@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:46:50 by simao             #+#    #+#             */
-/*   Updated: 2023/11/03 13:38:43 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/07 22:31:13 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,10 @@ t_Color	blue_sky(t_Vector ray)
 	blue_sky_color.r = 115;
 	blue_sky_color.g = 215;
 	blue_sky_color.b = 255;
-
 	intensity = 1.0 - (fabs(ray.y) / ((float)viewport()->height));
 	blue_sky_color.r *= intensity;
 	blue_sky_color.g *= intensity;
 	blue_sky_color.b *= intensity;
-
 	return (blue_sky_color);
 }
 
@@ -92,6 +90,5 @@ t_Color	background_color(t_Vector ray)
 		color = blue_sky(ray);
 	if (scene()->background == 1)
 		color = night_sky();
-
 	return (color);
 }

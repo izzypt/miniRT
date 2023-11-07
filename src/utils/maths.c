@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 12:37:11 by simao             #+#    #+#             */
-/*   Updated: 2023/10/17 02:16:40 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/07 17:03:47 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ float	calculate_fov(void)
 				+ pow(viewport()->dist, 2));
 	sine = (viewport()->width / 2) / hipo;
 	fov = (asin(sine) * 2) * 180 / PI;
-
 	return (fov);
 }
 
@@ -68,7 +67,6 @@ float	angle_btwn_vectors(t_Vector vector1, t_Vector vector2)
 	magnitude2 = vector_magnitude(vector2);
 	dot = dot_product(vector1, vector2);
 	radians = (acos(dot / (magnitude1 * magnitude2)));
-
 	return (radians);
 }
 
@@ -88,7 +86,6 @@ t_Vector	mult_mtrx_vector(t_RotMatrix *matrix, t_Vector vector)
 	vector.y + matrix->m[1][2] * vector.z;
 	result.z = matrix->m[2][0] * vector.x + matrix->m[2][1] * \
 	vector.y + matrix->m[2][2] * vector.z;
-
 	return (result);
 }
 
@@ -111,20 +108,16 @@ t_RotMatrix	create_rot_matrix(t_Vector axis, float angle)
 	matrix.m[0][0] = cos_theta + axis.x * axis.x * one_minus_cos_theta;
 	matrix.m[0][1] = axis.x * axis.y * one_minus_cos_theta - axis.z * sin_theta;
 	matrix.m[0][2] = axis.x * axis.z * one_minus_cos_theta + axis.y * sin_theta;
-
 	matrix.m[1][0] = axis.y * axis.x * one_minus_cos_theta + axis.z * sin_theta;
 	matrix.m[1][1] = cos_theta + axis.y * axis.y * one_minus_cos_theta;
 	matrix.m[1][2] = axis.y * axis.z * one_minus_cos_theta - axis.x * sin_theta;
-
 	matrix.m[2][0] = axis.z * axis.x * one_minus_cos_theta - axis.y * sin_theta;
 	matrix.m[2][1] = axis.z * axis.y * one_minus_cos_theta + axis.x * sin_theta;
 	matrix.m[2][2] = cos_theta + axis.z * axis.z * one_minus_cos_theta;
-
 	return (matrix);
 }
 
-
-t_Vector	rotate_x(t_Vector old, float angle)
+/*t_Vector	rotate_x(t_Vector old, float angle)
 {
 	t_Vector	new;
 
@@ -155,47 +148,4 @@ t_Vector	rotate_z(t_Vector old, float  angle)
 	new.z = old.z;
 
 	return (new);
-}
-
-/*
-
-Consider a point object O has to be rotated from one angle to another in a 3D plane.
-
-Let:
-
-- Initial coordinates of the object O = (Xold, Yold, Zold)
-- Initial angle of the object O with respect to origin = Φ
-- Rotation angle = θ
-
-New coordinates of the object O after rotation = (Xnew, Ynew, Znew)
-
-For X-Axis Rotation
- 
-
-This rotation is achieved by using the following rotation equations-
-
-Xnew = Xold
-Ynew = Yold x cosθ – Zold x sinθ
-Znew = Yold x sinθ + Zold x cosθ
-
-----------------------------------------------------------------------------
-
-For Y-Axis Rotation
- 
-
-This rotation is achieved by using the following rotation equations-
-
-Xnew = Zold x sinθ + Xold x cosθ
-Ynew = Yold
-Znew = Yold x cosθ – Xold x sinθ
-
-----------------------------------------------------------
-
-For Z-Axis Rotation
- 
-This rotation is achieved by using the following rotation equations-
-
-Xnew = Xold x cosθ – Yold x sinθ
-Ynew = Xold x sinθ + Yold x cosθ
-Znew = Zold
-*/
+}*/
