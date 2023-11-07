@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/11/07 16:55:38 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/07 23:02:54 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,6 +244,8 @@ void			validate_plane_values(char **plane_point, char **plane_normal, \
 							char **plane_color);
 void			validate_cyl_values(char **plane_point, char **plane_normal, \
 							char **plane_color);
+void			validate_line_values(char **line);
+
 /*****************/
 /* INITIALIZER  */
 /***************/
