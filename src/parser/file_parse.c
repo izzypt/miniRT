@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/11/03 16:11:15 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/07 23:03:24 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,17 @@ void	redirect_line(char **line)
 		parse_light(line);
 	if (!ft_strncmp(line[0], "sp", 2))
 	{
-		if (!line[1] || !line[2] || !line[3])
-			send_error("One or more sphere values are missing\n");
+		validate_line_values(line);
 		parse_sphere(line);
 	}
 	if (!ft_strncmp(line[0], "pl", 2))
 	{
-		if (!line[1] || !line[2] || !line[3])
-			send_error("One or more plane values are missing\n");
+		validate_line_values(line);
 		parse_plane(line);
 	}
 	if (!ft_strncmp(line[0], "cy", 2))
 	{
-		if (!line[1] || !line[2] || !line[3] || !line[4] || !line[5])
-			send_error("One or more plane values are missing\n");
+		validate_line_values(line);
 		parse_cylinder(line);
 	}
 	if (!ft_strncmp(line[0], "NIGHT", 5))
