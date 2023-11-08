@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/18 13:52:32 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/08 00:20:29 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	copy_cylinder(int i, t_Cylinder *tmp)
 	scene()->cylinders[i].color.g = tmp[i].color.g;
 	scene()->cylinders[i].color.b = tmp[i].color.b;
 	scene()->cylinders[i].spec = tmp[i].spec;
+	free(tmp);
 }
 
 /**

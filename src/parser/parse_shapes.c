@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 15:13:10 by simao             #+#    #+#             */
-/*   Updated: 2023/11/03 15:13:28 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/08 00:25:17 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	parse_cylinder(char **line)
 	cyl.color.b = ft_atof(color[2]);
 	validate_rgb_values(cyl.color.r, cyl.color.g, cyl.color.b);
 	set_cylinder(cyl);
+	free_matrix(normal);
 	free_matrix(color);
 	free_matrix(position);
 }

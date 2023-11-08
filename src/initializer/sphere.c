@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/18 13:52:03 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/08 00:23:42 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	copy_sphere(int i, t_Sphere *tmp)
 	scene()->spheres[i].color.g = tmp[i].color.g;
 	scene()->spheres[i].color.b = tmp[i].color.b;
 	scene()->spheres[i].spec = tmp[i].spec;
+	free(tmp);
 }
 
 /**

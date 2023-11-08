@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/10/18 13:51:45 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/08 00:20:18 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	copy_plane(int i, t_Plane *tmp)
 	scene()->planes[i].color.r = tmp[i].color.r;
 	scene()->planes[i].color.g = tmp[i].color.g;
 	scene()->planes[i].color.b = tmp[i].color.b;
+	free(tmp);
 }
 
 /**
