@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/11/08 00:23:42 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/08 17:24:29 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	copy_sphere(int i, t_Sphere *tmp)
 	scene()->spheres[i].color.g = tmp[i].color.g;
 	scene()->spheres[i].color.b = tmp[i].color.b;
 	scene()->spheres[i].spec = tmp[i].spec;
-	free(tmp);
 }
 
 /**
@@ -71,7 +70,10 @@ void	set_sphere(float radius, t_Vector center, t_Color color)
 		scene()->max_obj_count = scene()->spheres_count;
 	i = -1;
 	if (scene()->spheres == NULL)
+	{
+		tmp = NULL;
 		scene()->spheres = malloc(sizeof(t_Sphere) * 1);
+	}
 	else
 	{
 		tmp = scene()->spheres;
@@ -80,7 +82,11 @@ void	set_sphere(float radius, t_Vector center, t_Color color)
 	while (++i < scene()->spheres_count)
 	{
 		if (i == scene()->spheres_count - 1)
+		{
+			if (tmp != NULL)
+				free(tmp);
 			new_sphere(i, radius, center, color);
+		}
 		else
 			copy_sphere(i, tmp);
 	}
