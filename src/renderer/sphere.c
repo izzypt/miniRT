@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:34:54 by simao             #+#    #+#             */
-/*   Updated: 2023/10/19 15:53:11 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/07 16:59:52 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_Point	intrscts_sphr(t_Vector O, t_Vector D, t_Sphere sphere)
 	b = 2 * dot_product(vector_sub(O, sphere.center), D);
 	c = dot_product(vector_sub(O, sphere.center), \
 	vector_sub(O, sphere.center)) - sphere.radius * sphere.radius;
-
 	discriminant = b * b - 4.0f * a * c;
 	intersections.t1 = (-b + sqrt(discriminant)) / (2 * a);
 	intersections.t2 = (-b - sqrt(discriminant)) / (2 * a);

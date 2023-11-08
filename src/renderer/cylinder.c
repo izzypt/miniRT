@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:34:54 by simao             #+#    #+#             */
-/*   Updated: 2023/10/19 15:53:15 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/07 22:29:53 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,18 @@ void	check_cy_height(t_Point *itsct, t_Cylinder cy, t_Vector O, t_Vector D)
 */
 t_Point	intrscts_cyl(t_Vector O, t_Vector D, t_Cylinder cylinder)
 {
-	float		a, b, c;
+	t_Vector	a;
 	t_Point		intersections;
 	t_Vector	delta_p;
 	float		discriminant;
 
 	delta_p = vector_sub(O, cylinder.pos);
-	a = dot_product(D, D) - pow(dot_product(D, cylinder.normal), 2);
-	b = 2 * (dot_product(D, delta_p) \
-	- dot_product(D, cylinder.normal) * dot_product(delta_p, cylinder.normal));
-	c = dot_product(delta_p, delta_p) \
+	a.x = dot_product(D, D) - pow(dot_product(D, cylinder.normal), 2);
+	a.y = 2 * (dot_product(D, delta_p) - dot_product(D, cylinder.normal) \
+	* dot_product(delta_p, cylinder.normal));
+	a.z = dot_product(delta_p, delta_p) \
 	- pow(dot_product(delta_p, cylinder.normal), 2) - pow(cylinder.radius, 2);
-
-	discriminant = b * b - 4.0f * a * c;
+	discriminant = a.y * a.y - 4.0f * a.x * a.z;
 	if (discriminant < 0)
 	{
 		intersections.t1 = INT_MAX;
@@ -94,10 +93,9 @@ t_Point	intrscts_cyl(t_Vector O, t_Vector D, t_Cylinder cylinder)
 	}
 	else
 	{
-		intersections.t1 = (-b + sqrt(discriminant)) / (2 * a);
-		intersections.t2 = (-b - sqrt(discriminant)) / (2 * a);
+		intersections.t1 = (-a.y + sqrt(discriminant)) / (2 * a.x);
+		intersections.t2 = (-a.y - sqrt(discriminant)) / (2 * a.x);
 	}
 	check_cy_height(&intersections, cylinder, O, D);
 	return (intersections);
 }
-

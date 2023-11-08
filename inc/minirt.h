@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:54:28 by simao             #+#    #+#             */
-/*   Updated: 2023/11/03 12:00:42 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/07 23:57:11 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct mlx
 	int			bpp;
 	int			line_len;
 	int			endian;
+	int			wdth;
+	int			hght;
 }	t_mlx;
 
 typedef struct vector
@@ -114,6 +116,12 @@ typedef struct point
 	float	t1;
 	float	t2;
 }	t_Point;
+
+typedef struct light_helper
+{
+	float	*intensity;
+	int		index;
+}	t_LightInfo;
 
 typedef struct sphere
 {
@@ -238,6 +246,11 @@ void			parse_cylinder(char **line);
 void			validate_rgb_values(int r, int g, int b);
 void			validate_normal_vector(int x, int y, int z);
 float			validate_fov(float fov);
+void			validate_plane_values(char **plane_point, char **plane_normal, \
+							char **plane_color);
+void			validate_cyl_values(char **plane_point, char **plane_normal, \
+							char **plane_color);
+void			validate_line_values(char **line);
 
 /*****************/
 /* INITIALIZER  */
@@ -265,8 +278,8 @@ t_Intersection	clst_intsct(t_Vector O, t_Vector D, float t_min, float t_max);
 t_Color			trace_ray(t_Vector pos, int t_min, int t_max);
 float			calc_light(t_Vector P, t_Vector N, t_Vector V, float spec);
 void			diff_reflection(t_Vector norm, t_Vector lvec, float *i, int j);
-void			spec_reflection(t_Vector norm, t_Vector lvec, int spec, \
-				float *i, int j, t_Vector V);
+void			spec_reflection(t_Vector norm, t_Vector lvec, \
+				t_LightInfo *info, t_Vector V);
 
 /******************/
 /* KEYS MANAGER  */

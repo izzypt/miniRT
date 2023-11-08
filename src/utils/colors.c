@@ -6,7 +6,7 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:47:20 by simao             #+#    #+#             */
-/*   Updated: 2023/10/17 11:37:49 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/07 17:01:30 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ int	rgb_to_hex(t_Color color)
 	int	hex_color;
 
 	hex_color = ((int)color.r << 16) | ((int)color.g << 8) | (int)color.b;
-
 	hex_color &= 0x00FFFFFF;
-
 	return (hex_color);
 }
 
@@ -40,7 +38,6 @@ t_Color	hex_to_rgb(int hex_color)
 	color.r = (hex_color >> 16) & 0xFF;
 	color.g = (hex_color >> 8) & 0xFF;
 	color.b = hex_color & 0xFF;
-
 	return (color);
 }
 
@@ -113,7 +110,6 @@ t_Color	color_mult(t_Color color1, float num)
 	result.r = color1.r * num;
 	result.g = color1.g * num;
 	result.b = color1.b * num;
-
 	if (result.r > 255)
 		result.r = 255;
 	if (result.r < 0)
