@@ -6,11 +6,31 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/11/08 00:20:29 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/08 18:09:32 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
+
+/**
+ * @brief Count and store the maximum value of cylinders.
+ * 
+ */
+void	cy_max_count(void)
+{
+	if (scene()->cyl_count > scene()->max_obj_count)
+		scene()->max_obj_count = scene()->cyl_count;
+}
+
+/**
+ * @brief Allocates memory for cylinders and 
+ * stores the previous allocated cylinders on tmp.
+ */
+void	allocate_more_cy(t_Cylinder *tmp)
+{
+	tmp = scene()->cylinders;
+	scene()->cylinders = malloc(sizeof(t_Cylinder) * scene()->cyl_count);
+}
 
 /**
  * @brief Copies the data of the cylinder from temporary buffer to the scene.
@@ -33,7 +53,6 @@ void	copy_cylinder(int i, t_Cylinder *tmp)
 	scene()->cylinders[i].color.g = tmp[i].color.g;
 	scene()->cylinders[i].color.b = tmp[i].color.b;
 	scene()->cylinders[i].spec = tmp[i].spec;
-	free(tmp);
 }
 
 /**
@@ -75,20 +94,23 @@ void	set_cylinder(t_Cylinder cylinder)
 	int				i;
 
 	scene()->cyl_count++;
-	if (scene()->cyl_count > scene()->max_obj_count)
-		scene()->max_obj_count = scene()->cyl_count;
+	cy_max_count();
 	i = -1;
 	if (scene()->cylinders == NULL)
-		scene()->cylinders = malloc(sizeof(t_Cylinder) * 1);
-	else
 	{
-		tmp = scene()->cylinders;
-		scene()->cylinders = malloc(sizeof(t_Cylinder) * scene()->cyl_count);
+		tmp = NULL;
+		scene()->cylinders = malloc(sizeof(t_Cylinder) * 1);
 	}
+	else
+		allocate_more_cy(tmp = scene()->cylinders);
 	while (++i < scene()->cyl_count)
 	{
 		if (i == scene()->cyl_count - 1)
+		{
+			if (tmp != NULL)
+				free(tmp);
 			new_cylinder(i, cylinder);
+		}
 		else
 			copy_cylinder(i, tmp);
 	}

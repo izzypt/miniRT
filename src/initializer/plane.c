@@ -6,14 +6,34 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/11/08 00:20:18 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/08 18:38:13 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
 /**
- * @brief Copies the data of the spheres from temporary buffer to the scene.
+ * @brief Count and store the maximum value of objects in the scene.
+ * 
+ */
+void	pl_max_count(void)
+{
+	if (scene()->plane_count > scene()->max_obj_count)
+		scene()->max_obj_count = scene()->plane_count;
+}
+
+/**
+ * @brief Allocates memory for planes and 
+ * stores the previous allocated planes on tmp.
+ */
+void	allocate_more_pl(t_Plane *tmp)
+{
+	tmp = scene()->planes;
+	scene()->planes = malloc(sizeof(t_Plane) * scene()->plane_count);
+}
+
+/**
+ * @brief Copies the data of the planes from temporary buffer to the scene.
  * 
  * @param i The index of the sphere in the temporary buffer.
  * @param tmp The temporary buffer.
@@ -69,20 +89,23 @@ void	set_plane(t_Vector point, t_Vector normal, t_Color color)
 	int			i;
 
 	scene()->plane_count++;
-	if (scene()->plane_count > scene()->max_obj_count)
-		scene()->max_obj_count = scene()->plane_count;
+	pl_max_count();
 	i = -1;
 	if (scene()->planes == NULL)
-		scene()->planes = malloc(sizeof(t_Plane) * 1);
-	else
 	{
-		tmp = scene()->planes;
-		scene()->planes = malloc(sizeof(t_Plane) * scene()->plane_count);
+		tmp = NULL;
+		scene()->planes = malloc(sizeof(t_Plane) * 1);
 	}
+	else
+		allocate_more_pl(tmp = scene()->planes);
 	while (++i < scene()->plane_count)
 	{
 		if (i == scene()->plane_count - 1)
+		{
+			if (tmp != NULL)
+				free(tmp);
 			new_plane(i, point, normal, color);
+		}
 		else
 			copy_plane(i, tmp);
 	}

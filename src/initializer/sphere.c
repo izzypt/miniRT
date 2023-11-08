@@ -6,11 +6,31 @@
 /*   By: simao <simao@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:09:38 by simao             #+#    #+#             */
-/*   Updated: 2023/11/08 17:24:29 by simao            ###   ########.fr       */
+/*   Updated: 2023/11/08 18:32:34 by simao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
+
+/**
+ * @brief Count and store the maximum value of objects in the scene.
+ * 
+ */
+void	sp_max_count(void)
+{
+	if (scene()->spheres_count > scene()->max_obj_count)
+		scene()->max_obj_count = scene()->spheres_count;
+}
+
+/**
+ * @brief Allocates memory for spheres and 
+ * stores the previous allocated spheres on tmp.
+ */
+void	allocate_more_sp(t_Sphere *tmp)
+{
+	tmp = scene()->spheres;
+	scene()->spheres = malloc(sizeof(t_Sphere) * scene()->spheres_count);
+}
 
 /**
  * @brief Copies the data of the spheres from temporary buffer to the scene.
@@ -66,8 +86,7 @@ void	set_sphere(float radius, t_Vector center, t_Color color)
 	int			i;
 
 	scene()->spheres_count++;
-	if (scene()->spheres_count > scene()->max_obj_count)
-		scene()->max_obj_count = scene()->spheres_count;
+	sp_max_count();
 	i = -1;
 	if (scene()->spheres == NULL)
 	{
@@ -75,10 +94,7 @@ void	set_sphere(float radius, t_Vector center, t_Color color)
 		scene()->spheres = malloc(sizeof(t_Sphere) * 1);
 	}
 	else
-	{
-		tmp = scene()->spheres;
-		scene()->spheres = malloc(sizeof(t_Sphere) * scene()->spheres_count);
-	}
+		allocate_more_sp(tmp = scene()->spheres);
 	while (++i < scene()->spheres_count)
 	{
 		if (i == scene()->spheres_count - 1)
