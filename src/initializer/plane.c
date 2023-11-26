@@ -49,7 +49,6 @@ void	copy_plane(int i, t_Plane *tmp)
 	scene()->planes[i].color.r = tmp[i].color.r;
 	scene()->planes[i].color.g = tmp[i].color.g;
 	scene()->planes[i].color.b = tmp[i].color.b;
-	free(tmp);
 }
 
 /**
