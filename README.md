@@ -15,9 +15,9 @@ Once completed you will be able to render simple Computer-Generated-Images and y
 
 ***Sources***:
 - https://en.wikipedia.org/wiki/Ray_tracing_%28graphics%29
-- https://gabrielgambetta.com/computer-graphics-from-scratch/02-basic-raytracing.html
 - https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-ray-tracing/how-does-it-work.html
 - https://raytracing.github.io/books/RayTracingInOneWeekend.html#thevec3class
+- https://gabrielgambetta.com/computer-graphics-from-scratch/02-basic-raytracing.html
 - https://blog.devgenius.io/a-passion-for-pixels-building-a-ray-tracer-from-scratch-449651509fa0
 - https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection.html
 
